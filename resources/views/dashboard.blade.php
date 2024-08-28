@@ -3,6 +3,7 @@
 @section('content')
 
   <div class="row">
+    <!--card kat dashboard 1st line-->
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
@@ -69,7 +70,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-sm-6">
+    <!--<div class="col-xl-3 col-sm-6">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
@@ -91,13 +92,16 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
+
+  <!--card dalam dashboard 2nd line-->
   <div class="row mt-4">
     <div class="col-lg-7 mb-lg-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
             <div class="col-lg-6">
+              <!--content dalam card-->
               <div class="d-flex flex-column h-100">
                 <p class="mb-1 pt-2 text-bold">Built by developers</p>
                 <h5 class="font-weight-bolder">Soft UI Dashboard</h5>
@@ -108,6 +112,7 @@
                 </a>
               </div>
             </div>
+            <!-- image dalam dashboard-->
             <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
               <div class="bg-gradient-primary border-radius-lg h-100">
                 <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
@@ -122,8 +127,10 @@
     </div>
     <div class="col-lg-5">
       <div class="card h-100 p-3">
+        <!--card with picture-->
         <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/ivancik.jpg');">
           <span class="mask bg-gradient-dark"></span>
+          
           <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
             <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with the rockets</h5>
             <p class="text-white">Wealth creation is an evolutionarily recent positive-sum game. It is all about who take the opportunity first.</p>
@@ -136,6 +143,8 @@
       </div>
     </div>
   </div>
+
+  <!--card dalam dashboard 3rd line-->
   <div class="row mt-4">
     <div class="col-lg-5 mb-lg-0 mb-4">
       <div class="card z-index-2">
@@ -633,7 +642,7 @@
             borderRadius: 4,
             borderSkipped: false,
             backgroundColor: "#fff",
-            data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+            data: [0, 2, 0, 220, 500, 100, 400, 230, 500],
             maxBarThickness: 6
           }, ],
         },

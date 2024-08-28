@@ -29,6 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
+	Route::get('graf-tumbesaran-anak', function () {
+		return view('growth-charts');
+	})->name('graf');
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
