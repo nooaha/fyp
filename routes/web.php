@@ -9,6 +9,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
+Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.update');
 
 Route::group(['middleware' => 'auth'], function () {
 
