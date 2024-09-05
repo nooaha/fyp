@@ -35,6 +35,14 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('growth-charts');
 	})->name('graf');
 
+    Route::get('tips-dan-intervensi', function () {
+		return view('tips-interventions');
+	})->name('tips-dan-intervensi');
+
+    Route::get('profil-pengguna', function () {
+		return view('profil-pengguna');
+	})->name('profil');
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
@@ -68,8 +76,10 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('sign-up');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
-	Route::get('/user-profile', [InfoUserController::class, 'create']);
-	Route::post('/user-profile', [InfoUserController::class, 'store']);
+    Route::get('/profil-pengguna', [InfoUserController::class, 'create']);
+	Route::post('/profil-pengguna', [InfoUserController::class, 'store']);
+	//Route::get('/user-profile', [InfoUserController::class, 'create']);
+	//Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
