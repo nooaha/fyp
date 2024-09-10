@@ -11,6 +11,7 @@
 <div class="card-header pb-0">
 
         <div class="mb-0 text-center font-weight-bold" style="width: 100%;">
+            <br>
             <h6>Sentuhan</h6>
         </div>
         <br>
@@ -30,7 +31,7 @@
                             <td>
                               <div class="d-flex align-items-center">
                                 <img src="https://lumiere-a.akamaihd.net/v1/images/gallery_princess_rapunzel_4_2832aa5a.jpeg"
-                                     style="width: 20%; height: auto; margin-right: 10%;" alt="Rapunzel Image">
+                                     style="width: 20%; height: auto; margin-right: 10%; margin-left: 10%;" alt="Rapunzel Image">
                                 <p class="text-xs font-weight-bold mb-0">Admin</p>
                               </div>
                             </td>
@@ -40,7 +41,7 @@
                             <td>
                               <div class="d-flex align-items-center">
                                 <img src="https://lumiere-a.akamaihd.net/v1/images/gallery_princess_rapunzel_4_2832aa5a.jpeg"
-                                     style="width: 20%; height: auto; margin-right: 10%;" alt="Rapunzel Image">
+                                     style="width: 20%; height: auto; margin-right: 10%; margin-left: 10%;" alt="Rapunzel Image">
                                 <p class="text-xs font-weight-bold mb-0">Admin</p>
                               </div>
                             </td>
@@ -50,7 +51,7 @@
                             <td>
                               <div class="d-flex align-items-center">
                                 <img src="https://lumiere-a.akamaihd.net/v1/images/gallery_princess_rapunzel_4_2832aa5a.jpeg"
-                                     style="width: 20%; height: auto; margin-right: 10%;" alt="Rapunzel Image">
+                                     style="width: 20%; height: auto; margin-right: 10%; margin-left: 10%;" alt="Rapunzel Image">
                                 <p class="text-xs font-weight-bold mb-0">Admin</p>
                               </div>
                             </td>
@@ -61,7 +62,11 @@
             </div>
         </div>
 <br><br>
-
+<!-- start button kembali-->
+<div class="d-flex justify-content-center text-center">
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/tips-dan-intervensi'">Kembali</button>
+</div>
+<!-- end button kembali-->
 </div>
 
 @endsection

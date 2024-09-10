@@ -106,6 +106,8 @@
   </div>
 <!--end tips-->
 
+<br>
+
 <!--start intervention-->
 <div style="background-color: #90C9E9; padding: 10px; margin-top: 10px; text-align: center; border-radius: 20px;">
     <h5>Intervensi</h5>
