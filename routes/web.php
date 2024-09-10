@@ -33,6 +33,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('growth-charts');
 	})->name('graf');
 
+	Route::get('rekod-maklumat-tumbesaran', function(){
+		return view('add-growth');
+	})->name('add-growth');
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
