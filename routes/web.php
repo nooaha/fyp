@@ -43,6 +43,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('tips1');
 	})->name('tips1');
 
+    Route::get('interventions1', function () {
+		return view('interventions1');
+	})->name('interventions1');
+
     Route::get('profil-pengguna', function () {
 		return view('profil-pengguna');
 	})->name('profil');

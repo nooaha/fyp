@@ -124,7 +124,7 @@
                                  style="width: 100%; height: auto; display: block; margin: 0 auto;" alt="Rapunzel Image">
                             <br>
                             <h5 class="text-sm mb-0 text-capitalize font-weight-bold">
-                                Pemakanan bayi dari 6 bulan hingga 6 tahun
+                                Sentuhan
                             </h5>
                         </div>
                     </div>
@@ -132,8 +132,8 @@
                 <br><br>
 <!-- button -->
 <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-info btn-sm mb-0">Lihat</button>
-    </div>
+    <button type="button" class="btn btn-info btn-sm mb-0" onclick="window.location.href='/interventions1'">Lihat</button>
+</div>
 <!-- end button-->
             </div>
         </div>

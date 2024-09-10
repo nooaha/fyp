@@ -4,14 +4,14 @@
 
 <!--start tips-->
 <div style="background-color: #90C9E9; padding: 10px; margin-top: 10px; text-align: center; border-radius: 20px;">
-    <h5>Tips</h5>
+    <h5>Intervensi</h5>
 </div>
 <br>
 
 <div class="card-header pb-0">
 
         <div class="mb-0 text-center font-weight-bold" style="width: 100%;">
-            <h6>Pemakanan bayi dari 6 bulan hingga 6 tahun</h6>
+            <h6>Sentuhan</h6>
         </div>
         <br>
 
@@ -30,7 +30,7 @@
                             <td>
                               <div class="d-flex align-items-center">
                                 <img src="https://lumiere-a.akamaihd.net/v1/images/gallery_princess_rapunzel_4_2832aa5a.jpeg"
-                                     style="width: 20%; height: auto; margin-right: 10%; margin-left: 10%;" alt="Rapunzel Image">
+                                     style="width: 20%; height: auto; margin-right: 10%;" alt="Rapunzel Image">
                                 <p class="text-xs font-weight-bold mb-0">Admin</p>
                               </div>
                             </td>
