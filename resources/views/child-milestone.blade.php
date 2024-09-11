@@ -9,11 +9,11 @@
             <div class="row align-items-center">
                     <!-- Peratusan Pencapaian -->
                     <div class="col-md-4">
-                        <p class="mb-0">Peratusan Pencapaian Perkembangan</p>
+                        <p class="mb-0 mb-1">Peratusan Pencapaian Perkembangan</p>
                     </div>
 
                     <!-- Progress Bar -->
-                    <div class="col-md-5">
+                    <div class="col-md-5 mb-2">
                         <div class="progress progress-lg">
                             <div class="progress-bar bg-success" role="progressbar" style="width: 60%; height: 25px; font-weight: bold; color: black;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                             60%
@@ -22,7 +22,7 @@
                     </div>
 
                     <!-- Rekod Perkembangan Button -->
-                    <div class="col-md-3 text-right">
+                    <div class="col-md-3 text-end">
                         <button class="btn btn-primary" onclick="location.href='{{ route('checklist-milestone') }}'">Rekod Perkembangan</button>
                     </div>
                 </div>
@@ -35,11 +35,11 @@
             <div class="row align-items-center">
                     <!-- Peratusan Pencapaian -->
                     <div class="col-md-4">
-                        <p class="mb-0">Peratusan Pencapaian Perkembangan</p>
+                        <p class="mb-0 mb-1">Peratusan Pencapaian Perkembangan</p>
                     </div>
 
                     <!-- Progress Bar -->
-                    <div class="col-md-5">
+                    <div class="col-md-5 mb-2">
                         <div class="progress progress-lg">
                             <div class="progress-bar bg-success" role="progressbar" style="width: 10%; height: 25px; font-weight: bold; color: black;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                             10%
@@ -48,7 +48,7 @@
                     </div>
 
                     <!-- Rekod Perkembangan Button -->
-                    <div class="col-md-3 text-right">
+                    <div class="col-md-3 text-end">
                         <button class="btn btn-primary" onclick="location.href='{{ route('checklist-milestone') }}'">Rekod Perkembangan</button>
                     </div>
                 </div>
