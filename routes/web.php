@@ -37,6 +37,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('add-growth');
 	})->name('add-growth');
 
+	Route::get('senarai-perkembangan', function(){
+		return view('checklist-milestone');
+	})->name('checklist-milestone');
+
 	Route::get('pencapaian-perkembangan', function(){
 		return view('child-milestone');
 	})->name('child-milestone');
