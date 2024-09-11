@@ -30,7 +30,7 @@
         </div>
         <span class="nav-link-text ms-1">Paparan Utama</span>
     </a>
-    <!-- Accordion -->
+    <!-- Accordion kena ada foreach-->
     <div id="childAccordion" class="collapse">
         <ul class="list-unstyled ps-3">
             <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child1') }}">Child 1</a></li>
@@ -103,7 +103,7 @@
       </li>
       <!--Nav Milestone-->
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('billing') ? 'active' : '') }}" href="{{ url('billing') }}">
+        <a class="nav-link {{ (Request::is('pencapaian-perkembangan') ? 'active' : '') }}" href="{{ url('pencapaian-perkembangan') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>credit-card</title>
