@@ -15,7 +15,7 @@
                     <!-- Progress Bar -->
                     <div class="col-md-5">
                         <div class="progress progress-lg">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%; height: 25px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%; height: 25px; font-weight: bold; color: black;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                             60%
                             </div>
                         </div>
@@ -23,7 +23,7 @@
 
                     <!-- Rekod Perkembangan Button -->
                     <div class="col-md-3 text-right">
-                        <a href="" class="btn btn-primary">Rekod Perkembangan</a>
+                        <button class="btn btn-primary" onclick="location.href='{{ route('checklist-milestone') }}'">Rekod Perkembangan</button>
                     </div>
                 </div>
         </div>
@@ -41,7 +41,7 @@
                     <!-- Progress Bar -->
                     <div class="col-md-5">
                         <div class="progress progress-lg">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 10%; height: 25px;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 10%; height: 25px; font-weight: bold; color: black;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                             10%
                             </div>
                         </div>
@@ -49,7 +49,7 @@
 
                     <!-- Rekod Perkembangan Button -->
                     <div class="col-md-3 text-right">
-                        <a href="" class="btn btn-primary">Rekod Perkembangan</a>
+                        <button class="btn btn-primary" onclick="location.href='{{ route('checklist-milestone') }}'">Rekod Perkembangan</button>
                     </div>
                 </div>
         </div>
