@@ -45,6 +45,19 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('child-milestone');
 	})->name('child-milestone');
 
+	Route::get('m-chat', function(){
+		return view('m-chat');
+	})->name('m-chat');
+
+	Route::get('ujian-mchat', function(){
+		return view('test-mchat');
+	})->name('ujian-mchat');
+
+	Route::get('keputusan-ujian', function(){
+		return view('test-result');
+	})->name('test-result');
+
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
