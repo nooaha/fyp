@@ -30,7 +30,7 @@
         </div>
         <span class="nav-link-text ms-1">Paparan Utama</span>
     </a>
-    <!-- Accordion -->
+    <!-- Accordion kena ada foreach-->
     <div id="childAccordion" class="collapse">
         <ul class="list-unstyled ps-3">
             <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child1') }}">Child 1</a></li>
