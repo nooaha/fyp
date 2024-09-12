@@ -157,8 +157,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-info btn-md mt-4 mb-4">{{ 'Simpan' }}</button>
+                    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                        <!-- Kembali button aligned to the left -->
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/'">Kembali</button>
+
+                        <!-- Simpan button aligned to the right -->
+                        <button type="submit" class="btn btn-info btn-sm">{{ 'Simpan' }}</button>
                     </div>
                 </form>
 

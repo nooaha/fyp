@@ -49,7 +49,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('maklumat-ibubapa', function () {
 		return view('maklumat-ibubapa');
-	})->name('maklumat-bapa');
+	})->name('maklumat-ibubapa');
+
+    Route::get('maklumat-admin', function () {
+		return view('maklumat-admin');
+	})->name('maklumat-admin');
 
 	Route::get('billing', function () {
 		return view('billing');
