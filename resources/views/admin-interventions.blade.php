@@ -45,7 +45,7 @@
 
     <div class="container mt-5">
         <div class="tips-header">
-            <h5>Tips</h5>
+            <h5>Intervensi</h5>
         </div>
         <br>
 
@@ -104,9 +104,9 @@
             </div>
 
 <!-- start button kembali-->
-    <div class="d-flex justify-content-center text-center">
-        <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/tips-dan-intervensi'">Kembali</button>
-    </div>
+<div class="d-flex justify-content-center text-center">
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/tips-dan-intervensi'">Kembali</button>
+</div>
 <!-- end button kembali-->
 
         </div>
