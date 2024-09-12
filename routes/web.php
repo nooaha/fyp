@@ -41,7 +41,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('profil-pengguna', function () {
 		return view('profil-pengguna');
-	})->name('profil');
+	})->name('profil-pengguna');
+
+    Route::get('maklumat-anak', function () {
+		return view('maklumat-anak');
+	})->name('maklumat-anak');
+
+    Route::get('maklumat-ibubapa', function () {
+		return view('maklumat-ibubapa');
+	})->name('maklumat-bapa');
 
 	Route::get('billing', function () {
 		return view('billing');
