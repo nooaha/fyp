@@ -9,6 +9,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
+Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.update');
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -62,6 +64,34 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('test-result');
 
 
+    Route::get('tips-dan-intervensi', function () {
+		return view('tips-interventions');
+	})->name('tips-dan-intervensi');
+
+    Route::get('tips1', function () {
+		return view('tips1');
+	})->name('tips1');
+
+    Route::get('interventions1', function () {
+		return view('interventions1');
+	})->name('interventions1');
+
+    Route::get('admin-tips', function () {
+		return view('admin-tips');
+	})->name('admin-tips');
+
+    Route::get('admin-interventions', function () {
+		return view('admin-interventions');
+	})->name('admin-interventions');
+
+    Route::get('admin-tips-interventions', function () {
+		return view('admin-tips-interventions');
+	})->name('admin-tips-interventions');
+
+    Route::get('profil-pengguna', function () {
+		return view('profil-pengguna');
+	})->name('profil');
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
@@ -95,8 +125,10 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('sign-up');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
-	Route::get('/user-profile', [InfoUserController::class, 'create']);
-	Route::post('/user-profile', [InfoUserController::class, 'store']);
+    Route::get('/profil-pengguna', [InfoUserController::class, 'create']);
+	Route::post('/profil-pengguna', [InfoUserController::class, 'store']);
+	//Route::get('/user-profile', [InfoUserController::class, 'create']);
+	//Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
