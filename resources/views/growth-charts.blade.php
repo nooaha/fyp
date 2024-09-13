@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-7">
                             <h6>Graf Tumbesaran - Berat</h6>
-                            <p class="text-sm mb-0"></p>
+                            <p class="text-sm mb-0">
                             <span class="font-weight-bold ms-1">Berat</span>
                             </p>
                         </div>
