@@ -31,7 +31,7 @@
           <span class="nav-link-text ms-1">Paparan Utama</span>
         </a>
       </li>
-      <!--Nav Header(yang ni mcm x yah kan?-->
+      <!--Nav Header-->
       <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
       </li>
