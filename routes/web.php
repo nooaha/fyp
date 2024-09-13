@@ -29,9 +29,13 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
+	Route::get('paparan-utama', function () {
+		return view('user-dashboard');
+	})->name('user-dashboard');
+
 	Route::get('graf-tumbesaran-anak', function () {
 		return view('growth-charts');
-	})->name('graf');
+	})->name('growth-charts');
 
 	Route::get('rekod-maklumat-tumbesaran', function(){
 		return view('add-growth');

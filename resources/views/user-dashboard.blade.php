@@ -3,119 +3,92 @@
 @section('content')
 
 <div class="container">
-    <div class="row my-4">
-        <!-- first card-->
-        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
-            <div class="card">
-                <!--header dalam card-->
-                <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="col-lg-6 col-7">
-                            <h6>Graf Tumbesaran - Berat</h6>
-                            <p class="text-sm mb-0">
-                            <span class="font-weight-bold ms-1">Berat</span>
-                            </p>
-                        </div>
-                        <!-- menu dotted 3-->
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <!-- Dynamic age range selection -->
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"  onclick="updateWeightChart('all')">Semua Umur</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"  onclick="updateWeightChart('24-36')">2-3 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;" onclick="updateWeightChart('36-48')">3-4 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;" onclick="updateWeightChart('48-60')">4-5 Tahun</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <h2 class="mb-3">Selamat Datang, </h2>
+    <p>Mula jejak tumbesaran dan pencapaian perkembangan anak anda.</p>
 
-                <!-- content @ body dalam card-->
-                <div class="card-body px-2 pb-2 pt-2">
-                    <div class="chart">
-                        <canvas id="weightChart" class="chart-canvas" height="250"></canvas>
-                    </div>
+    <div class="row">
+        <!-- Growth Chart Section -->
+        <div class="col-md-9 mb-3">
+            <div class="card">
+                <div class="card-body mb-0">
+                    <h5 class="card-title">Graf Tumbesaran</h5>
+                    <p class="text-sm mb-0">
+                        <span class="font-weight-bold ms-1">Berat</span>
+                    </p>
+                    <canvas id="weightChart" height="200px"></canvas>
+                    <a href="{{ route('growth-charts') }}" class="btn btn-primary mt-3" style="float: right">Lihat Tumbesaran</a>
                 </div>
-                
             </div>
         </div>
 
-        <!--second card
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100">
-                <div class="card-header pb-0">
-                    <h6>Carta overview</h6>
-                </div>
-                <div class="card-body p-3">
-                    <div class="timeline timeline-one-side">
-                        <div class="timeline-block mb-3">
-                            <span class="timeline-step">
-                                <i class="ni ni-bell-55 text-success text-gradient"></i>
-                            </span>
-                            <div class="timeline-content">
-                                <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
-                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-    </div>
-
-    <div class="row my-4">
-        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+        <!-- M-CHAT Score Section -->
+        <div class="col-md-3">
             <div class="card">
-            <div class="card-header pb-0">
-                <div class="row">
-                        <div class="col-lg-6 col-7">
-                            <h6>Graf Tumbesaran - Tinggi</h6>
-                            <p class="text-sm mb-0"></p>
-                            <span class="font-weight-bold ms-1">Tinggi</span>
-                            </p>
-                        </div>
-                        <!-- menu dotted 3-->
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <!-- Dynamic age range selection -->
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"  onclick="updateChart('all')">Semua Umur</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"  onclick="updateChart('24-36')">2-3 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;" onclick="updateChart('36-48')">3-4 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;" onclick="updateChart('48-60')">4-5 Tahun</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-
-                    </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">M-CHAT</h5>
+                    <h6 class="card-title mb-3">Skor M-CHAT</h6>
+                    <h2 class="display-4"><strong>3</strong></h2>
+                    <p>Negatif skor</p>
+                    <span class="badge badge-pill badge-lg bg-gradient-success">Rendah</span>
+                    <br>
+                    <a href="{{ route('m-chat') }}" class="btn btn-primary mt-3">Ambil Ujian</a>
                 </div>
-
-                <div class="card-body px-2 pb-2 pt-2">
-                    <div class="chart">
-                        <canvas id="growthChart" class="chart-canvas" height="300"></canvas>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-    <!-- error in location need (controller)-->
-    <button type="button" class="btn btn-primary btn-lg" style="float: right" onclick="location.href='{{ route('add-growth') }}'">Tambah Data</button>
 
+    <!-- Development Progress Section-->
+    <div class="card mb-3">
+    <div class="card-header pb-0">
+            <h5 class="card-title ">Penilaian Perkembangan</h5>
+            </div>
+        <div class="card-body">
+            <h6 class="card-title mb-3">Senarai Semak Perkembangan - 12 bulan</h6>
+            <div class="row align-items-center mb-3">
+                    <!-- Peratusan Pencapaian -->
+                    <div class="col-md-4">
+                        <p class="mb-0 mb-1">Peratusan Pencapaian Perkembangan</p>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="col-md-5 mb-2">
+                        <div class="progress progress-lg">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%; height: 25px; font-weight: bold; color: black;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                            60%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rekod Perkembangan Button -->
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-primary" onclick="location.href='{{ route('child-milestone') }}'">Rekod Perkembangan</button>
+                    </div>
+            </div>
+            <div class="row align-items-center">
+                    <!-- Peratusan Pencapaian -->
+                    <div class="col-md-4">
+                        <p class="mb-0 mb-1">Peratusan Pencapaian Perkembangan</p>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="col-md-5 mb-2">
+                        <div class="progress progress-lg">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%; height: 25px; font-weight: bold; color: black;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                            60%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rekod Perkembangan Button -->
+                    <div class="col-md-3 text-end">
+                        <button class="btn btn-primary" onclick="location.href='{{ route('child-milestone') }}'">Rekod Perkembangan</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
-<br>
-<br>
 @endsection
-
-@push('dashboard')
 <script>
     window.onload = function() {
     
@@ -477,4 +450,4 @@
 
 };
 </script>
-@endpush
+
