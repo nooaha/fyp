@@ -19,8 +19,8 @@
                     </div>
                     
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-secondary btn-lg me-2" onclick="window.history.back()">Kembali</button>
-                        <button type="submit" class="btn btn-primary btn-lg" style="float: right">Tambah Data</button>
+                        <button type="button" class="btn btn-secondary me-2" onclick="window.history.back()">Kembali</button>
+                        <button type="submit" class="btn btn-primary" style="float: right">Tambah Data</button>
                         
                     </div>
                 </form>
