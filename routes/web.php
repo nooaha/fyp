@@ -76,6 +76,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('interventions1');
 	})->name('interventions1');
 
+	Route::get('admin-dashboard', function () {
+		return view('admin-dashboard');
+	})->name('admin-dashboard');
+
     Route::get('admin-tips', function () {
 		return view('admin-tips');
 	})->name('admin-tips');
@@ -87,6 +91,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin-tips-interventions', function () {
 		return view('admin-tips-interventions');
 	})->name('admin-tips-interventions');
+
+	Route::get('senarai-pencapaian-perkembangan', function () {
+		return view('admin-milestone-checklist');
+	})->name('list-milestone');
+
+	Route::get('tambah-senarai', function () {
+		return view('admin-add-milestone');
+	})->name('add-milestone');
+
+	Route::get('kemaskini-senarai', function () {
+		return view('admin-edit-milestone');
+	})->name('edit-milestone');
+
+
 
     Route::get('profil-pengguna', function () {
 		return view('profil-pengguna');
