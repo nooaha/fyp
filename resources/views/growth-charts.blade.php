@@ -86,7 +86,7 @@
         </div>
     </div>
     <!-- error in location need (controller)-->
-    <button type="button" class="btn btn-primary btn-lg" style="float: right" onclick="location.href='{{ route('add-growth') }}'">Tambah Data</button>
+    <button type="button" class="btn btn-primary" style="float: right" onclick="location.href='{{ route('add-growth') }}'">Tambah Data</button>
 
 </div>
 <br>
