@@ -37,35 +37,13 @@
                 <!-- content @ body dalam card-->
                 <div class="card-body px-2 pb-2 pt-2">
                     <div class="chart">
-                        <canvas id="weightChart" class="chart-canvas" height="250"></canvas>
+                        <canvas id="weightChart" class="chart-canvas" height="150px"></canvas>
                     </div>
                 </div>
                 
             </div>
         </div>
-
-        <!--second card
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100">
-                <div class="card-header pb-0">
-                    <h6>Carta overview</h6>
-                </div>
-                <div class="card-body p-3">
-                    <div class="timeline timeline-one-side">
-                        <div class="timeline-block mb-3">
-                            <span class="timeline-step">
-                                <i class="ni ni-bell-55 text-success text-gradient"></i>
-                            </span>
-                            <div class="timeline-content">
-                                <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
-                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-    </div>
+</div>
 
     <div class="row my-4">
         <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
@@ -100,7 +78,7 @@
 
                 <div class="card-body px-2 pb-2 pt-2">
                     <div class="chart">
-                        <canvas id="growthChart" class="chart-canvas" height="300"></canvas>
+                        <canvas id="growthChart" class="chart-canvas" height="150px"></canvas>
                     </div>
                 </div>
 
