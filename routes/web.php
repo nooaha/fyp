@@ -102,9 +102,33 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin-add-category-tips');
 	})->name('add-category-tips');
 
+    Route::get('tambah-tips', function () {
+		return view('admin-add-tips');
+	})->name('add-tips');
+
+    Route::get('edit-kategori-tips', function () {
+		return view('admin-edit-category-tips');
+	})->name('edit-kategori-tips');
+
+    Route::get('edit-tips', function () {
+		return view('admin-edit-tips');
+	})->name('edit-tips');
+
     Route::get('tambah-kategori-intervensi', function () {
 		return view('admin-add-category-interventions');
 	})->name('add-category-interventions');
+
+    Route::get('tambah-intervensi', function () {
+		return view('admin-add-interventions');
+	})->name('add-interventions');
+
+    Route::get('edit-kategori-intervensi', function () {
+		return view('admin-edit-category-interventions');
+	})->name('edit-category-interventions');
+
+    Route::get('edit-intervensi', function () {
+		return view('admin-edit-interventions');
+	})->name('edit-interventions');
 
     Route::get('admin-profile', function () {
 		return view('admin-profile');
