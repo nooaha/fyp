@@ -92,6 +92,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin-tips-interventions');
 	})->name('admin-tips-interventions');
 
+    Route::get('admin-profile', function () {
+		return view('admin-profile');
+	})->name('admin-profile');
+
 	Route::get('senarai-pencapaian-perkembangan', function () {
 		return view('admin-milestone-checklist');
 	})->name('list-milestone');
