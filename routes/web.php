@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ImageUploadController;
 
+Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +28,9 @@ use App\Http\Controllers\ImageUploadController;
 Route::get('/password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
 Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.update');
 
-Route::get('/upload', [ImageUploadController::class, 'showUploadForm'])->name('upload.form');
+/*Route::get('/upload', [ImageUploadController::class, 'showUploadForm'])->name('upload.form');
 Route::post('/upload', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
-
+*/
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
@@ -118,8 +121,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('kemaskini-senarai', function () {
 		return view('admin-edit-milestone');
 	})->name('edit-milestone');
-
-
 
     Route::get('profil-pengguna', function () {
 		return view('profil-pengguna');
