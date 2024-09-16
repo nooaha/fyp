@@ -6,29 +6,20 @@ use Illuminate\Http\Request;
 
 class ImageUploadController extends Controller
 {
-    public function showUploadForm()
+    public function store(Request $request)
     {
-        return view('upload');
-    }
-
-    public function uploadImage(Request $request)
-    {
-        // Validate the request
+        // Validate the image
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Handle the uploaded file
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/images');
-            $image->move($destinationPath, $name);
-
-            // Return success response or redirect
-            return back()->with('success', 'Image uploaded successfully');
+        // Store the image in the 'public/uploads' directory
+        if ($request->file('image')) {
+            $imagePath = $request->file('image')->store('uploads', 'public');
         }
 
-        return back()->withErrors(['image' => 'Image upload failed']);
+        // Return success response
+        return back()->with('success', 'Data Berjaya Ditambah');
     }
 }
+

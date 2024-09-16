@@ -64,14 +64,14 @@
                                 <th class="action-column">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="categoryTableBody">
                             <tr>
                                 <td>1</td>
                                 <td>Tip 1</td>
                                 <td>This is a short description of tip 1.</td>
                                 <td class="action-column">
-                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Padam</a>
+                                    <button class="btn btn-warning btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
                                 </td>
                             </tr>
                             <tr>
@@ -79,8 +79,8 @@
                                 <td>Tip 2</td>
                                 <td>This is a short description of tip 2.</td>
                                 <td class="action-column">
-                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Padam</a>
+                                    <button class="btn btn-warning btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
                                 </td>
                             </tr>
                             <tr>
@@ -88,8 +88,8 @@
                                 <td>Tip 3</td>
                                 <td>This is a short description of tip 3.</td>
                                 <td class="action-column">
-                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Padam</a>
+                                    <button class="btn btn-warning btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -105,6 +105,18 @@
 
         </div>
 
+        <!-- Include Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- JavaScript for delete confirmation -->
+        <script>
+            function confirmDelete(button) {
+                if (confirm("Adakah anda pasti untuk padam?")) {
+                    // Delete the row if confirmed
+                    var row = button.closest('tr');
+                    row.remove();
+                }
+            }
+        </script>
     </div>
 @endsection
