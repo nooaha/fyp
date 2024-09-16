@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\ImageUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ use App\Http\Controllers\PasswordController;
 */
 Route::get('/password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
 Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.update');
+
+Route::get('/upload', [ImageUploadController::class, 'showUploadForm'])->name('upload.form');
+Route::post('/upload', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -63,7 +67,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('test-result');
 	})->name('test-result');
 
-
     Route::get('tips-dan-intervensi', function () {
 		return view('tips-interventions');
 	})->name('tips-dan-intervensi');
@@ -91,6 +94,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin-tips-interventions', function () {
 		return view('admin-tips-interventions');
 	})->name('admin-tips-interventions');
+
+    Route::get('tambah-kategori-tips', function () {
+		return view('admin-add-category-tips');
+	})->name('add-category-tips');
+
+    Route::get('admin-profile', function () {
+		return view('admin-profile');
+	})->name('admin-profile');
 
 	Route::get('senarai-pencapaian-perkembangan', function () {
 		return view('admin-milestone-checklist');
