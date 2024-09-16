@@ -99,6 +99,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin-add-category-tips');
 	})->name('add-category-tips');
 
+    Route::get('tambah-kategori-intervensi', function () {
+		return view('admin-add-category-interventions');
+	})->name('add-category-interventions');
+
     Route::get('admin-profile', function () {
 		return view('admin-profile');
 	})->name('admin-profile');
