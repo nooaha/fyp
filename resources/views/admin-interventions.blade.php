@@ -9,23 +9,11 @@
             text-align: center;
         }
 
-        /* Add button aligned right */
-        .btn-add {
-            float: right;
-        }
-
-        /* Align the title and button on the same row */
+        /* Align the title and button on the same row, with button to the right */
         .header-row {
             display: flex;
-            justify-content: center;
+            justify-content: space-between; /* Push content to far ends */
             align-items: center;
-            position: relative;
-        }
-
-        /* Position "Tambah" button to the right */
-        .header-row .btn-add {
-            position: absolute;
-            right: 0;
         }
 
         /* Styling for the Tips header */
@@ -41,6 +29,12 @@
         table, th, td {
             border: 1px solid grey !important; /* Ensures all borders are visible */
         }
+
+        /* Ensure the button stays on the right side of the card */
+        .btn-add {
+            float: right;
+        }
+
     </style>
 
     <div class="container mt-5">
@@ -55,7 +49,7 @@
             <div class="header-row mb-3">
                 <h5 class="font-weight-bold">Senarai Kategori</h5>
                 <!-- "Tambah" button aligned to the right -->
-                <a href="#" class="btn btn-success btn-add btn-sm">Tambah</a>
+                <button type="button" class="btn btn-success btn-sm btn-add" onclick="window.location.href='/tambah-kategori-tips'">Tambah</button>
             </div>
 
             <!-- Table starts here -->
@@ -103,11 +97,11 @@
                 </div>
             </div>
 
-<!-- start button kembali-->
-<div class="d-flex justify-content-center text-center">
-    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-tips-interventions'">Kembali</button>
-</div>
-<!-- end button kembali-->
+            <!-- Start button kembali -->
+            <div class="d-flex justify-content-center text-center">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-tips-interventions'">Kembali</button>
+            </div>
+            <!-- End button kembali -->
 
         </div>
 
