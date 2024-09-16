@@ -47,9 +47,9 @@
             <br>
             <!-- Header row containing title and add button -->
             <div class="header-row mb-3">
-                <h5 class="font-weight-bold">Senarai Kategori</h5>
+                <h5 class="font-weight-bold">Senarai Intervensi</h5>
                 <!-- "Tambah" button aligned to the right -->
-                <button type="button" class="btn btn-success btn-sm btn-add" onclick="window.location.href='/tambah-kategori-intervensi'">Tambah</button>
+                <button type="button" class="btn btn-success btn-sm btn-add" onclick="window.location.href='/tambah-intervensi'">Tambah</button>
             </div>
 
             <!-- Table starts here -->
@@ -70,7 +70,7 @@
                                 <td>Tip 1</td>
                                 <td>This is a short description of tip 1.</td>
                                 <td class="action-column">
-                                    <button class="btn btn-warning btn-sm" onclick="window.location.href='/edit-kategori-intervensi'">Edit</button>
+                                    <button class="btn btn-warning btn-sm" onclick="window.location.href='/edit-intervensi'">Edit</button>
                                     <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
                                 </td>
                             </tr>

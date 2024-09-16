@@ -70,7 +70,7 @@
                                 <td>Tip 1</td>
                                 <td>This is a short description of tip 1.</td>
                                 <td class="action-column">
-                                    <button class="btn btn-warning btn-sm">Edit</button>
+                                    <button class="btn btn-warning btn-sm"onclick="window.location.href='/edit-kategori-tips'">Edit</button>
                                     <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
                                 </td>
                             </tr>

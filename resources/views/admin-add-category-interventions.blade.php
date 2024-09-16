@@ -24,8 +24,8 @@
 
                         <!-- Tips Category -->
                         <div class="form-group">
-                            <label for="tipsCategory" class="form-control-label">Nama Kategori</label>
-                            <input class="form-control" type="text" placeholder="Nama kategori" id="tipsCategory" name="tips_category" required>
+                            <label for="interventionsCategory" class="form-control-label">Nama Kategori</label>
+                            <input class="form-control" type="text" placeholder="Nama kategori" id="interventionsCategory" name="interventions_category" required>
                         </div>
 
                         <!-- Image Upload Section -->
@@ -93,8 +93,8 @@
 
                         <!-- Tips Category -->
                         <div class="form-group">
-                            <label for="tipsCategory" class="form-control-label">Nama Kategori</label>
-                            <input class="form-control" type="text" placeholder="Nama kategori" id="tipsCategory" name="tips_category" required>
+                            <label for="interventionsCategory" class="form-control-label">Nama Kategori</label>
+                            <input class="form-control" type="text" placeholder="Nama kategori" id="interventionsCategory" name="interventions_category" required>
                         </div>
 
                         <!-- Image Upload Section -->

@@ -13,7 +13,7 @@
                 <div class="card-header pb-0">
                     <div class="row mb-0">
                         <div class="col-md-9">
-                            <h6 class="mb-0">Tambah Senarai Kategori</h6>
+                            <h6 class="mb-0">Tambah Senarai Intervensi</h6>
                         </div>
                     </div>
                 </div>
@@ -22,16 +22,22 @@
                     <form action="{{ route('upload.image') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <!-- Tips Category -->
+                        <!-- Tips title -->
                         <div class="form-group">
-                            <label for="tipsCategory" class="form-control-label">Nama Kategori</label>
-                            <input class="form-control" type="text" placeholder="Nama kategori" id="tipsCategory" name="tips_category" required>
+                            <label for="tipsTitle" class="form-control-label">Tajuk</label>
+                            <input class="form-control" type="text" placeholder="Tajuk" id="tipsTitle" name="tips_title" required>
                         </div>
 
                         <!-- Image Upload Section -->
                         <div class="form-group">
                             <label for="image">Gambar:</label>
                             <input type="file" name="image" class="form-control" id="image" required>
+                        </div>
+
+                        <!-- Explaination -->
+                        <div class="form-group">
+                            <label for="tipsExplain" class="form-control-label">Penerangan</label>
+                            <input class="form-control" type="text" placeholder="Penerangan" id="tipsExplain" name="tips_explain" required>
                         </div>
 
                         <!-- Success Message placed below the image upload but above the buttons -->
@@ -57,7 +63,7 @@
                             <!-- Cancel/Back Button -->
                             <button type="button" class="btn btn-secondary me-2" onclick="window.history.back()">Kembali</button>
                             <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary">Tambah Senarai</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
                     </form>
                 </div>
