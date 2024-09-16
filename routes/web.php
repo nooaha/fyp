@@ -130,7 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin-edit-interventions');
 	})->name('edit-interventions');
 
-    Route::get('admin-profile', function () {
+    Route::get('profil-admin', function () {
 		return view('admin-profile');
 	})->name('admin-profile');
 
