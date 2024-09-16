@@ -12,18 +12,18 @@
         <br>
 
         <div class="d-flex justify-content-center text-center">
-            <button type="button" class="btn btn-info btn-sm custom-btn" onclick="window.location.href='/admin-tips'">Tips</button>
+            <button type="button" class="btn btn-primary btn-sm custom-btn" onclick="window.location.href='/admin-tips'">Tips</button>
         </div>
 
 
         <div class="d-flex justify-content-center text-center">
-            <button type="button" class="btn btn-info btn-sm custom-btn" onclick="window.location.href='/admin-interventions'">Intervensi</button>
+            <button type="button" class="btn btn-primary btn-sm custom-btn" onclick="window.location.href='/admin-interventions'">Intervensi</button>
         </div>
 
 
         <!-- start button kembali-->
         <div class="d-flex justify-content-center text-center">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/'">Kembali</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-dashboard'">Kembali</button>
         </div>
         <!-- end button kembali-->
         <br>
