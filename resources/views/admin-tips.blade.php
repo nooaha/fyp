@@ -105,7 +105,7 @@
 
 <!-- start button kembali-->
     <div class="d-flex justify-content-center text-center">
-        <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/tips-dan-intervensi'">Kembali</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-tips-interventions'">Kembali</button>
     </div>
 <!-- end button kembali-->
 
