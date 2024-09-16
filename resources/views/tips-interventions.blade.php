@@ -28,7 +28,7 @@
                 <br><br>
 <!-- button -->
 <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-info btn-sm mb-0" onclick="window.location.href='/tips1'">Lihat</button>
+    <button type="button" class="btn btn-primary btn-sm mb-0" onclick="window.location.href='/tips1'">Lihat</button>
 </div>
 <!-- end button-->
             </div>
@@ -134,7 +134,7 @@
                 <br><br>
 <!-- button -->
 <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-info btn-sm mb-0" onclick="window.location.href='/interventions1'">Lihat</button>
+    <button type="button" class="btn btn-primary btn-sm mb-0" onclick="window.location.href='/interventions1'">Lihat</button>
 </div>
 <!-- end button-->
             </div>
