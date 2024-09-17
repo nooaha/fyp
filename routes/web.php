@@ -39,115 +39,115 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('dashboard');
 
 	Route::get('paparan-utama', function () {
-		return view('user-dashboard');
+		return view('user.user-dashboard');
 	})->name('user-dashboard');
 
 	Route::get('graf-tumbesaran-anak', function () {
-		return view('growth-charts');
+		return view('user.growth-charts');
 	})->name('growth-charts');
 
 	Route::get('rekod-maklumat-tumbesaran', function(){
-		return view('add-growth');
+		return view('user.add-growth');
 	})->name('add-growth');
 
 	Route::get('senarai-perkembangan', function(){
-		return view('checklist-milestone');
+		return view('user.checklist-milestone');
 	})->name('checklist-milestone');
 
 	Route::get('pencapaian-perkembangan', function(){
-		return view('child-milestone');
+		return view('user.child-milestone');
 	})->name('child-milestone');
 
 	Route::get('m-chat', function(){
-		return view('m-chat');
+		return view('user.m-chat');
 	})->name('m-chat');
 
 	Route::get('ujian-mchat', function(){
-		return view('test-mchat');
+		return view('user.test-mchat');
 	})->name('ujian-mchat');
 
 	Route::get('keputusan-ujian', function(){
-		return view('test-result');
+		return view('user.test-result');
 	})->name('test-result');
 
     Route::get('tips-dan-intervensi', function () {
-		return view('tips-interventions');
+		return view('user.tips-interventions');
 	})->name('tips-dan-intervensi');
 
     Route::get('tips1', function () {
-		return view('tips1');
+		return view('user.tips1');
 	})->name('tips1');
 
     Route::get('interventions1', function () {
-		return view('interventions1');
+		return view('user.interventions1');
 	})->name('interventions1');
 
 	Route::get('admin-dashboard', function () {
-		return view('admin-dashboard');
+		return view('admin.admin-dashboard');
 	})->name('admin-dashboard');
 
     Route::get('admin-tips', function () {
-		return view('admin-tips');
+		return view('admin.admin-tips');
 	})->name('admin-tips');
 
     Route::get('admin-interventions', function () {
-		return view('admin-interventions');
+		return view('admin.admin-interventions');
 	})->name('admin-interventions');
 
     Route::get('admin-tips-interventions', function () {
-		return view('admin-tips-interventions');
+		return view('admin.admin-tips-interventions');
 	})->name('admin-tips-interventions');
 
     Route::get('tambah-kategori-tips', function () {
-		return view('admin-add-category-tips');
+		return view('admin.admin-add-category-tips');
 	})->name('add-category-tips');
 
     Route::get('tambah-tips', function () {
-		return view('admin-add-tips');
+		return view('admin.admin-add-tips');
 	})->name('add-tips');
 
     Route::get('edit-kategori-tips', function () {
-		return view('admin-edit-category-tips');
+		return view('admin.admin-edit-category-tips');
 	})->name('edit-kategori-tips');
 
     Route::get('edit-tips', function () {
-		return view('admin-edit-tips');
+		return view('admin.admin-edit-tips');
 	})->name('edit-tips');
 
     Route::get('tambah-kategori-intervensi', function () {
-		return view('admin-add-category-interventions');
+		return view('admin.admin-add-category-interventions');
 	})->name('add-category-interventions');
 
     Route::get('tambah-intervensi', function () {
-		return view('admin-add-interventions');
+		return view('admin.admin-add-interventions');
 	})->name('add-interventions');
 
     Route::get('edit-kategori-intervensi', function () {
-		return view('admin-edit-category-interventions');
+		return view('admin.admin-edit-category-interventions');
 	})->name('edit-category-interventions');
 
     Route::get('edit-intervensi', function () {
-		return view('admin-edit-interventions');
+		return view('admin.admin-edit-interventions');
 	})->name('edit-interventions');
 
     Route::get('profil-admin', function () {
-		return view('admin-profile');
+		return view('admin.admin-profile');
 	})->name('admin-profile');
 
 	Route::get('senarai-pencapaian-perkembangan', function () {
-		return view('admin-milestone-checklist');
+		return view('admin.admin-milestone-checklist');
 	})->name('list-milestone');
 
 	Route::get('tambah-senarai', function () {
-		return view('admin-add-milestone');
+		return view('admin.admin-add-milestone');
 	})->name('add-milestone');
 
 	Route::get('kemaskini-senarai', function () {
-		return view('admin-edit-milestone');
+		return view('admin.admin-edit-milestone');
 	})->name('edit-milestone');
 
     Route::get('profil-pengguna', function () {
-		return view('user-profile');
+		return view('user.user-profile');
 	})->name('profil-pengguna');
 
 	Route::get('billing', function () {
