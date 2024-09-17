@@ -3,20 +3,13 @@
 @section('content')
 <div class="container-fluid">
     <!--gambar atas -->
-    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-        <!--<span class="mask bg-gradient-primary opacity-6"></span>-->
+    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 45%;">
     </div>
     <div class="card card-body blur shadow-blur mx-4 mt-n6">
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="../assets/img/team-1.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
-
-                    <!-- untuk edit image profil
-                        <a href="javascript:;" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
-                        <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Image"></i>
-                    </a>-->
-
+                    <img src="../assets/img/marie.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
                 </div>
             </div>
             <div class="col-auto my-auto">
@@ -25,16 +18,21 @@
                         {{ auth()->user()->name }}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        {{ __('Admin') }}
+                        {{ __('User') }}
                     </p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                 <div class="nav-wrapper position-relative end-0">
-                    <ul class="nav nav-tabs justify-content-center" id="admin-tabs" role="tablist">
+                    <ul class="nav nav-tabs justify-content-center" id="user-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active tab-item" data-bs-toggle="tab" href="#admin-info" role="tab" aria-controls="admin-info" aria-selected="true">
-                                {{ __('Maklumat Admin') }}
+                            <a class="nav-link active tab-item" data-bs-toggle="tab" href="#parent-info" role="tab" aria-controls="parent-info" aria-selected="true">
+                                {{ __('Maklumat Ibu Bapa') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tab-item" data-bs-toggle="tab" href="#child-info" role="tab" aria-controls="child-info" aria-selected="false">
+                                {{ __('Maklumat Anak') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -48,20 +46,20 @@
         </div>
     </div>
 
-    <!-- Maklumat admin Content Section -->
+    <!-- Content Sections -->
     <div class="container-fluid py-4">
         <div class="card">
             <div class="card-body">
                 <div class="tab-content">
-                    <!-- Admin Info Tab -->
-                    <div class="tab-pane fade show active" id="admin-info" role="tabpanel">
+                    <!-- Parent Info Tab -->
+                    <div class="tab-pane fade show active" id="parent-info" role="tabpanel">
                         <div class="card-header pb-0 px-3">
-                            <h6 class="mb-0">{{ __('Maklumat Admin') }}</h6>
+                            <h6 class="mb-0">{{ __('Maklumat Ibu Bapa') }}</h6>
                         </div>
                         <div class="card-body pt-4 p-3">
                             <form action="/user-profile" method="POST" role="form text-left">
                                 @csrf
-                                <!-- Form fields for Admin Info -->
+                                <!-- Form fields for Parent Info -->
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -103,8 +101,8 @@
                         </div>
                     </div>
 
-                     <!-- Password Info Tab -->
-                     <div class="tab-pane fade" id="password-info" role="tabpanel">
+                    <!-- Password Info Tab -->
+                    <div class="tab-pane fade" id="password-info" role="tabpanel">
                         <div class="card-header pb-0 px-3">
                             <h6 class="mb-0">{{ __('Tukar Kata Laluan') }}</h6>
                         </div>
@@ -161,6 +159,63 @@
                             </form>
                         </div>
                     </div>
+
+                    <!-- Child Info Tab -->
+                    <div class="tab-pane fade" id="child-info" role="tabpanel">
+                        <div class="card-header pb-0 px-3">
+                            <h6 class="mb-0">{{ __('Maklumat Anak') }}</h6>
+                        </div>
+                        <div class="card-body pt-4 p-3">
+                            <form action="/child-profile" method="POST" role="form text-left">
+                                @csrf
+                                <!-- Form fields for Child Info -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="child-name" class="form-control-label">{{ __('Nama Penuh') }}</label>
+                                            <div class="@error('child.name')border border-danger rounded-3 @enderror">
+                                                <input class="form-control" type="text" placeholder="Nama Penuh" id="child-name" name="child_name" value="{{ old('child_name') }}">
+                                                @error('child_name')
+                                                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="child-tlahir" class="form-control-label">{{ __('Tarikh Lahir') }}</label>
+                                            <input class="form-control" type="date" id="child-tlahir" name="child_tlahir" value="{{ old('child_tlahir') }}">
+                                            @error('child_tlahir')
+                                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="child-jantina" class="form-control-label">{{ __('Jantina') }}</label>
+                                            <input class="form-control" type="text" placeholder="Jantina" id="child-jantina" name="child_jantina" value="{{ old('child_jantina') }}">
+                                            @error('child_jantina')
+                                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-dashboard'">Kembali</button>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            {{ __('Kemaskini') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> <!-- End of Child Info Tab -->
+
                 </div>
             </div>
         </div>
@@ -169,7 +224,6 @@
 @endsection
 
 @section('custom-css')
-<style>
 <style>
     .nav-tabs .nav-link {
         border-bottom: none !important;
@@ -182,6 +236,5 @@
     .nav-tabs .nav-link:hover {
         border-bottom: none !important;
     }
-
 </style>
 @endsection
