@@ -11,9 +11,12 @@
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
                     <img src="../assets/img/marie.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
-                    <a href="javascript:;" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
+
+                    <!-- untuk edit image profil
+                        <a href="javascript:;" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
                         <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Image"></i>
-                    </a>
+                    </a>-->
+
                 </div>
             </div>
             <div class="col-auto my-auto">
@@ -94,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/'">Kembali</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-dashboard'">Kembali</button>
                                 </div>
                             </form>
                         </div>
@@ -103,7 +106,7 @@
                      <!-- Password Info Tab -->
                      <div class="tab-pane fade" id="password-info" role="tabpanel">
                         <div class="card-header pb-0 px-3">
-                            <h6 class="mb-0">{{ __('Kata Laluan') }}</h6>
+                            <h6 class="mb-0">{{ __('Tukar Kata Laluan') }}</h6>
                         </div>
                         <div class="card-body pt-4 p-3">
                             <form action="/update-password" method="POST" role="form text-left">
@@ -145,13 +148,12 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <!-- Button Kembali (Left) -->
-                                        <button type="button" class="btn btn-secondary">
-                                            {{ __('Kembali') }}
+                                            <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-dashboard'">Kembali</button>
                                         </button>
                                     </div>
                                     <div class="col-6 text-end">
                                         <!-- Button Kemaskini Kata Laluan (Right) -->
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary btn-sm">
                                             {{ __('Kemaskini') }}
                                         </button>
                                     </div>
