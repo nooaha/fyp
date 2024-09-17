@@ -100,7 +100,7 @@
     <div class="container-fluid py-4">
         <div class="card">
             <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">{{ __('Maklumat Ibu Bapa') }}</h6>
+                <h6 class="mb-0">{{ __('Maklumat Anak') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
                 <form action="/user-profile" method="POST" role="form text-left">
@@ -124,23 +124,12 @@
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="user-name" class="form-control-label">{{ __('Nama Penuh') }}</label>
                                 <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->name }}" type="text" placeholder="Name" id="user-name" name="name">
+                                    <input class="form-control" value="{{ auth()->user()->name }}" type="text" placeholder="Name" id="child-name" name="name">
                                         @error('name')
-                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                                        @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user-email" class="form-control-label">{{ __('Emel') }}</label>
-                                <div class="@error('email')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->email }}" type="email" placeholder="@example.com" id="user-email" name="email">
-                                        @error('email')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
                                 </div>
@@ -168,14 +157,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="about">{{ 'Alamat' }}</label>
-                        <div class="@error('user.alamat')border border-danger rounded-3 @enderror">
-                            <textarea class="form-control" id="alamat" rows="3" placeholder="Alamat" name="alamat">{{ auth()->user()->alamat }}</textarea>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Simpan' }}</button>
+                    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                        <!-- Kembali button aligned to the left -->
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/'">Kembali</button>
+
+                        <!-- Simpan button aligned to the right -->
+                        <button type="submit" class="btn btn-info btn-sm">{{ 'Simpan' }}</button>
                     </div>
                 </form>
 
