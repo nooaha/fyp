@@ -40,20 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('tips-dan-intervensi');
 
     Route::get('profil-pengguna', function () {
-		return view('profil-pengguna');
+		return view('user-profile');
 	})->name('profil-pengguna');
-
-    Route::get('maklumat-anak', function () {
-		return view('maklumat-anak');
-	})->name('maklumat-anak');
-
-    Route::get('maklumat-ibubapa', function () {
-		return view('maklumat-ibubapa');
-	})->name('maklumat-ibubapa');
-
-    Route::get('maklumat-admin', function () {
-		return view('maklumat-admin');
-	})->name('maklumat-admin');
 
 	Route::get('billing', function () {
 		return view('billing');
