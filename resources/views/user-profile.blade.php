@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <!--gambar atas -->
+
     <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 45%;">
     </div>
     <div class="card card-body blur shadow-blur mx-4 mt-n6">
