@@ -146,6 +146,10 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin-edit-milestone');
 	})->name('edit-milestone');
 
+    Route::get('profil-pengguna', function () {
+		return view('user-profile');
+	})->name('profil-pengguna');
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
