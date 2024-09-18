@@ -61,12 +61,23 @@
                                 @csrf
                                 <!-- Form fields for Parent Info -->
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="user-name" class="form-control-label">{{ __('Nama Penuh') }}</label>
+                                            <label for="user.name" class="form-control-label">{{ __('Nama Penuh') }}</label>
                                             <div class="@error('user.name')border border-danger rounded-3 @enderror">
                                                 <input class="form-control" value="{{ auth()->user()->name }}" type="text" placeholder="Name" id="user-name" name="name">
                                                 @error('name')
+                                                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="user.email" class="form-control-label">{{ __('Email') }}</label>
+                                            <div class="@error('user.email')border border-danger rounded-3 @enderror">
+                                                <input class="form-control" value="{{ auth()->user()->email }}" type="email" placeholder="Email" id="user-email" name="email" readonly>
+                                                @error('email')
                                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                                 @enderror
                                             </div>
@@ -90,6 +101,16 @@
                                             <label for="user.jantina" class="form-control-label">{{ __('Jantina') }}</label>
                                             <div class="@error('user.jantina') border border-danger rounded-3 @enderror">
                                                 <input class="form-control" type="text" placeholder="Jantina" id="jantina" name="jantina" value="{{ auth()->user()->jantina }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="user.alamat" class="form-control-label">{{ __('Alamat') }}</label>
+                                            <div class="@error('user.alamat')border border-danger rounded-3 @enderror">
+                                                <input class="form-control" value="{{ auth()->user()->alamat }}" type="text" placeholder="Alamat" id="user-alamat" name="alamat">
                                             </div>
                                         </div>
                                     </div>
