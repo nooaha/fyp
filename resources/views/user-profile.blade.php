@@ -61,12 +61,23 @@
                                 @csrf
                                 <!-- Form fields for Parent Info -->
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="user-name" class="form-control-label">{{ __('Nama Penuh') }}</label>
+                                            <label for="user.name" class="form-control-label">{{ __('Nama Penuh') }}</label>
                                             <div class="@error('user.name')border border-danger rounded-3 @enderror">
                                                 <input class="form-control" value="{{ auth()->user()->name }}" type="text" placeholder="Name" id="user-name" name="name">
                                                 @error('name')
+                                                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="user.email" class="form-control-label">{{ __('Email') }}</label>
+                                            <div class="@error('user.email')border border-danger rounded-3 @enderror">
+                                                <input class="form-control" value="{{ auth()->user()->email }}" type="email" placeholder="Email" id="user-email" name="email" readonly>
+                                                @error('email')
                                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                                 @enderror
                                             </div>
@@ -94,6 +105,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="user.alamat" class="form-control-label">{{ __('Alamat') }}</label>
+                                            <div class="@error('user.alamat')border border-danger rounded-3 @enderror">
+                                                <input class="form-control" value="{{ auth()->user()->alamat }}" type="text" placeholder="Alamat" id="user-alamat" name="alamat">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
                                     <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-dashboard'">Kembali</button>
                                 </div>
@@ -101,7 +122,7 @@
                         </div>
                     </div>
 
-                    <!-- Password Info Tab -->
+                    <!-- Password Change Info Tab -->
                     <div class="tab-pane fade" id="password-info" role="tabpanel">
                         <div class="card-header pb-0 px-3">
                             <h6 class="mb-0">{{ __('Tukar Kata Laluan') }}</h6>
