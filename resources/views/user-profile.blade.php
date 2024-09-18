@@ -122,7 +122,7 @@
                         </div>
                     </div>
 
-                    <!-- Password Info Tab -->
+                    <!-- Password Change Info Tab -->
                     <div class="tab-pane fade" id="password-info" role="tabpanel">
                         <div class="card-header pb-0 px-3">
                             <h6 class="mb-0">{{ __('Tukar Kata Laluan') }}</h6>
