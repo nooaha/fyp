@@ -207,7 +207,7 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::get('/', function () {
-    return view('welcome-default');
+    return view('welcome');
 })->name('welcome');
 
 
