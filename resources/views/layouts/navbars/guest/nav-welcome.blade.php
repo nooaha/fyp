@@ -35,17 +35,23 @@
     @endif
         <li class="nav-item">
           <a class="nav-link me-2" href="#home">
-            Halaman Utama
+              <strong>
+                  Halaman Utama
+              </strong>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link me-2" href="#aboutUs">
-            Tentang Kami
+            <strong>
+                  Tentang Kami
+              </strong>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link me-2" href="#contactUs">
-            Hubungi Kami
+            <strong>
+                  Hubungi Kami
+              </strong>
           </a>
         </li>
       </ul>
