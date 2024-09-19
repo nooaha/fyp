@@ -50,12 +50,12 @@
             <h2 class="pb-3 ">Perkhidmatan Kami</h2>
             <div class="row">
                 <div class="col-md-3" >
-                    <i class="fas fa-baby fa-3x mb-3"></i>
+                    <i class="fas fa-chart-line fa-3x mb-3"></i>
                     <h5>Carta Tumbesaran</h5>
                     <p>Jejak dan pantau perkembangan anak anda dengan carta tumbesaran kami.</p>
                 </div>
                 <div class="col-md-3">
-                    <i class="fas fa-chart-line fa-3x mb-3"></i>
+                    <i class="fas fa-baby fa-3x mb-3"></i>
                     <h5>Pemantauan Perkembangan</h5>
                     <p>Dapatkan pandangan perkembangan berdasarkan pencapaian anak anda.</p>
                 </div>
