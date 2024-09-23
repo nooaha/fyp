@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\MilestoneChecklistController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
@@ -134,17 +135,21 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin.admin-profile');
 	})->name('admin-profile');
 
-	Route::get('senarai-pencapaian-perkembangan', function () {
-		return view('admin.admin-milestone-checklist');
-	})->name('list-milestone');
+	
+
+	Route::resource('milestone-checklists', MilestoneChecklistController::class);
+
+	Route::get('/senarai-semak-perkembangan', [MilestoneChecklistController::class, 'index'])->name('senarai-semak-perkembangan');
+
+	Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
+
+
 
 	Route::get('tambah-senarai', function () {
 		return view('admin.admin-add-milestone');
 	})->name('add-milestone');
 
-	Route::get('kemaskini-senarai', function () {
-		return view('admin.admin-edit-milestone');
-	})->name('edit-milestone');
+	
 
     Route::get('profil-pengguna', function () {
 		return view('user.user-profile');
@@ -212,6 +217,6 @@ Route::get('/', function () {
 
 
 Route::get('/login', function () {
-    return view('session/login-session');
+    return view('session/login-session-copy');
 })->name('login');
 
