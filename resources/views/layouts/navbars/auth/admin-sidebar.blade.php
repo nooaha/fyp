@@ -4,17 +4,15 @@
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
       aria-hidden="true" id="iconSidenav"></i>
     <a class="align-items-center d-flex justify-content-center m-0 navbar-brand text-wrap"
-      href="{{route('user-dashboard')}}">
-      <img src="../assets/img/logo.png" alt="PediPulse Logo" style="max-height: 60px; width: auto;">
+      href="{{route('admin-dashboard')}}">
+      <img src="{{ asset('../assets/img/logo.png') }}" alt="PediPulse Logo" style="max-height: 60px; width: auto;">
     </a>
   </div>
   <hr class="horizontal dark mt-3">
   <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle {{ (Request::is('user-dashboard') ? 'active' : '') }}"
-          href="{{ url('user-dashboard') }}" id="childDropdown" data-bs-toggle="collapse"
-          data-bs-target="#childAccordion" aria-expanded="false">
+      <li class="nav-item">
+        <a class="nav-link {{ (Request::is('admin-dashboard') ? 'active' : '') }}" href="{{ url('admin-dashboard') }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <i style="font-size: 1rem;" class="fas  fa-lg fa-home ps-2 pe-2 text-center text-dark"
@@ -22,17 +20,7 @@
           </div>
           <span class="nav-link-text ms-1">Paparan Utama</span>
         </a>
-        <!-- Accordion kena ada foreach-->
-        <div id="childAccordion" class="collapse">
-          <ul class="list-unstyled ps-3">
-            <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child1') }}">Child 1</a></li>
-            <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child2') }}">Child 2</a></li>
-            <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child3') }}">Child 3</a></li>
-          </ul>
-        </div>
       </li>
-
-
       <!--Nav Header-->
       <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
@@ -85,15 +73,15 @@
       </li>
       <!--Nav Graph-->
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('graf-tumbesaran-anak') ? 'active' : '') }}"
-          href="{{ url('graf-tumbesaran-anak') }}">
+        <a class="nav-link {{ (Request::is('senarai-semak-perkembangan') ? 'active' : '') }}"
+          href="{{ route('senarai-semak-perkembangan') }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas  fa-lg fa-chart-line ps-2 pe-2 text-center text-dark"
+            <i style="font-size: 1rem;" class="fas fa-lg fa-clipboard-list ps-2 pe-2 text-center text-dark"
               aria-hidden="true"></i>
 
           </div>
-          <span class="nav-link-text ms-1">Graf Tumbesaran Anak</span>
+          <span class="nav-link-text ms-1">Pengurusan Senarai Semak</span>
         </a>
       </li>
       <!--Nav Milestone-->
@@ -102,33 +90,10 @@
           href="{{ url('pencapaian-perkembangan') }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas  fa-lg fa-baby ps-2 pe-2 text-center text-dark "
+            <i style="font-size: 1rem;" class="fas fa-lg fa-folder-open ps-2 pe-2 text-center text-dark "
               aria-hidden="true"></i>
           </div>
-          <span class="nav-link-text ms-1">Pencapaian Perkembangan</span>
-        </a>
-      </li>
-      <!--Nav M-Chat-->
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('m-chat') ? 'active' : '') }}" href="{{ url('m-chat') }}">
-          <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas  fa-lg fa-clipboard-check ps-2 pe-2 text-center text-dark "
-              aria-hidden="true"></i>
-          </div>
-          <span class="nav-link-text ms-1">M-CHAT</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('tips-dan-intervensi') ? 'active' : '') }}"
-          href="{{ url('tips-dan-intervensi') }}">
-          <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas  fa-lg fa-heart ps-2 pe-2 text-center text-dark"
-              aria-hidden="true"></i>
-          </div>
-          <span class="nav-link-text ms-1">Tips dan Intervensi</span>
+          <span class="nav-link-text ms-1">Pengurusan Tips dan Intervensi</span>
         </a>
       </li>
 
@@ -166,58 +131,7 @@
           <span class="nav-link-text ms-1">Profile</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link  " href="{{ url('static-sign-in') }}">
-          <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-              <title>document</title>
-              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                  <g transform="translate(1716.000000, 291.000000)">
-                    <g transform="translate(154.000000, 300.000000)">
-                      <path class="color-background opacity-6"
-                        d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z">
-                      </path>
-                      <path class="color-background"
-                        d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z">
-                      </path>
-                    </g>
-                  </g>
-                </g>
-              </g>
-            </svg>
-          </div>
-          <span class="nav-link-text ms-1">Sign In</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link  " href="{{ url('static-sign-up') }}">
-          <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <img src="../assets/img/apple-icon.png" alt="Custom Icon" width="12" height="12">
-          </div>
-          <span class="nav-link-text ms-1">Sign Up</span>
-        </a>
-      </li>
     </ul>
   </div>
-  <div class="sidenav-footer mx-3 ">
-    <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
-      <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
-      <div class="card-body text-start p-3 w-100">
-        <div
-          class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
-          <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
-        </div>
-        <div class="docs-info">
-          <h6 class="text-white up mb-0">Need help?</h6>
-          <p class="text-xs font-weight-bold">Please check our docs</p>
-          <a href="/documentation/getting-started/overview.html" target="_blank"
-            class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </aside>
