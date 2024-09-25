@@ -2,56 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\View;
 
-class InfoUserController extends Controller
+class UserController extends Controller
 {
-
-    public function create()
+    public function submitUserInfo(Request $request)
     {
-        return view('/user-profile');
-    }
-
-    public function store(Request $request)
-    {
-
-        $attributes = request()->validate([
-            'name' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
-            'tlahir'     => ['required','Date::format(DD-MM-YYYY)'],
-            'jantina' => ['max:10'],
-            'alamat' => ['max:70'],
-        ]);
-        if($request->get('email') != Auth::user()->email)
-        {
-            if(env('IS_DEMO') && Auth::user()->id == 1)
-            {
-                return redirect()->back()->withErrors(['msg2' => 'You are in a demo version, you can\'t change the email address.']);
-
-            }
-
-        }
-        else{
-            $attribute = request()->validate([
-                'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore(Auth::user()->id)],
-            ]);
-        }
-
-
-        User::where('id',Auth::user()->id)
-        ->update([
-            'name'    => $attributes['name'],
-            'email' => $attribute['email'],
-            'tlahir'     => $attributes['tlahir'],
-            'jantina'    => $attributes['jantina'],
-            'alamat' => $attributes['alamat'],
+        // Validate the form data
+        $request->validate([
+            'parent_name' => 'required|string|max:255',
+            'parent_dob' => 'required|date',
+            'parent_gender' => 'required|string',
+            'parent_address' => 'required|string',
+            'child_name' => 'required|string|max:255',
+            'child_dob' => 'required|date',
+            'child_gender' => 'required|string',
         ]);
 
+        // Handle saving the data (if you have models for this)
 
-        return redirect('/user-profile')->with('success','Profile updated successfully');
+        // Redirect to the dashboard after successful form submission
+        return redirect()->route('dashboard');
     }
 }

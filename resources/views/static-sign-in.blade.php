@@ -10,8 +10,8 @@
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <h3 class="font-weight-bolder text-info text-gradient">Selamat kembali</h3>
+                  <p class="mb-0">Masukkan emel dan kata kunci untuk log masuk</p>
                 </div>
                 <div class="card-body">
                   <form role="form">
