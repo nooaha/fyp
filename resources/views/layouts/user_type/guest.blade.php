@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('guest')
-    @if(\Request::is('login/forgot-password')) 
+    @if(\Request::is('login/forgot-password'))
         @include('layouts.navbars.guest.nav')
         @yield('content') 
     @elseif(\Request::is('/'))
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        @yield('content')        
+        @yield('content')
         @include('layouts.footers.guest.footer')
     @endif
 @endsection

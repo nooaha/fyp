@@ -215,8 +215,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
 Route::get('/login', function () {
     return view('session/login-session-copy');
 })->name('login');
+
+Route::get('/maklumat-pengguna', function () {
+    return view('user.user-fill-form');
+})->name('userInfo')->middleware('auth');
+
+// Handle form submission and redirect to the dashboard
+Route::post('/submit-user-info', [UserController::class, 'submitUserInfo'])->name('submitUserInfo');
+
 
