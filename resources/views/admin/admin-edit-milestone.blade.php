@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header pb-0">
                     <h6 class="mb-0">Edit Senarai Pencapaian Perkembangan</h6>
                 </div>
                 <div class="card-body">
@@ -32,8 +32,8 @@
                         <div class="form-group">
                             <label for="description" class="form-control-label">Penerangan Senarai Pencapaian
                                 Perkembangan</label>
-                            <input class="form-control" type="text" id="description" name="description"
-                                value="{{ $milestone->description }}">
+                                <textarea id="description" name="description" class="form-control">{{ old('description',$milestone->description) }}</textarea>
+
                         </div>
 
                         <div class="row">
@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-3 text-end">
                                 <!-- Single Button to Add New Questions -->
-                                <button type="button" class="btn btn-success mb-3" id="addQuestionBtn">Tambah
+                                <button type="button" class="btn btn-success mb-3" id="addQuestionBtn">+&nbsp;Tambah
                                     Soalan</button>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
 
                         <div class="d-flex mt-3 justify-content-end">
                             <!-- Submit Button -->
-                            <button type="button" class="btn btn-secondary me-2" id="cancelButton">Cancel</button>
+                            <button type="button" class="btn btn-secondary me-2" id="cancelButton">Batal</button>
                             <button type="submit" class="btn btn-primary" style="float: right">Kemas kini
                                 Senarai</button>
                         </div>
@@ -112,7 +112,7 @@
         
         if (cancelButton) {
             cancelButton.addEventListener('click', function() {
-                window.location.href = "{{ route('milestone-checklists.index') }}";
+                window.location.href = "{{ route('milestone-checklists.show', $milestone->id) }}";
             });
         }
     });
