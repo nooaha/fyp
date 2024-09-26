@@ -147,9 +147,10 @@
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i style="font-size: 1rem;" class="fas fa-lg fa-list-check ps-2 pe-2 text-center text-dark "
-                            aria-hidden="true"></i>
-                            
+                                <i style="font-size: 1rem;"
+                                    class="fas fa-lg fa-list-check ps-2 pe-2 text-center text-dark "
+                                    aria-hidden="true"></i>
+
                             </div>
                         </div>
                     </div>
@@ -172,8 +173,9 @@
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i style="font-size: 1rem;" class="fas fa-lg fa-circle-exclamation ps-2 pe-2 text-center text-dark "
-                            aria-hidden="true"></i>
+                                <i style="font-size: 1rem;"
+                                    class="fas fa-lg fa-circle-exclamation ps-2 pe-2 text-center text-dark "
+                                    aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -195,52 +197,37 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Kategori Umur</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Tarikh</th>
+                                Tarikh akhir kemaskini</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!--
+                    @if ($checklists->isEmpty())
                         <tr>
-                            <td colspan="4" class="text-center mb-0 text-xs">Tiada rekod</td>
-                        </tr>-->
-                        
-                        <tr>
-                            <td class="align-middle text-xs">SP12</td>
-                            <td class="align-middle text-xs">Senarai Pencapaian Perkembangan </td>
-                            <td class="align-middle text-center text-xs">
-                                <span class="badge bg-gradient-secondary ">12 bulan</span>
-                            </td>
-                            <td class="align-middle text-center text-xs">12/02/2023</td>
+                            <td colspan="4" class="text-center mb-0 text-xs">Tiada rekod Senarai Pencapaian Perkembangan</td>
                         </tr>
-                        <tr>
-                            <td class="align-middle text-xs">SP12</td>
-                            <td class="align-middle text-xs">Senarai Pencapaian Perkembangan </td>
-                            <td class="align-middle text-center text-xs">
-                                <span class="badge bg-gradient-secondary ">21 bulan</span>
-                            </td>
-                            <td class="align-middle text-center text-xs">12/02/2023</td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle text-xs">SP12</td>
-                            <td class="align-middle text-xs">Senarai Pencapaian Perkembangan </td>
-                            <td class="align-middle text-center text-xs">
-                                <span class="badge bg-gradient-secondary ">15 bulan</span>
-                            </td>
-                            <td class="align-middle text-center text-xs">12/02/2023</td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle text-xs">SP12</td>
-                            <td class="align-middle text-xs">Senarai Pencapaian Perkembangan </td>
-                            <td class="align-middle text-center text-xs">
-                                <span class="badge bg-gradient-secondary ">18 bulan</span>
-                            </td>
-                            <td class="align-middle text-center text-xs">12/02/2023</td>
-                        </tr>
+                    @else
+                        @foreach ($checklists as $checklist)
+                            <tr>
+                                <td class="align-middle text-xs">
+                                    <span>SP{{ $checklist->id }}</span>
+                                </td>
+                                <td class="align-middle text-xs">
+                                    <span>{{ $checklist->title}}</span>
+                                </td>
+                                <td class="align-middle text-center text-xs">
+                                    <span class="badge bg-gradient-secondary ">{{ $checklist->age_category }} bulan</span>
+                                </td>
+                                <td class="align-middle text-center text-xs">
+                                    <span>{{ $checklist->updated_at}}</span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
             <div class="text-end mt-2">
-                <a href="{{ route('admin-tips-interventions') }}" class="btn btn-primary mb-0">Kemas kini</a>
+                <a href="{{ route('milestone-checklists.index') }}" class="btn btn-primary mb-0">Kemas kini</a>
             </div>
         </div>
     </div>

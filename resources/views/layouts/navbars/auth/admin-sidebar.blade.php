@@ -4,7 +4,7 @@
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
       aria-hidden="true" id="iconSidenav"></i>
     <a class="align-items-center d-flex justify-content-center m-0 navbar-brand text-wrap"
-      href="{{route('admin-dashboard')}}">
+      href="{{route('admin.dashboard')}}">
       <img src="{{ asset('../assets/img/logo.png') }}" alt="PediPulse Logo" style="max-height: 60px; width: auto;">
     </a>
   </div>
@@ -86,8 +86,8 @@
       </li>
       <!--Nav Milestone-->
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('pencapaian-perkembangan') ? 'active' : '') }}"
-          href="{{ url('pencapaian-perkembangan') }}">
+        <a class="nav-link {{ (Request::is('admin-tips-interventions') ? 'active' : '') }}"
+          href="{{ url('admin-tips-interventions') }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <i style="font-size: 1rem;" class="fas fa-lg fa-folder-open ps-2 pe-2 text-center text-dark "
