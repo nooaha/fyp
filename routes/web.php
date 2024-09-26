@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\MilestoneChecklistController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
@@ -135,15 +136,15 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin.admin-profile');
 	})->name('admin-profile');
 
-	
+	Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 	Route::resource('milestone-checklists', MilestoneChecklistController::class);
+
+	Route::get('/milestone-checklists/{milestoneChecklist}', [MilestoneChecklistController::class, 'show'])->name('milestone-checklists.show');
 
 	Route::get('/senarai-semak-perkembangan', [MilestoneChecklistController::class, 'index'])->name('senarai-semak-perkembangan');
 
 	Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
-
-
 
 	Route::get('tambah-senarai', function () {
 		return view('admin.admin-add-milestone');
