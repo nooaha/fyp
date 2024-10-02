@@ -9,32 +9,34 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-
     public function create()
     {
-    return view('session.register')->withErrors(session('errors'));
+        return view('session.register');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
-            'username' => ['required', 'max:50', Rule::unique('users', 'username')], // Check for unique username
+        // Validate and create the user
+        $validated = $request->validate([
             'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
+            'name' => ['required', 'min:3', 'max:100'],
             'password' => ['required', 'min:5', 'max:20'],
             'agreement' => ['accepted']
         ]);
 
         // Hash the password before saving
-        $attributes['password'] = bcrypt($attributes['password']);
+        $validated['password'] = bcrypt($validated['password']);
 
         // Create user and login
-        $user = User::create($attributes);
+        $user = User::create($validated);
         Auth::login($user);
 
         // Flash a success message
         session()->flash('success', 'Your account has been created.');
 
         // Redirect to the user information form instead of the dashboard
-        return redirect()->route('userInfo');  // Redirects to user info form
-    }
+        return redirect()->route('user-details.create', ['userId' => $user->id]);
+
+   }
+    
 }
