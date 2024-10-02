@@ -22,7 +22,7 @@
 
         @if($isAdmin)
             
-            @include('layouts.navbars.auth.admin-sidebar') 
+            @include('layouts.navbars.auth.admin-sidebar', ['user' => auth()->user()])
             <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
                 @include('layouts.navbars.auth.nav')
                 <div class="container-fluid py-4">
@@ -47,7 +47,7 @@
             </div>
 
         @else
-            @include('layouts.navbars.auth.sidebar')
+            @include('layouts.navbars.auth.sidebar', ['user' => auth()->user()])
             <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg overflow-hidden">
                 @include('layouts.navbars.auth.nav')
                 <div class="container-fluid py-4">
