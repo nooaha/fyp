@@ -22,7 +22,6 @@ class SessionsController extends Controller
                 'password' => 'required',
             ]);
 
-            // Attempt to log in as admin using the username
             if (Auth::attempt(['username' => $attributes['username'], 'password' => $attributes['password']])) {
                 session()->regenerate();
                 return redirect('admin-dashboard')->with(['success' => 'You are logged in as admin.']);
@@ -36,15 +35,27 @@ class SessionsController extends Controller
                 'password' => 'required',
             ]);
 
-            // Attempt to log in as parent using the email
             if (Auth::attempt(['email' => $attributes['email'], 'password' => $attributes['password']])) {
                 session()->regenerate();
-                return redirect('paparan-utama')->with(['success' => 'You are logged in.']);
+
+                // Check how many children the parent has
+                $parent = Auth::user();
+                $children = $parent->children; // Assuming you have a `children` relationship
+
+                if ($children->count() > 0) {
+                    // Store the first child's ID in the session by default
+                    session(['child_id' => $children->first()->id]);
+                    return redirect('paparan-utama')->with(['success' => 'You have successfully logged in!']);
+                }else {
+                    return redirect('paparan-utama')->with(['error' => 'No children found.']);
+                }
+                
             } else {
                 return back()->withErrors(['email' => 'Email or password invalid.']);
             }
         }
     }
+
 
 
     public function destroy()
