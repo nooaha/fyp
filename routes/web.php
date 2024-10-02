@@ -40,9 +40,17 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
+	Route::resource('user-details', InfoUserController::class);
+	// Show the user details form
+	Route::get('/maklumat-pengguna', [InfoUserController::class, 'create'])->name('user-details.create');
+
+	// Handle form submission
+	Route::post('/maklumat-pengguna', [InfoUserController::class, 'store'])->name('user-details.store');
+
 	Route::get('paparan-utama', function () {
 		return view('user.user-dashboard');
 	})->name('user-dashboard');
+
 
 	Route::get('graf-tumbesaran-anak', function () {
 		return view('user.growth-charts');
@@ -176,10 +184,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('tables');
 	})->name('tables');
 
-    Route::get('virtual-reality', function () {
-		return view('virtual-reality');
-	})->name('virtual-reality');
-
+    
     Route::get('static-sign-in', function () {
 		return view('static-sign-in');
 	})->name('sign-in');
@@ -193,7 +198,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/profil-pengguna', [InfoUserController::class, 'store']);
 	//Route::get('/user-profile', [InfoUserController::class, 'create']);
 	//Route::post('/user-profile', [InfoUserController::class, 'store']);
-    Route::get('/login', function () {
+    
+	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
 });
@@ -220,11 +226,6 @@ Route::get('/login', function () {
     return view('session/login-session-copy');
 })->name('login');
 
-Route::get('/maklumat-pengguna', function () {
-    return view('user.user-fill-form');
-})->name('userInfo')->middleware('auth');
+//Route::get('/maklumat-pengguna', function () {return view('user.user-fill-form');})->name('userInfo')->middleware('auth');
 
 // Handle form submission and redirect to the dashboard
-Route::post('/submit-user-info', [UserController::class, 'submitUserInfo'])->name('submitUserInfo');
-
-

@@ -21,13 +21,13 @@
       <ul class="navbar-nav mx-auto">
         @if (auth()->user())
       <li class="nav-item">
-        <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{{ url('dashboard') }}">
+        <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{{ url('paparan-utama') }}">
         <i class="fa fa-chart-pie opacity-6 me-1 {{ (Request::is('static-sign-up') ? '' : 'text-dark') }}"></i>
         Dashboard
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link me-2" href="{{ url('profile') }}">
+        <a class="nav-link me-2" href="{{ url('user-profile') }}">
         <i class="fa fa-user opacity-6 me-1 {{ (Request::is('static-sign-up') ? '' : 'text-dark') }}"></i>
         Profile
         </a>
@@ -55,14 +55,14 @@
           </a>
         </li>
       </ul>
-      <ul class="navbar-nav d-flex justify-content-end pt-2">
+      <ul class="navbar-nav d-flex justify-content-end pt-2" >
         <li class="nav-item">
-          <button type="button" class="btn btn-primary me-2"
-            href="">Log Masuk</button>
+          <a class="btn btn-primary me-2" aria-current="page"  href="{{ auth()->user() ? url('static-sign-in') : url('login') }}">
+            Log Masuk</a>
         </li>
         <li class="nav-item">
-          <button type="button" class="btn btn-secondary"
-            href="">Daftar</button>
+          <a class="btn btn-secondary me-2" aria-current="page" href="{{ auth()->user() ? url('static-sign-up') : url('register') }}">
+            Daftar</a>
         </li>
       </ul>
     </div>
