@@ -11,27 +11,47 @@
   <hr class="horizontal dark mt-3">
   <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle {{ (Request::is('user-dashboard') ? 'active' : '') }}"
-          href="{{ url('user-dashboard') }}" id="childDropdown" data-bs-toggle="collapse"
-          data-bs-target="#childAccordion" aria-expanded="false">
-          <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas  fa-lg fa-home ps-2 pe-2 text-center text-dark"
-              aria-hidden="true"></i>
-          </div>
-          <span class="nav-link-text ms-1">Paparan Utama</span>
-        </a>
-        <!-- Accordion kena ada foreach-->
-        <div id="childAccordion" class="collapse">
-          <ul class="list-unstyled ps-3">
-            <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child1') }}">Child 1</a></li>
-            <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child2') }}">Child 2</a></li>
-            <li><a class="dropdown-item nav-link-text" href="{{ url('dashboard/child3') }}">Child 3</a></li>
-          </ul>
-        </div>
-      </li>
+    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" 
+               href="#"
+               id="childDropdown" 
+               data-bs-toggle="collapse" 
+               data-bs-target="#childAccordion"
+               aria-expanded="{{ Request::is('user-dashboard/*') ? 'true' : 'false' }}">
+                <div
+                    class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i style="font-size: 1rem;" class="fas fa-lg fa-home ps-2 pe-2 text-center text-dark"
+                       aria-hidden="true"></i>
+                </div>
+                <span class="nav-link-text ms-1">Paparan Utama</span>
+            </a>
 
+            <!-- Child Dropdown -->
+            <div id="childAccordion" aria-expanded=" {{ Request::is('user-dashboard/*') ? 'show' : '' }}">
+                <ul class="list-unstyled ps-3">
+                    @if(isset($user))
+                        @foreach ($user->children as $child)
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::is('user-dashboard/' . $child->id) ? 'active' : '' }}" 
+                                   href="{{ route('user-dashboard', ['child_id' => $child->id]) }}">
+                                    <div
+                                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                        @if($child->child_gender === 'Lelaki')
+                                            <i style="font-size: 1rem;" class="fas fa-lg fa-child text-center text-dark" aria-hidden="true"></i>
+                                        @elseif($child->child_gender === 'Perempuan')
+                                            <i style="font-size: 1rem;" class="fas fa-lg fa-child-dress text-center text-dark" aria-hidden="true"></i>
+                                        @endif
+                                    </div>
+                                    <span class="nav-link-text ms-1 text-capitalize">{{ $child->child_name }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    @else
+                        <li>No children available</li>
+                    @endif
+                </ul>
+            </div>
+        </li>
 
       <!--Nav Header-->
       <li class="nav-item mt-2">

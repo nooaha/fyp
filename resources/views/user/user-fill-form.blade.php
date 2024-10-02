@@ -5,36 +5,41 @@
         <div class="row">
             <div class="col mt-0">
                 <div class="card z-index-0">
-
                     <div class="card-body p-3">
                         <h4><strong>Maklumat Pengguna</strong></h4>
                         <br>
-                        <form action="{{ route('submitUserInfo') }}" method="POST">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form action="{{ route('user-details.store') }}" method="POST">
                             @csrf
                             <!-- Maklumat Ibu/Bapa -->
                             <h5>Maklumat Ibu/Bapa</h5>
                             <div class="form-group">
-                                <label for="parent_name">Nama Penuh</label>
-                                <input class="form-control" type="text" id="parent_name" name="parent_name" required>
+                                <label class="form-control-label">Nama Penuh</label>
+                                <input class="form-control" type="text" id="parent_name" name="full_name" required>
                             </div>
                             <div class="form-group">
-                                <label for="parent_dob">Tarikh Lahir</label>
-                                <input class="form-control" type="date" id="parent_dob" name="parent_dob" required>
+                                <label class="form-control-label">Tarikh Lahir</label>
+                                <input class="form-control" type="date" id="parent_dob" name="dob" required>
                             </div>
-
                             <div class="form-group">
-                                <label for="parent_gender">Jantina</label> <!-- Label placed outside -->
-                                <select class="form-control" id="parent_gender" name="parent_gender" required>
+                                <label class="form-control-label">Jantina</label>
+                                <select class="form-control" id="parent_gender" name="gender" required>
                                     <option value="">--Pilih Jantina--</option>
                                     <option value="Lelaki">Lelaki</option>
                                     <option value="Perempuan">Perempuan</option>
                                 </select>
                             </div>
-
                             <div class="form-group mb-5">
-                                <label for="parent_address">Alamat</label>
-                                <input class="form-control" type="text" id="parent_address" name="parent_address"
-                                    required>
+                                <label class="form-control-label">Alamat</label>
+                                <input class="form-control" type="text" id="parent_address" name="address" required>
                             </div>
 
                             <!-- Maklumat Anak -->
@@ -43,70 +48,63 @@
                                     <h5>Maklumat Anak</h5>
                                 </div>
                                 <div class="col-md-3 text-end">
-                                    <!-- Single Button to Add New Questions -->
-                                    <button type="button" class="btn btn-success mb-3 " id="addChildBtn">Tambah
-                                        Anak</button>
+                                    <button type="button" class="btn btn-success mb-3" id="addChildBtn">Tambah Anak</button>
                                 </div>
 
                                 <div id="ChildContainer">
-
                                     <div class="form-group">
-                                        <label for="child_name">Nama Penuh</label>
-                                        <input class="form-control child_name" type="text" name="child_name[]" required>
-
+                                        <label class="form-control-label">Nama Penuh</label>
+                                        <input class="form-control" type="text" name="children[0][name]" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="child_dob">Tarikh Lahir</label>
-                                        <input class="form-control" type="date" id="child_dob" name="child_dob[]"
-                                            required>
+                                        <label class="form-control-label">Tarikh Lahir</label>
+                                        <input class="form-control" type="date" name="children[0][dob]" required>
                                     </div>
                                     <div class="form-group mb-5">
-                                        <label for="child_gender">Jantina</label> <!-- Label placed outside -->
-                                        <select class="form-control" id="child_gender" name="child_gender" required>
+                                        <label class="form-control-label">Jantina</label>
+                                        <select class="form-control" name="children[0][gender]" required>
                                             <option value="">--Pilih Jantina--</option>
                                             <option value="Lelaki">Lelaki</option>
                                             <option value="Perempuan">Perempuan</option>
                                         </select>
                                     </div>
-
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" style="float: right"
-                                        class="btn btn-primary btn-lg">Daftar</button>
+                                    <button type="submit" style="float: right" class="btn btn-primary btn-lg">Daftar</button>
                                 </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Add new question input field when 'Tambah Soalan' button is clicked
-        $('#addChildBtn').click(function() {
-            $('#ChildContainer').append(`
-                                    <div class="form-group">
-                                        <label for="child_name">Nama Penuh</label>
-                                        <input class="form-control" type="text" id="child_name" name="child_name[]"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="child_dob">Tarikh Lahir</label>
-                                        <input class="form-control" type="date" id="child_dob" name="child_dob[]" required>
-                                    </div>
-                                    <div class="form-group mb-5">
-
-                                <label for="parent_gender">Jantina</label> <!-- Label placed outside -->
-                                <select class="form-control" id="parent_gender" name="parent_gender" required>
-                                    <option value="">--Pilih Jantina--</option>
-                                    <option value="Lelaki">Lelaki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let childCount = 1; // Start with the first child
+            $('#addChildBtn').click(function() {
+                $('#ChildContainer').append(`
+                    <div class="form-group">
+                        <label class="form-control-label">Nama Penuh</label>
+                        <input class="form-control" type="text" name="children[${childCount}][name]" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Tarikh Lahir</label>
+                        <input class="form-control" type="date" name="children[${childCount}][dob]" required>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label class="form-control-label">Jantina</label>
+                        <select class="form-control" name="children[${childCount}][gender]" required>
+                            <option value="">--Pilih Jantina--</option>
+                            <option value="Lelaki">Lelaki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
                 `);
+                childCount++; // Increment the child count for the next child
+            });
         });
-    });
-</script>
+    </script>
+@endsection

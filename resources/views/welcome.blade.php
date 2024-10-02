@@ -15,7 +15,7 @@
                             class="text-primary">PediPulse</span></h2>
                         <p class="lead text-white">Ketahui pandangan tentang perkembangan anak anda - Daftar sekarang!
                         </p>
-                        <a href="" class="btn btn-primary">Mula Mengesan</a>
+                        <a href="{{ auth()->user() ? url('static-sign-in') : url('login') }}" class="btn btn-primary">Mula Mengesan</a>
                 </div>
             </div>
         </div>

@@ -3,7 +3,8 @@
 @section('content')
 
 <div class="container">
-    <h2 class="mb-3">Selamat Datang, </h2>
+    
+    <h2 class="mb-3">Selamat Datang,<span class="text-capitalize" style="color: #3F51B2;"> {{auth()->user()->name}}!</span></h2>
     <p>Mula jejak tumbesaran dan pencapaian perkembangan anak anda.</p>
 
     <div class="row">
