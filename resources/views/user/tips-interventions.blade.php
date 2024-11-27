@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-12"> <!-- Change col-8 to col-12 to use full width -->
                         <div class="numbers" style="text-align: center;">
-                            <img src="https://lumiere-a.akamaihd.net/v1/images/gallery_princess_rapunzel_4_2832aa5a.jpeg"
+                            <img src="https://static.cdntap.com/tap-assets-prod/wp-content/uploads/sites/6/2023/09/Collage-Maker-08-Sep-2023-11-32-AM-7554.jpg?width=700&quality=95"
                                  style="width: 100%; height: auto; display: block; margin: 0 auto;" alt="Rapunzel Image">
                             <br>
                             <h5 class="text-sm mb-0 text-capitalize font-weight-bold">
@@ -122,7 +122,7 @@
                 <div class="row">
                     <div class="col-12"> <!-- Change col-8 to col-12 to use full width -->
                         <div class="numbers" style="text-align: center;">
-                            <img src="https://lumiere-a.akamaihd.net/v1/images/gallery_princess_rapunzel_4_2832aa5a.jpeg"
+                            <img src="https://static.cdntap.com/tap-assets-prod/wp-content/uploads/sites/6/2023/09/Collage-Maker-08-Sep-2023-11-32-AM-7554.jpg?width=700&quality=95"
                                  style="width: 100%; height: auto; display: block; margin: 0 auto;" alt="Rapunzel Image">
                             <br>
                             <h5 class="text-sm mb-0 text-capitalize font-weight-bold">

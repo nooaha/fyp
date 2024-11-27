@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-0">
-            <div class="card" style="width: 100%; overflow-x: hidden;">
+
                 <div class="card-header pb-0">
                     <div class="row mb-0">
                         <div class="col-md-9">

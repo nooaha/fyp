@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\MilestoneChecklistController;
+use App\Http\Controllers\TipsCategoryController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -96,9 +97,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('admin.admin-dashboard');
 	})->name('admin-dashboard');
 
-    Route::get('admin-tips', function () {
-		return view('admin.admin-tips');
-	})->name('admin-tips');
 
     Route::get('admin-interventions', function () {
 		return view('admin.admin-interventions');
@@ -154,11 +152,24 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
 
+    Route::resource('tips-categories', TipsCategoryController::class)->except(['show']);
+
+    //Route::delete('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tips-categories.destroy');
+
+    Route::get('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'show'])->name('tipscategories.show');
+
+    //Route::get('/admin-tips', [TipsCategoryController::class, 'index'])->name('tips-categories.index');
+
+    //Route::delete('/tipscategories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tipscategories.destroy');
+    //Route::delete('/tipscategories/{id}', [TipsCategoryController::class, 'destroy'])->name('custom-category-destroy');
+
+
+
 	Route::get('tambah-senarai', function () {
 		return view('admin.admin-add-milestone');
 	})->name('add-milestone');
 
-	
+
 
     Route::get('profil-pengguna', function () {
 		return view('user.user-profile');
@@ -184,7 +195,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('tables');
 	})->name('tables');
 
-    
+
     Route::get('static-sign-in', function () {
 		return view('static-sign-in');
 	})->name('sign-in');
@@ -198,7 +209,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/profil-pengguna', [InfoUserController::class, 'store']);
 	//Route::get('/user-profile', [InfoUserController::class, 'create']);
 	//Route::post('/user-profile', [InfoUserController::class, 'store']);
-    
+
 	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
