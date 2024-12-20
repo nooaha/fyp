@@ -3,7 +3,9 @@
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\MilestoneChecklistController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\GrowthRecordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
@@ -36,10 +38,7 @@ Route::post('/upload', [ImageUploadController::class, 'uploadImage'])->name('upl
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
-	Route::get('dashboard', function () {
-		return view('dashboard');
-	})->name('dashboard');
-
+	
 	Route::resource('user-details', InfoUserController::class);
 	// Show the user details form
 	Route::get('/maklumat-pengguna', [InfoUserController::class, 'create'])->name('user-details.create');
@@ -47,18 +46,16 @@ Route::group(['middleware' => 'auth'], function () {
 	// Handle form submission
 	Route::post('/maklumat-pengguna', [InfoUserController::class, 'store'])->name('user-details.store');
 
-	Route::get('paparan-utama', function () {
-		return view('user.user-dashboard');
-	})->name('user-dashboard');
+	
+	Route::get('/paparan-utama/anak/{childId}', [UserDashboardController::class, 'index'])->name('user-dashboard');
+
+	//Route::get('graf-tumbesaran-anak/anak/{childId}', [GrowthRecordController::class, 'index'])->name('growth-tracking.index'); // Fetch records
+	Route::get('graf-tumbesaran-anak/anak/{childId}', [GrowthRecordController::class, 'showGrowthChart'])->name('growth-tracking.showGrowthChart'); // Fetch records
+	Route::get('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'add'])->name('growth-tracking.add'); // Add record
+	Route::post('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'store'])->name('growth-tracking.store'); // Add record
 
 
-	Route::get('graf-tumbesaran-anak', function () {
-		return view('user.growth-charts');
-	})->name('growth-charts');
-
-	Route::get('rekod-maklumat-tumbesaran', function(){
-		return view('user.add-growth');
-	})->name('add-growth');
+	//Route::get('rekod-maklumat-tumbesaran', [GrowthRecordController::class, 'index'])->name('growth-tracking.create');
 
 	Route::get('senarai-perkembangan', function(){
 		return view('user.checklist-milestone');
