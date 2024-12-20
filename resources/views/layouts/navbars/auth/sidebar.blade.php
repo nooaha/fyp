@@ -4,60 +4,57 @@
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
       aria-hidden="true" id="iconSidenav"></i>
     <a class="align-items-center d-flex justify-content-center m-0 navbar-brand text-wrap"
-      href="{{route('user-dashboard')}}">
-      <img src="../assets/img/logo.png" alt="PediPulse Logo" style="max-height: 60px; width: auto;">
+      href="{{ route('user-dashboard', ['childId' => $childId ?? $user->children->first()->id]) }}">
+      <img src="{{ asset('assets/img/logo.png') }}" alt="PediPulse Logo" style="max-height: 60px; width: auto;">
     </a>
   </div>
   <hr class="horizontal dark mt-3">
   <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-    <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" 
-               href="#"
-               id="childDropdown" 
-               data-bs-toggle="collapse" 
-               data-bs-target="#childAccordion"
-               aria-expanded="{{ Request::is('user-dashboard/*') ? 'true' : 'false' }}">
-                <div
-                    class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <i style="font-size: 1rem;" class="fas fa-lg fa-home ps-2 pe-2 text-center text-dark"
-                       aria-hidden="true"></i>
-                </div>
-                <span class="nav-link-text ms-1">Paparan Utama</span>
-            </a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="childDropdown" data-bs-toggle="collapse"
+          data-bs-target="#childAccordion" aria-expanded="{{ Request::is('user-dashboard/*') ? 'true' : 'false' }}">
+          <div
+            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i style="font-size: 1rem;" class="fas fa-lg fa-home ps-2 pe-2 text-center text-dark"
+              aria-hidden="true"></i>
+          </div>
+          <span class="nav-link-text ms-1">Paparan Utama</span>
+        </a>
 
-            <!-- Child Dropdown -->
-            <div id="childAccordion" aria-expanded=" {{ Request::is('user-dashboard/*') ? 'show' : '' }}">
-                <ul class="list-unstyled ps-3">
-                    @if(isset($user))
-                        @foreach ($user->children as $child)
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('user-dashboard/' . $child->id) ? 'active' : '' }}" 
-                                   href="{{ route('user-dashboard', ['child_id' => $child->id]) }}">
-                                    <div
-                                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                        @if($child->child_gender === 'Lelaki')
-                                            <i style="font-size: 1rem;" class="fas fa-lg fa-child text-center text-dark" aria-hidden="true"></i>
-                                        @elseif($child->child_gender === 'Perempuan')
-                                            <i style="font-size: 1rem;" class="fas fa-lg fa-child-dress text-center text-dark" aria-hidden="true"></i>
-                                        @endif
-                                    </div>
-                                    <span class="nav-link-text ms-1 text-capitalize">{{ $child->child_name }}</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    @else
-                        <li>No children available</li>
-                    @endif
-                </ul>
-            </div>
-        </li>
+        <!-- Child Dropdown -->
+        <div id="childAccordion" aria-expanded="{{ Request::is('user-dashboard/*') ? 'show' : '' }}">
+          <ul class="list-unstyled ps-3">
+            @if(isset($user) && $user->children->isNotEmpty())
+        @foreach ($user->children as $child)
+      <li class="nav-item">
+        <a class="nav-link {{ request('childId') == $child->id ? 'active' : '' }}"
+        href="{{ route('user-dashboard', ['childId' => $child->id]) }}">
+        <div
+        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+        @if($child->child_gender === 'Lelaki')
+      <i style="font-size: 1rem;" class="fas fa-lg fa-child text-center text-dark" aria-hidden="true"></i>
+    @elseif($child->child_gender === 'Perempuan')
+    <i style="font-size: 1rem;" class="fas fa-lg fa-child-dress text-center text-dark"
+    aria-hidden="true"></i>
+  @endif
+        </div>
+        <span class="nav-link-text ms-1 text-capitalize">{{ $child->child_name }}</span>
+        </a>
+      </li>
+    @endforeach
+      @else
+    <li>No children available</li>
+  @endif
+          </ul>
+        </div>
+      </li>
 
-      <!--Nav Header-->
+      <!--Nav Header
       <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
       </li>
-      <!--Nav User Profile-->
+      
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('user-profile') ? 'active' : '') }} " href="{{ url('user-profile') }}">
           <div
@@ -88,7 +85,7 @@
           <span class="nav-link-text ms-1">User Profile</span>
         </a>
       </li>
-      <!--Nav User Management-->
+      
       <li class="nav-item pb-2">
         <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
           <div
@@ -98,24 +95,31 @@
           </div>
           <span class="nav-link-text ms-1">User Management</span>
         </a>
-      </li>
-      <!--Nav Header-->
+      </li>-->
+
       <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman</h6>
       </li>
+
       <!--Nav Graph-->
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('graf-tumbesaran-anak') ? 'active' : '') }}"
-          href="{{ url('graf-tumbesaran-anak') }}">
+        <!--@foreach ($user->children as $child)
+        @dump('Loop Child ID: ' . $child->id)
+        @endforeach
+        @dump('Request Child ID: ' . request('childId'))
+        @dump('Route Child ID: ' . request()->route('childId'))-->
+
+        <a class="nav-link {{ request()->route('childId') == $child->id ? 'active' : '' }}"
+          href="{{ route('growth-tracking.showGrowthChart', ['childId' => request('childId')]) }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas  fa-lg fa-chart-line ps-2 pe-2 text-center text-dark"
+            <i style="font-size: 1rem;" class="fas fa-lg fa-chart-line ps-2 pe-2 text-center text-dark"
               aria-hidden="true"></i>
-
           </div>
           <span class="nav-link-text ms-1">Graf Tumbesaran Anak</span>
         </a>
       </li>
+
       <!--Nav Milestone-->
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('pencapaian-perkembangan') ? 'active' : '') }}"
