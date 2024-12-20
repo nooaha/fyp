@@ -24,4 +24,9 @@ class Child extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function growthRecords()
+    {
+        return $this->hasMany(GrowthRecord::class);
+    }
 }
