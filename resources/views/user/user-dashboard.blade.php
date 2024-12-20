@@ -17,7 +17,7 @@
                         <span class="font-weight-bold ms-1">Berat</span>
                     </p>
                     <canvas id="weightChart" height="200px"></canvas>
-                    <a href="{{ route('growth-charts') }}" class="btn btn-primary mt-3" style="float: right">Lihat Tumbesaran</a>
+                    <a href="{{ route('growth-tracking.showGrowthChart', ['childId' => $child->id]) }}" class="btn btn-primary mt-3" style="float: right">Lihat Tumbesaran</a>
                 </div>
             </div>
         </div>
