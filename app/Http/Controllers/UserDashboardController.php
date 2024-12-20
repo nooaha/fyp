@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; 
+use App\Models\User;
 use App\Models\Child;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,20 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
-    public function index()
+    public function index($childId)
     {
-        // No need to check again for the first child since it's already set in the session
-        $user = Auth::user();
-        if (!session()->has('child_id')) {
-            return redirect('user-dashboard')->with(['error' => 'No child available.']);
+        $user = Auth::user(); // Get the logged-in user
+
+        // Validate that the child belongs to the current user
+        $child = Child::where('id', $childId)
+            ->where('parent_id', $user->id)
+            ->first();
+
+        if (!$child) {
+            return redirect()->route('user-dashboard', ['childId' => $user->children->first()->id])
+                ->with('error', 'Child not found or does not belong to you.');
         }
 
-        // Redirect to the child's dashboard using the child_id in the session
-        return redirect()->route('user-dashboard', ['child_id' => session('child_id')]);
+        // Pass the data to the dashboard view
+        return view('user.user-dashboard', compact('childId', 'child'));
     }
 
-    
-    public function showChildDashboard($child_id)
+
+
+    /*public function showChildDashboard($child_id)
     {
         $parent = Auth::user();
     
@@ -40,7 +47,7 @@ class UserDashboardController extends Controller
     
         
         return view('child.dashboard', compact('child', 'growthRecords', 'milestoneProgress', 'mchatResults'));
-    }  
- 
+    }  */
+
 
 }
