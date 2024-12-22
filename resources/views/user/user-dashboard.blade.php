@@ -32,7 +32,7 @@
                     <p>Negatif skor</p>
                     <span class="badge badge-pill badge-lg bg-gradient-success">Rendah</span>
                     <br>
-                    <a href="{{ route('m-chat') }}" class="btn btn-primary mt-3">Ambil Ujian</a>
+                    <a href="{{ route('mchat.index', ['childId' => $child->id]) }}" class="btn btn-primary mt-3">Ambil Ujian</a>
                 </div>
             </div>
         </div>
