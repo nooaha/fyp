@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\ReferenceData;
 use App\Models\GrowthRecord;
 use App\Models\Child;
 use App\Models\User;
@@ -82,31 +82,29 @@ class GrowthRecordController extends Controller
         $currentDate = now();
         $ageInMonths = $currentDate->diffInMonths($childDob);
 
-        $refRecords = DB::table('reference_data')
-            ->select(
-                'age_months',
-                'height_normal_3SD as height3SD',
-                'height_normal_0SD as height0SD',
-                'height_min as heightMin',
-                'weight_obese_3SD as weight3SD',
-                'weight_normal_0SD as weight0SD',
-                'weight_min as weightMin'
-            )
+        $refRecords = ReferenceData::select(
+            'age_months',
+            'height_normal_3SD as height3SD',
+            'height_normal_0SD as height0SD',
+            'height_min as heightMin',
+            'weight_obese_3SD as weight3SD',
+            'weight_normal_0SD as weight0SD',
+            'weight_min as weightMin'
+        )
             ->orderBy('age_months')
             ->get();
 
-        $growthRecords = DB::table('growth_records')
-            ->join('children', 'growth_records.child_id', '=', 'children.id')
-            ->select(
-                'growth_records.height',
-                'growth_records.weight',
-                DB::raw('TIMESTAMPDIFF(MONTH, children.child_dob, growth_records.created_at) as age_in_months')
-            )
-            ->where('growth_records.child_id', $childId)
-            ->orderBy('growth_records.created_at')
-            ->get();
 
-        return view('user.growth-charts', compact('child', 'growthRecords', 'ageInMonths', 'refRecords'));
+        $growthRecords = GrowthRecord::with('child')
+            ->where('child_id', $childId)
+            ->orderBy('created_at')
+            ->get()
+            ->map(function ($record) {
+                $record->age_in_months = $record->child->child_dob->diffInMonths($record->created_at);
+                return $record;
+            });
+
+        return view('user.growth-charts', compact('child','growthRecords', 'ageInMonths','refRecords'));
     }
 
 
