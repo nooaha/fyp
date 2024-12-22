@@ -29,4 +29,14 @@ class Child extends Model
     {
         return $this->hasMany(GrowthRecord::class);
     }
+
+    public function mchatAnswers()
+    {
+        return $this->hasMany(MChatAnswer::class);
+    }
+
+    public function mchatResult()
+    {
+        return $this->hasMany(MChatResult::class);
+    }
 }
