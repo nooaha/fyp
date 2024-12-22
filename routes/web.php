@@ -8,6 +8,7 @@ use App\Http\Controllers\GrowthRecordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\MCHATController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -38,8 +39,8 @@ Route::post('/upload', [ImageUploadController::class, 'uploadImage'])->name('upl
 */
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', [HomeController::class, 'home']);
-	
+	Route::get('/', [HomeController::class, 'home']);
+
 	Route::resource('user-details', InfoUserController::class);
 	// Show the user details form
 	Route::get('/maklumat-pengguna', [InfoUserController::class, 'create'])->name('user-details.create');
@@ -47,7 +48,6 @@ Route::group(['middleware' => 'auth'], function () {
 	// Handle form submission
 	Route::post('/maklumat-pengguna', [InfoUserController::class, 'store'])->name('user-details.store');
 
-	
 	Route::get('/paparan-utama/anak/{childId}', [UserDashboardController::class, 'index'])->name('user-dashboard');
 
 	//Route::get('graf-tumbesaran-anak/anak/{childId}', [GrowthRecordController::class, 'index'])->name('growth-tracking.index'); // Fetch records
@@ -55,38 +55,29 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'add'])->name('growth-tracking.add'); // Add record
 	Route::post('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'store'])->name('growth-tracking.store'); // Add record
 
+	//Route::get('mchat/{child_id}', [MCHATController::class, 'results'])->name('mchat');
+	Route::get('MCHAT/{childId}', [MCHATController::class, 'index'])->name('mchat.index');
+	Route::get('ujian-MCHAT/{childId}', [MCHATController::class, 'create'])->name('mchat.create');
+	Route::post('keputusan-ujian/{childId}', [MCHATController::class, 'store'])->name('mchat.store');
 
-	//Route::get('rekod-maklumat-tumbesaran', [GrowthRecordController::class, 'index'])->name('growth-tracking.create');
 
-	Route::get('senarai-perkembangan', function(){
+	Route::get('senarai-perkembangan', function () {
 		return view('user.checklist-milestone');
 	})->name('checklist-milestone');
 
-	Route::get('pencapaian-perkembangan', function(){
+	Route::get('pencapaian-perkembangan', function () {
 		return view('user.child-milestone');
 	})->name('child-milestone');
 
-	Route::get('m-chat', function(){
-		return view('user.m-chat');
-	})->name('m-chat');
-
-	Route::get('ujian-mchat', function(){
-		return view('user.test-mchat');
-	})->name('ujian-mchat');
-
-	Route::get('keputusan-ujian', function(){
-		return view('user.test-result');
-	})->name('test-result');
-
-    Route::get('tips-dan-intervensi', function () {
+	Route::get('tips-dan-intervensi', function () {
 		return view('user.tips-interventions');
 	})->name('tips-dan-intervensi');
 
-    Route::get('tips1', function () {
+	Route::get('tips1', function () {
 		return view('user.tips1');
 	})->name('tips1');
 
-    Route::get('interventions1', function () {
+	Route::get('interventions1', function () {
 		return view('user.interventions1');
 	})->name('interventions1');
 
@@ -95,47 +86,47 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('admin-dashboard');
 
 
-    Route::get('admin-interventions', function () {
+	Route::get('admin-interventions', function () {
 		return view('admin.admin-interventions');
 	})->name('admin-interventions');
 
-    Route::get('admin-tips-interventions', function () {
+	Route::get('admin-tips-interventions', function () {
 		return view('admin.admin-tips-interventions');
 	})->name('admin-tips-interventions');
 
-    Route::get('tambah-kategori-tips', function () {
+	Route::get('tambah-kategori-tips', function () {
 		return view('admin.admin-add-category-tips');
 	})->name('add-category-tips');
 
-    Route::get('tambah-tips', function () {
+	Route::get('tambah-tips', function () {
 		return view('admin.admin-add-tips');
 	})->name('add-tips');
 
-    Route::get('edit-kategori-tips', function () {
+	Route::get('edit-kategori-tips', function () {
 		return view('admin.admin-edit-category-tips');
 	})->name('edit-kategori-tips');
 
-    Route::get('edit-tips', function () {
+	Route::get('edit-tips', function () {
 		return view('admin.admin-edit-tips');
 	})->name('edit-tips');
 
-    Route::get('tambah-kategori-intervensi', function () {
+	Route::get('tambah-kategori-intervensi', function () {
 		return view('admin.admin-add-category-interventions');
 	})->name('add-category-interventions');
 
-    Route::get('tambah-intervensi', function () {
+	Route::get('tambah-intervensi', function () {
 		return view('admin.admin-add-interventions');
 	})->name('add-interventions');
 
-    Route::get('edit-kategori-intervensi', function () {
+	Route::get('edit-kategori-intervensi', function () {
 		return view('admin.admin-edit-category-interventions');
 	})->name('edit-category-interventions');
 
-    Route::get('edit-intervensi', function () {
+	Route::get('edit-intervensi', function () {
 		return view('admin.admin-edit-interventions');
 	})->name('edit-interventions');
 
-    Route::get('profil-admin', function () {
+	Route::get('profil-admin', function () {
 		return view('admin.admin-profile');
 	})->name('admin-profile');
 
@@ -149,26 +140,22 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
 
-    Route::resource('tips-categories', TipsCategoryController::class)->except(['show']);
+	Route::resource('tips-categories', TipsCategoryController::class)->except(['show']);
 
-    //Route::delete('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tips-categories.destroy');
+	//Route::delete('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tips-categories.destroy');
 
-    Route::get('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'show'])->name('tipscategories.show');
+	Route::get('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'show'])->name('tipscategories.show');
 
-    //Route::get('/admin-tips', [TipsCategoryController::class, 'index'])->name('tips-categories.index');
+	//Route::get('/admin-tips', [TipsCategoryController::class, 'index'])->name('tips-categories.index');
 
-    //Route::delete('/tipscategories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tipscategories.destroy');
-    //Route::delete('/tipscategories/{id}', [TipsCategoryController::class, 'destroy'])->name('custom-category-destroy');
-
-
+	//Route::delete('/tipscategories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tipscategories.destroy');
+	//Route::delete('/tipscategories/{id}', [TipsCategoryController::class, 'destroy'])->name('custom-category-destroy');
 
 	Route::get('tambah-senarai', function () {
 		return view('admin.admin-add-milestone');
 	})->name('add-milestone');
 
-
-
-    Route::get('profil-pengguna', function () {
+	Route::get('profil-pengguna', function () {
 		return view('user.user-profile');
 	})->name('profil-pengguna');
 
@@ -193,16 +180,16 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('tables');
 
 
-    Route::get('static-sign-in', function () {
+	Route::get('static-sign-in', function () {
 		return view('static-sign-in');
 	})->name('sign-in');
 
-    Route::get('static-sign-up', function () {
+	Route::get('static-sign-up', function () {
 		return view('static-sign-up');
 	})->name('sign-up');
 
-    Route::get('/logout', [SessionsController::class, 'destroy']);
-    Route::get('/profil-pengguna', [InfoUserController::class, 'create']);
+	Route::get('/logout', [SessionsController::class, 'destroy']);
+	Route::get('/profil-pengguna', [InfoUserController::class, 'create']);
 	Route::post('/profil-pengguna', [InfoUserController::class, 'store']);
 	//Route::get('/user-profile', [InfoUserController::class, 'create']);
 	//Route::post('/user-profile', [InfoUserController::class, 'store']);
@@ -215,10 +202,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/register', [RegisterController::class, 'create']);
-    Route::post('/register', [RegisterController::class, 'store']);
-    Route::get('/login', [SessionsController::class, 'create']);
-    Route::post('/session', [SessionsController::class, 'store']);
+	Route::get('/register', [RegisterController::class, 'create']);
+	Route::post('/register', [RegisterController::class, 'store']);
+	Route::get('/login', [SessionsController::class, 'create']);
+	Route::post('/session', [SessionsController::class, 'store']);
 	Route::get('/login/forgot-password', [ResetController::class, 'create']);
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
@@ -227,11 +214,11 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 })->name('welcome');
 
 Route::get('/login', function () {
-    return view('session/login-session-copy');
+	return view('session/login-session-copy');
 })->name('login');
 
 //Route::get('/maklumat-pengguna', function () {return view('user.user-fill-form');})->name('userInfo')->middleware('auth');
