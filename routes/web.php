@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\MilestoneRecordController;
 
 Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
 
@@ -60,14 +61,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('ujian-MCHAT/{childId}', [MCHATController::class, 'create'])->name('mchat.create');
 	Route::post('keputusan-ujian/{childId}', [MCHATController::class, 'store'])->name('mchat.store');
 
+	Route::get('pencapaian-perkembangan/{childId}', [MilestoneChecklistController::class, 'showMilestoneList'])->name('child-milestone.showMilestoneList');
+	Route::get('senarai-perkembangan',[MilestoneRecordController::class, 'index'])->name('record-milestone.index');
+	Route::post('senarai-perkembangan',[MilestoneRecordController::class, 'store'])->name('record-milestone.store');
 
-	Route::get('senarai-perkembangan', function () {
-		return view('user.checklist-milestone');
-	})->name('checklist-milestone');
-
-	Route::get('pencapaian-perkembangan', function () {
-		return view('user.child-milestone');
-	})->name('child-milestone');
+	
 
 	Route::get('tips-dan-intervensi', function () {
 		return view('user.tips-interventions');
@@ -213,7 +211,7 @@ Route::group(['middleware' => 'guest'], function () {
 
 });
 
-Route::get('/', function () {
+Route::get('', function () {
 	return view('welcome');
 })->name('welcome');
 
