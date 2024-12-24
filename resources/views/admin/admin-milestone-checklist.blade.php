@@ -10,9 +10,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-0">
-
                 <div class="card-header pb-0">
-                    <div class="row mb-0">
+                    <div class="row mb-0 mt-2">
                         <div class="col-md-9">
                             <h6 class="mb-0">Kemaskini Senarai Perkembangan</h6>
                         </div>
@@ -28,7 +27,7 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                             style="width: 5%;">
-                                            LID.</th>
+                                            No.</th>
                                         <th class=" align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                                             style="width: 20%;">
                                             Tajuk Senarai</th>
@@ -52,8 +51,8 @@
                                     @else
                                         @foreach ($checklists as $checklist)
                                             <tr>
-                                                <td class="align-middle text-xs" style="width: 5%; white-space: normal;">
-                                                    SP{{ $checklist->id }}
+                                                <td class="align-middle text-center text-xs" style="width: 5%; white-space: normal;">
+                                                    {{ $loop->iteration }}
                                                 </td>
                                                 <td class="align-middle text-xs" style="width: 20%; white-space: normal;">
                                                     {{ $checklist->title }}
