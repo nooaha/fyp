@@ -21,9 +21,41 @@
           <span class="nav-link-text ms-1">Paparan Utama</span>
         </a>
       </li>
+
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman</h6>
+      </li>
+
+      <!--Nav Milestone-->
+      <li class="nav-item">
+        <a class="nav-link {{ (Request::is('senarai-semak-perkembangan') ? 'active' : '') }}"
+          href="{{ route('senarai-semak-perkembangan') }}">
+          <div
+            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i style="font-size: 1rem;" class="fas fa-lg fa-clipboard-list ps-2 pe-2 text-center text-dark"
+              aria-hidden="true"></i>
+
+          </div>
+          <span class="nav-link-text ms-1">Pengurusan Senarai Semak</span>
+        </a>
+      </li>
+
+      <!--Nav Tips and Intervention-->
+      <li class="nav-item">
+        <a class="nav-link {{ (Request::is('admin-tips-interventions') ? 'active' : '') }}"
+          href="{{ url('admin-tips-interventions') }}">
+          <div
+            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i style="font-size: 1rem;" class="fas fa-lg fa-folder-open ps-2 pe-2 text-center text-dark "
+              aria-hidden="true"></i>
+          </div>
+          <span class="nav-link-text ms-1">Pengurusan Tips dan Intervensi</span>
+        </a>
+      </li>
+
       <!--Nav Header-->
-      <li class="nav-item mt-2">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman Pengurusan</h6>
       </li>
       <!--Nav User Profile-->
       <li class="nav-item">
@@ -53,9 +85,10 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">User Profile</span>
+          <span class="nav-link-text ms-1">Profil Pengguna</span>
         </a>
       </li>
+
       <!--Nav User Management-->
       <li class="nav-item pb-2">
         <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
@@ -64,36 +97,7 @@
             <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark"
               aria-hidden="true"></i>
           </div>
-          <span class="nav-link-text ms-1">User Management</span>
-        </a>
-      </li>
-      <!--Nav Header-->
-      <li class="nav-item mt-2">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman</h6>
-      </li>
-      <!--Nav Graph-->
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('senarai-semak-perkembangan') ? 'active' : '') }}"
-          href="{{ route('senarai-semak-perkembangan') }}">
-          <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas fa-lg fa-clipboard-list ps-2 pe-2 text-center text-dark"
-              aria-hidden="true"></i>
-
-          </div>
-          <span class="nav-link-text ms-1">Pengurusan Senarai Semak</span>
-        </a>
-      </li>
-      <!--Nav Milestone-->
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('admin-tips-interventions') ? 'active' : '') }}"
-          href="{{ url('admin-tips-interventions') }}">
-          <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas fa-lg fa-folder-open ps-2 pe-2 text-center text-dark "
-              aria-hidden="true"></i>
-          </div>
-          <span class="nav-link-text ms-1">Pengurusan Tips dan Intervensi</span>
+          <span class="nav-link-text ms-1">Pengurusan Pengguna</span>
         </a>
       </li>
 
