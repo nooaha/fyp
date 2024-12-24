@@ -58,25 +58,25 @@ class MCHATController extends Controller
         }
 
         // Retrieve the child's answers (responses)
-        $responses = $request->input('answers'); 
+        $responses = $request->input('answers');
 
         // Initialize counters
-        $atRiskScore = 0; 
-        $criticalCount = 0; 
+        $atRiskScore = 0;
+        $criticalCount = 0;
 
-        
+
         foreach ($responses as $questionId => $answer) {
-            
+
             $question = MChatQuestion::find($questionId);
 
             // Ensure the question exists before proceeding
             if (!$question) {
-                continue; 
+                continue;
             }
 
-            
+
             MChatAnswer::create([
-                'child_id' => $childId, 
+                'child_id' => $childId,
                 'question_id' => $questionId,
                 'answer' => $answer,
             ]);
@@ -96,29 +96,28 @@ class MCHATController extends Controller
         }
 
         // **Determine Risk Level**
-        if ($criticalCount >= 2 || $atRiskScore++>= 3) {
-            $riskLevel = 'HIGH';
+        if ($criticalCount >= 2 || $atRiskScore++ >= 3) {
+            $riskLevel = 'RISIKO TINGGI';
         } elseif ($atRiskScore >= 2) {
-            $riskLevel = 'MODERATE';
+            $riskLevel = 'RISIKO SEDERHANA';
         } else {
-            $riskLevel = 'LOW';
+            $riskLevel = 'RISIKO RENDAH';
         }
-        
-        
+
+
         // Store the result in the database, associating the result with the child's ID
         $results = MChatResult::create([
             'child_id' => $childId, // Store result under the child's ID
             'score' => $atRiskScore, // Store the total at-risk score
             'risk_level' => $riskLevel,
-            
+
         ]);
 
         // Redirect to the result page with the result ID
         //return redirect()->route('mchat.result', ['resultId' => $result->id]);
-        return view('user.test-result', compact('child', 'results'));
- 
+        return view('user.test-result', compact('child', 'results'))
+            ->with('success', 'Keputusan ujian anak anda sudah siap!');
+
     }
-
-
 
 }
