@@ -45,7 +45,7 @@ class MCHATController extends Controller
         $questions = MCHATQuestion::orderBy('created_at')->get();
         // Get all milestone checklists with their questions
 
-
+        //dd($questions);
         return view('user.test-mchat', compact('child', 'questions'));
     }
 
