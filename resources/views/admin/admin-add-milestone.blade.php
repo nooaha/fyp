@@ -25,7 +25,7 @@
                         <!-- Age Category -->
                         <div class="form-group mb-4">
                             <label class="form-control-label">Kategori Umur (bulan)</label>
-                            <input class="form-control" type="number" placeholder="Umur" id="age_category"
+                            <input class="form-control" type="text" placeholder="Umur" id="age_category"
                                 name="age_category" required>
                         </div>
 
