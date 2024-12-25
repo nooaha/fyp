@@ -89,7 +89,7 @@ class MilestoneChecklistController extends Controller
             ]);
         }
 
-        return redirect()->route('milestone-checklists.index')->with('success', 'Milestone checklist and questions created successfully.');
+        return redirect()->route('milestone-checklists.index')->with('success', 'Senarai semak perkembangan dan soalan berjaya disimpan!');
 
     }
 
@@ -144,7 +144,7 @@ class MilestoneChecklistController extends Controller
 
         $milestone->touch();
 
-        return redirect()->route('milestone-checklists.index')->with('success', 'Milestone updated successfully!');
+        return redirect()->route('milestone-checklists.index')->with('success', 'Senarai semak perkembangan dan soalan berjaya dikemaskini!');
     }
 
     public function destroy(MilestoneChecklist $milestoneChecklist)
@@ -157,10 +157,10 @@ class MilestoneChecklistController extends Controller
 
             DB::commit();
 
-            return back()->with('success', 'Milestone checklist and associated questions deleted successfully.');
+            return back()->with('success', 'Senarai semak perkembangan dan soalan berjaya dipadam!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'An error occurred while deleting the milestone checklist: ' . $e->getMessage());
+            return back()->with('error', 'Ralat berlaku semasa memadam senarai semak pencapaian.: ' . $e->getMessage());
         }
     }
 }
