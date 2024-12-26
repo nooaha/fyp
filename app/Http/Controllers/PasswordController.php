@@ -15,23 +15,25 @@ class PasswordController extends Controller
     }
 
     // Handle password change
-    public function changePassword(Request $request)
+    public function updatePassword(Request $request)
     {
         $request->validate([
-            'current_password' => ['required', 'string'],
-            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
         ]);
 
         $user = Auth::user();
 
+        // Check if the current password matches
         if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'The provided password does not match your current password.']);
+            return back()->withErrors(['current_password' => 'Kata laluan sekarang tidak sah.']);
         }
 
+        // Update the user's password
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->route('profile')->with('status', 'Password successfully updated!');
-
+        return redirect()->route('edit-kata-laluan')->with('success', 'Kata laluan berjaya dikemaskini.');
     }
+
 }
