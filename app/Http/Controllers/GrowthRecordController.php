@@ -104,8 +104,52 @@ class GrowthRecordController extends Controller
                 return $record;
             });
 
-        return view('user.growth-charts', compact('child','growthRecords', 'ageInMonths','refRecords'));
+        return view('user.growth-charts', compact('child', 'growthRecords', 'ageInMonths', 'refRecords'));
     }
 
+    public function showChart($childId)
+    {
+        $user = Auth::user();
+
+        $child = Child::where('id', $childId)->where('parent_id', $user->id)->first();
+
+        if (!$child) {
+            return redirect()->route('growth-tracking.showGrowthChart', ['childId' => $user->children->first()->id])
+                ->with('error', 'Invalid child selected, redirecting to default.');
+        }
+
+        $childDob = $child->child_dob;
+        $currentDate = now();
+        $ageInMonths = $currentDate->diffInMonths($childDob);
+
+        $refRecords = ReferenceData::select(
+            'age_months',
+            'height_normal_3SD as height3SD',
+            'height_normal_0SD as height0SD',
+            'height_min as heightMin',
+            'weight_obese_3SD as weight3SD',
+            'weight_normal_0SD as weight0SD',
+            'weight_min as weightMin'
+        )
+            ->orderBy('age_months')
+            ->get();
+
+        $growthRecords = GrowthRecord::with('child')
+            ->where('child_id', $childId)
+            ->orderBy('created_at')
+            ->get()
+            ->map(function ($record) {
+                $record->age_in_months = $record->child->child_dob->diffInMonths($record->created_at);
+                return $record;
+            });
+
+        // Return the data instead of the view
+        return [
+            'child' => $child,
+            'growthRecords' => $growthRecords,
+            'ageInMonths' => $ageInMonths,
+            'refRecords' => $refRecords,
+        ];
+    }
 
 }
