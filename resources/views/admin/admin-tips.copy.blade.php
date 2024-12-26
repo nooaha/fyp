@@ -47,18 +47,7 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th
-                                        class="id-column text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        ID</th>
-                                    <th
-                                        class="title-column text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tajuk</th>
-                                        <th
-                                        class="title-column text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Kategori umur</th>
-                                    <th
-                                        class="action-column text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tindakan</th>
+
                                 </tr>
                             </thead>
                             <tbody>
