@@ -49,5 +49,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Child::class, 'parent_id');
     }
-    
+    public function parentDetail()
+    {
+        return $this->hasOne(ParentDetail::class, 'user_id');
+    }
+
+
 }

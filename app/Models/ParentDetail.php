@@ -27,9 +27,19 @@ class ParentDetail extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function parentDetails()
+    {
+        return $this->hasMany(ParentDetail::class, 'user_id');
+    }
+
     // Define the relationship with Children
     public function children()
     {
         return $this->hasMany(Child::class, 'parent_id');
+    }
+
+    public function parentDetail()
+    {
+        return $this->hasOne(ParentDetail::class);
     }
 }
