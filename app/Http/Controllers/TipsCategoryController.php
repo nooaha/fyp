@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TipsCategory; // Updated model name
+use App\Models\Tips; // Updated model name
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +11,7 @@ class TipsCategoryController extends Controller
 {
     public function index()
     {
-        $tipscategories = TipsCategory::all();
+        $tipscategories = Tips::all();
         return view('admin.admin-tips', compact('tipscategories'));
     }
 
@@ -27,7 +27,7 @@ class TipsCategoryController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $tipscategory = new TipsCategory();
+        $tipscategory = new Tips();
         $tipscategory->tipscategoryname = $request->tipscategoryname;
 
         if ($request->hasFile('image')) {
@@ -40,16 +40,16 @@ class TipsCategoryController extends Controller
         return redirect()->route('tips-categories.index')->with('success', 'Category added successfully.');
     }
 
-    public function show(TipsCategory $tipscategory)
+    public function show(Tips $tipscategory)
     {
         $tipscategory->load('questions');
-        return view('admin.admin-milestone-view', compact('tipscategory'));
+        return view('admin.admin-tips-view', compact('tipscategory'));
     }
 
     public function edit($id)
     {
         // Fetch the tips category by ID
-        $tipscategory = TipsCategory::findOrFail($id);
+        $tipscategory = Tips::findOrFail($id);
 
         // Pass the data to the view
         return view('admin.admin-edit-category-tips', compact('tipscategory'));
@@ -87,7 +87,7 @@ class TipsCategoryController extends Controller
 
 
 
-    public function destroy(TipsCategory $tipscategory)
+    public function destroy(Tips $tipscategory)
     {
         try {
             DB::beginTransaction();

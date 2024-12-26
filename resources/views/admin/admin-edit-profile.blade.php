@@ -1,0 +1,46 @@
+@extends('layouts.user_type.auth')
+
+@section('content')
+    <div class="card">
+        <div class="container">
+            <br>
+            <h2>Edit Maklumat {{ $user->name }}</h2>
+            <br>
+            <div class="card-body">
+
+                <form method="POST" action="{{ route('user-details.updateUserDetails', $user->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label class="form-control-label">Nama</label>
+                        <input class="form-control" name="name" value="{{ $user->name }}" type="text" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email" class="form-control-label">Email</label>
+                        <input class="form-control" value="{{ $user->email }}" type="email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Nama Pengguna</label>
+                        <input class="form-control" name="username" value="{{ $user->username }}" type="text" placeholder="Nama Pengguna">
+                    </div>
+                    <br>
+                    <div class="row">
+                <div class="col-6">
+                    <!-- Button Kembali (Left) -->
+                    <button type="button" class="btn btn-secondary btn-sm"
+                        onclick="window.location.href='/papar-maklumat'">Kembali</button>
+                    </button>
+                </div>
+                <div class="col-6 text-end">
+                    <!-- Button Kemaskini Kata Laluan (Right) -->
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        {{ __('Kemaskini') }}
+                    </button>
+                </div>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
