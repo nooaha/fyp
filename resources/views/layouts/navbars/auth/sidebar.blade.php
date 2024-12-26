@@ -12,10 +12,10 @@
   <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
     <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" 
+            <a class="nav-link dropdown-toggle"
                href="#"
-               id="childDropdown" 
-               data-bs-toggle="collapse" 
+               id="childDropdown"
+               data-bs-toggle="collapse"
                data-bs-target="#childAccordion"
                aria-expanded="{{ Request::is('user-dashboard/*') ? 'true' : 'false' }}">
                 <div
@@ -32,7 +32,7 @@
                     @if(isset($user))
                         @foreach ($user->children as $child)
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is('user-dashboard/' . $child->id) ? 'active' : '' }}" 
+                                <a class="nav-link {{ Request::is('user-dashboard/' . $child->id) ? 'active' : '' }}"
                                    href="{{ route('user-dashboard', ['child_id' => $child->id]) }}">
                                     <div
                                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -158,7 +158,7 @@
       </li>
       <!--Profil pengguna-->
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('profil-pengguna') ? 'active' : '') }}" href="{{ url('profil-pengguna') }}">
+        <a class="nav-link {{ (Request::is('papar-maklumat') ? 'active' : '') }}" href="{{ url('papar-maklumat') }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +183,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Profile</span>
+          <span class="nav-link-text ms-1">Profil Pengguna</span>
         </a>
       </li>
       <li class="nav-item">
