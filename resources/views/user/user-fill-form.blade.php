@@ -23,7 +23,7 @@
                             <h5>Maklumat Ibu/Bapa</h5>
                             <div class="form-group">
                                 <label class="form-control-label">Nama Penuh</label>
-                                <input class="form-control" type="text" id="parent_name" name="full_name" required>
+                                <input class="form-control" type="text" id="parent_name" name="full_name" placeholder="Nama Penuh" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Tarikh Lahir</label>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="form-group mb-5">
                                 <label class="form-control-label">Alamat</label>
-                                <input class="form-control" type="text" id="parent_address" name="address" required>
+                                <input class="form-control" type="text" id="parent_address" name="address" placeholder="Alamat" required>
                             </div>
 
                             <!-- Maklumat Anak -->
@@ -48,13 +48,13 @@
                                     <h5>Maklumat Anak</h5>
                                 </div>
                                 <div class="col-md-3 text-end">
-                                    <button type="button" class="btn btn-success mb-3" id="addChildBtn">Tambah Anak</button>
+                                    <button type="button" class="btn btn-success mb-3 btn-sm" id="addChildBtn">+Tambah Anak</button>
                                 </div>
 
                                 <div id="ChildContainer">
                                     <div class="form-group">
                                         <label class="form-control-label">Nama Penuh</label>
-                                        <input class="form-control" type="text" name="children[0][name]" required>
+                                        <input class="form-control" type="text" name="children[0][name]" placeholder="Nama Penuh" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Tarikh Lahir</label>
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" style="float: right" class="btn btn-primary btn-lg">Daftar</button>
+                                    <button type="submit" style="float: right" class="btn btn-primary btn-sm">Daftar</button>
                                 </div>
                             </form>
                         </div>
@@ -88,7 +88,7 @@
                 $('#ChildContainer').append(`
                     <div class="form-group">
                         <label class="form-control-label">Nama Penuh</label>
-                        <input class="form-control" type="text" name="children[${childCount}][name]" required>
+                        <input class="form-control" type="text" placeholder="Nama Penuh" name="children[${childCount}][name]" required>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Tarikh Lahir</label>
