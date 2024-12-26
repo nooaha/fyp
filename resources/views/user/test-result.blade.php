@@ -41,7 +41,7 @@
                     @elseif ($results->risk_level === 'RISIKO SEDERHANA')
                         <p class="mb-1">
                             <strong style="color: #FFC107;">Risiko Sederhana:</strong> Risiko Sederhana menunjukkan skor
-                            berada antara {{ $moderate_threshold_min }} dan {{ $moderate_threshold_max }}.<br>
+                            sederhana.<br>
                         <ul>
                             <li>Lakukan saringan tambahan untuk menentukan keperluan tindakan selanjutnya.</li>
                             <li>Berbincang dengan pakar pediatrik tentang sebarang kebimbangan atau simptom yang
