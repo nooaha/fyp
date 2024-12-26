@@ -128,7 +128,7 @@
             const weightData = growthData.map(record => record.weight);
 
             // Reference Data
-            const refAge = refData.map(ref => ref.age_months);
+            //const refAge = refData.map(ref => ref.age_months);
             const height3SD = refData.map(ref => ref.height3SD);
             const height0SD = refData.map(ref => ref.height0SD);
             const heightMin = refData.map(ref => ref.heightMin);
@@ -140,7 +140,7 @@
             new Chart(document.getElementById('heightChart').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: refAge, // X-axis: Age in months
+                    labels: ageInMonths, // X-axis: Age in months
                     datasets: [
                         { label: 'Normal (+3SD)', data: height3SD, borderColor: 'green', fill: false },
                         { label: 'Normal (0SD)', data: height0SD, borderColor: 'green', backgroundColor: 'rgba(0, 255, 0, 0.2)', fill: "false" },
@@ -161,7 +161,7 @@
             new Chart(document.getElementById('weightChart').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: refAge, // X-axis: Age in months
+                    labels: ageInMonths, // X-axis: Age in months
                     datasets: [
                         { label: 'Top of Chart', data: new Array(37).fill(30), borderColor: 'transparent', backgroundColor: 'rgba(255, 0, 0, 0.2)', fill: false },
                         { label: 'Obesiti (+3SD)', data: weight3SD, borderColor: 'red', backgroundColor: 'rgba(255, 0, 0, 0.2)', fill: '-1' },
