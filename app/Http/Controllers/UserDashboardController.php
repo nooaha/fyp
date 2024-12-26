@@ -2,45 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; 
+use App\Models\User;
 use App\Models\Child;
+use App\Models\ReferenceData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\GrowthRecordController;
+use App\Http\Controllers\MilestoneChecklistController;
 
 
 class UserDashboardController extends Controller
 {
-    public function index()
+
+    public function index($childId)
     {
-        // No need to check again for the first child since it's already set in the session
-        $user = Auth::user();
-        if (!session()->has('child_id')) {
-            return redirect('user-dashboard')->with(['error' => 'No child available.']);
+        $user = Auth::user(); // Get the logged-in user
+
+        // Validate that the child belongs to the current user
+        $child = Child::where('id', $childId)
+            ->where('parent_id', $user->id)
+            ->first();
+
+        if (!$child) {
+            return redirect()->route('user-dashboard', ['childId' => $user->children->first()->id])
+                ->with('error', 'Sila cuba semula.');
         }
 
-        // Redirect to the child's dashboard using the child_id in the session
-        return redirect()->route('user-dashboard', ['child_id' => session('child_id')]);
-    }
+        $growthController = new GrowthRecordController();
+        $milestoneController = new MilestoneChecklistController();
+        $refRecords = ReferenceData::all();
 
-    
-    public function showChildDashboard($child_id)
-    {
-        $parent = Auth::user();
-    
-        // Check if the user has children before attempting to find a specific child
-        if ($parent->children->isEmpty()) {
-            return redirect()->route('paparan-utama')->with('error', 'You have not added any children yet.');
-        }
-    
-        // Find the child by ID, or fail gracefully if the child doesn't exist
-        $child = $parent->parent()->findOrFail($child_id);
-    
-        // Store selected child ID in session (optional if it's already set)
-        session(['child_id' => $child_id]);
-    
+        $chartData = $growthController->showChart($childId);
+        $growthRecords = $chartData['growthRecords'];
+
+        $milestoneProgress = $milestoneController->show($childId);
         
-        return view('child.dashboard', compact('child', 'growthRecords', 'milestoneProgress', 'mchatResults'));
-    }  
- 
+        // Retrieve data for the child
+        $latestMCHAT = $child->mchatResult()->latest()->first(); // Latest M-CHAT result
+
+        // Pass the data to the dashboard view
+        return view('user.user-dashboard', compact('childId', 'child', 'refRecords', 'growthRecords', 'milestoneProgress', 'latestMCHAT'));
+    }
 
 }
