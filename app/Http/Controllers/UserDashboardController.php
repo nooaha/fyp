@@ -35,7 +35,7 @@ class UserDashboardController extends Controller
         $chartData = $growthController->showChart($childId);
         $growthRecords = $chartData['growthRecords'];
 
-        $milestoneProgress = $milestoneController->show($childId);
+        $milestoneProgress = $milestoneController->showList($childId);
         
         // Retrieve data for the child
         $latestMCHAT = $child->mchatResult()->latest()->first(); // Latest M-CHAT result

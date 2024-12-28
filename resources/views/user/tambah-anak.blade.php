@@ -1,13 +1,18 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@php
+    // Get the first child of the user or null if no children (although your system will always have at least one child)
+    $firstChild = Auth::user()->children->first();
+    $childId = $firstChild ? $firstChild->id : null;
+@endphp
     <div class="card">
         <div class="container">
             <br>
             <h2>Maklumat Anak</h2>
             <br>
 
-        <form action="{{ route('user-details.storeChildDetails') }}" method="POST">
+        <form action="{{ route('user-details.storeChildDetails', ['childId' => $childId ?? Auth::user()->children->first()->id]) }}" method="POST">
             @csrf
             <div id="ChildContainer">
                 <div class="form-group">

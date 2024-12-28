@@ -1,6 +1,9 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@php
+    $childId = request('childId', Auth::user()->children->first()->id);
+@endphp
     <div class="card">
         <div class="container">
             <br>
@@ -54,7 +57,7 @@
 
     if (cancelButton) {
         cancelButton.addEventListener('click', function() {
-            window.location.href = "{{ route('user-details.showParentDetail', $child->id) }}";
+            window.location.href = "{{ route('user-details.showParentDetail', ['childId' => request('childId', Auth::user()->children->first()->id)]) }}";
         });
     }
 });

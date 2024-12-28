@@ -11,7 +11,7 @@ class PasswordController extends Controller
     // Show change password form
     public function showChangePasswordForm()
     {
-        return view('auth.change-password');
+        return view('user.edit-kata-laluan');
     }
 
     // Handle password change
@@ -33,7 +33,7 @@ class PasswordController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->route('edit-kata-laluan')->with('success', 'Kata laluan berjaya dikemaskini.');
+        return view('user.edit-kata-laluan')->with('success', 'Kata laluan berjaya dikemaskini.');
     }
 
 }

@@ -20,17 +20,17 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">M-CHAT</h5>
                     <h6 class="card-title mb-3">Skor M-CHAT</h6>
-                    <h2 class="display-4"><strong>{{ $latestMCHAT->score ?? 'N/A' }}</strong></h2>
+                    <h2 class="display-4"><strong>{{ $latestMCHAT->score ?? '0' }}</strong></h2>
 
-                    <span class="badge 
-                        @if ($latestMCHAT->risk_level === 'RISIKO TINGGI')
-                            bg-gradient-danger
-                        @elseif ($latestMCHAT->risk_level === 'RISIKO SEDERHANA')
-                            bg-gradient-warning
-                        @else
-                            bg-gradient-success
-                        @endif">
-                        {{ $latestMCHAT->risk_level ?? 'N/A' }}
+                    <span class="badge
+                    @if ($latestMCHAT?->risk_level === 'RISIKO TINGGI')
+                        bg-gradient-danger
+                    @elseif ($latestMCHAT?->risk_level === 'RISIKO SEDERHANA')
+                        bg-gradient-warning
+                    @else
+                        bg-gradient-success
+                    @endif">
+                        {{ $latestMCHAT?->risk_level ?? 'Tiada Rekod' }}
                     </span>
                     <br>
                     <a href="{{ route('mchat.index', ['childId' => $child->id]) }}" class="btn btn-primary mt-3">Ambil

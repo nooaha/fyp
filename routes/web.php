@@ -27,13 +27,12 @@ use App\Http\Controllers\MilestoneRecordController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
-Route::post('/update-password', [PasswordController::class, 'updatePassword'])->name('update-password');
+// Route to show the change password form
+Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm'])->name('update-password.showChangePasswordForm');
+
+// Route to handle password update (form submission)
+Route::post('/update-password', [PasswordController::class, 'updatePassword'])->name('update-password.updatePassword');
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
@@ -52,22 +51,22 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('papar-maklumat', [InfoUserController::class, 'showParentDetail'])->name('user-details.showParentDetail');
 
-    Route::get('maklumat-anak/{child}', [ChildDetailsController::class, 'showChildDetails'])->name('user-details.showChildDetails');
+    Route::get('maklumat-anak/{childId}', [ChildDetailsController::class, 'showChildDetails'])->name('user-details.showChildDetails');
 
     //Route::put('papar-maklumat', [InfoUserController::class, 'updateParentDetail'])->name('user-details.updateParentDetail');
     //Route::post('papar-maklumat', [InfoUserController::class, 'updateParentDetail'])->name('user-details.updateParentDetail');
 
-    Route::get('edit-maklumat-anak/{child}', [ChildDetailsController::class, 'edit'])->name('user-details.editChildDetails');
-    Route::put('edit-maklumat-anak/{child}', [ChildDetailsController::class, 'update'])->name('user-details.updateChildDetails');
+    Route::get('edit-maklumat-anak/{childId}', [ChildDetailsController::class, 'edit'])->name('user-details.editChildDetails');
+    Route::put('edit-maklumat-anak/{childId}', [ChildDetailsController::class, 'update'])->name('user-details.updateChildDetails');
 
     Route::get('edit-maklumat-pengguna/{user}', [InfoUserController::class, 'edit'])->name('user-details.editUserDetails');
     Route::put('edit-maklumat-pengguna/{user}', [InfoUserController::class, 'update'])->name('user-details.updateUserDetails');
-	Route::get('/paparan-utama/anak/{childId}', [UserDashboardController::class, 'index'])->name('user-dashboard');
+    Route::get('/paparan-utama/anak/{childId}', [UserDashboardController::class, 'index'])->name('user-dashboard');
 
-	//Route::get('graf-tumbesaran-anak/anak/{childId}', [GrowthRecordController::class, 'index'])->name('growth-tracking.index'); // Fetch records
-	Route::get('graf-tumbesaran-anak/anak/{childId}', [GrowthRecordController::class, 'showGrowthChart'])->name('growth-tracking.showGrowthChart'); // Fetch records
-	Route::get('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'add'])->name('growth-tracking.add'); // Add record
-	Route::post('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'store'])->name('growth-tracking.store'); // Add record
+    //Route::get('graf-tumbesaran-anak/anak/{childId}', [GrowthRecordController::class, 'index'])->name('growth-tracking.index'); // Fetch records
+    Route::get('graf-tumbesaran-anak/anak/{childId}', [GrowthRecordController::class, 'showGrowthChart'])->name('growth-tracking.showGrowthChart'); // Fetch records
+    Route::get('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'add'])->name('growth-tracking.add'); // Add record
+    Route::post('rekod-maklumat-tumbesaran/{childId}', [GrowthRecordController::class, 'store'])->name('growth-tracking.store'); // Add record
 
     Route::get('tambah-anak', [ChildDetailsController::class, 'createChildDetails'])->name('user-details.createChildDetails');
     Route::post('simpan-anak', [ChildDetailsController::class, 'storeChildDetails'])->name('user-details.storeChildDetails');
@@ -87,29 +86,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('interventions1', function () {
         return view('user.interventions1');
     })->name('interventions1');
-    
-	//Route::get('mchat/{child_id}', [MCHATController::class, 'results'])->name('mchat');
-	Route::get('MCHAT/{childId}', [MCHATController::class, 'index'])->name('mchat.index');
-	Route::get('ujian-MCHAT/{childId}', [MCHATController::class, 'create'])->name('mchat.create');
-	Route::post('keputusan-ujian/{childId}', [MCHATController::class, 'store'])->name('mchat.store');
 
-	Route::get('pencapaian-perkembangan/{childId}', [MilestoneChecklistController::class, 'showMilestoneList'])->name('child-milestone.showMilestoneList');
-	Route::get('senarai-perkembangan',[MilestoneRecordController::class, 'index'])->name('record-milestone.index');
-	Route::post('senarai-perkembangan',[MilestoneRecordController::class, 'store'])->name('record-milestone.store');
+    //Route::get('mchat/{child_id}', [MCHATController::class, 'results'])->name('mchat');
+    Route::get('MCHAT/{childId}', [MCHATController::class, 'index'])->name('mchat.index');
+    Route::get('ujian-MCHAT/{childId}', [MCHATController::class, 'create'])->name('mchat.create');
+    Route::post('keputusan-ujian/{childId}', [MCHATController::class, 'store'])->name('mchat.store');
 
-	
+    Route::get('pencapaian-perkembangan/{childId}', [MilestoneChecklistController::class, 'showMilestoneList'])->name('child-milestone.showMilestoneList');
+    Route::get('senarai-perkembangan', [MilestoneRecordController::class, 'index'])->name('record-milestone.index');
+    Route::post('senarai-perkembangan', [MilestoneRecordController::class, 'store'])->name('record-milestone.store');
 
-	Route::get('tips-dan-intervensi', function () {
-		return view('user.tips-interventions');
-	})->name('tips-dan-intervensi');
+    Route::get('tips-dan-intervensi', function () {
+        return view('user.tips-interventions');
+    })->name('tips-dan-intervensi');
 
-	Route::get('tips1', function () {
-		return view('user.tips1');
-	})->name('tips1');
+    Route::get('tips1', function () {
+        return view('user.tips1');
+    })->name('tips1');
 
-	Route::get('interventions1', function () {
-		return view('user.interventions1');
-	})->name('interventions1');
+    Route::get('interventions1', function () {
+        return view('user.interventions1');
+    })->name('interventions1');
 
     Route::get('admin-dashboard', function () {
         return view('admin.admin-dashboard');
@@ -156,16 +153,12 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('edit-interventions');
 
     Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
     Route::resource('milestone-checklists', MilestoneChecklistController::class);
-
-    Route::get('/milestone-checklists/{milestoneChecklist}', [MilestoneChecklistController::class, 'show'])->name('milestone-checklists.show');
-
+    Route::get('/senarai-semak-perkembangan/{milestoneChecklist}', [MilestoneChecklistController::class, 'showList'])->name('milestone-checklists.showList');
     Route::get('/senarai-semak-perkembangan', [MilestoneChecklistController::class, 'index'])->name('senarai-semak-perkembangan');
-
     Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
 
-	Route::resource('tips-categories', TipsCategoryController::class)->except(['show']);
+    Route::resource('tips-categories', TipsCategoryController::class)->except(['show']);
 
     Route::get('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'show'])->name('tipscategories.show');
 
@@ -173,14 +166,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Route::delete('/tipscategories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tipscategories.destroy');
     //Route::delete('/tipscategories/{id}', [TipsCategoryController::class, 'destroy'])->name('custom-category-destroy');
-
-    Route::get('edit-kata-laluan', function () {
-        return view('user.edit-kata-laluan');
-    })->name('edit-kata-laluan');
-
-    Route::get('tambah-senarai', function () {
-        return view('admin.admin-add-milestone');
-    })->name('add-milestone');
 
     Route::get('user-profile', function () {
         return view('user.user-profile');
@@ -208,11 +193,11 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::get('', function () {
-	return view('welcome');
+    return view('welcome');
 })->name('welcome');
 
 Route::get('/login', function () {
-	return view('session/login-session-copy');
+    return view('session/login-session-copy');
 })->name('login');
 
 //Route::get('/maklumat-pengguna', function () {return view('user.user-fill-form');})->name('userInfo')->middleware('auth');
