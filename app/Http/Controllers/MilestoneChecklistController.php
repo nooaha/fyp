@@ -48,7 +48,7 @@ class MilestoneChecklistController extends Controller
         return view('user.child-milestone', compact('milestoneProgress', 'childId','child', 'ageInMonths'));
     }
 
-    public function show($childId)
+    public function showList($childId)
     {
         // Fetch the milestones and calculate progress for each milestone
         $milestones = MilestoneChecklist::with('questions')->get();
@@ -71,6 +71,12 @@ class MilestoneChecklistController extends Controller
         });
 
         return $milestoneProgress; // Return only the data, not the view
+    }
+
+    public function show(MilestoneChecklist $milestoneChecklist)
+    {
+        $milestoneChecklist->load('questions');
+        return view('admin.admin-milestone-view', compact('milestoneChecklist'));
     }
 
 

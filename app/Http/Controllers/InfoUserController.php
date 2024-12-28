@@ -70,9 +70,9 @@ class InfoUserController extends Controller
         $user = Auth::user();
 
         $parentDetails = ParentDetail::where('user_id', auth()->id())->first();
+        //dd($parentDetails);
         $childDetails = Child::where('parent_id', auth()->id())->get();
-        //dd($childDetails);
-
+                
         // Add age information for each child
         foreach ($childDetails as $child) {
             if (!empty($child->child_dob)) {
@@ -83,7 +83,7 @@ class InfoUserController extends Controller
             }
         }
         // Pass both parent and child details to the view
-        return view('user.papar-maklumat', compact('user', 'parentDetails', 'childDetails'));
+        return view('user.papar-maklumat', compact('user','child', 'parentDetails', 'childDetails'));
     }
 
     //those for admin view part
