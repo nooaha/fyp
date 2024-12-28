@@ -5,7 +5,7 @@
     <div class="card">
         <div class="container">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h2>Senarai Pengguna</h2>
+                <h5>Senarai Pengguna</h5>
                 <!--<a href="" class="btn btn-success btn-sm">+&nbsp; Tambah Senarai</a>-->
 
             </div>

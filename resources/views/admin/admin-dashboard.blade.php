@@ -7,7 +7,7 @@
     <h6 class="ms-2 mb-3 text-uppercase text-xs font-weight-bolder opacity-6">Paparan Data Pengguna</h6>
     <div class="row mb-4">
         <!--card kat dashboard 1st line-->
-        <div class="col-md-3 mb-4">
+        <div class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body p-3">
                     <div class="row">
@@ -15,8 +15,8 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pengguna Berdaftar</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    $53,000
-                                    <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                {{ $registeredUsers }}
+                                    <span class="text-success text-sm font-weight-bolder"></span>
                                 </h5>
                             </div>
                         </div>
@@ -30,7 +30,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mb-4">
+
+        <!--c
+        <div class="col-md-4 mb-4">
             <div class="card h-100">
                 <div class="card-body p-3">
                     <div class="row">
@@ -38,8 +40,8 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pengguna Aktif</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    2,300
-                                    <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                    $activeUsers
+                                    <span class="text-success text-sm font-weight-bolder"></span>
                                 </h5>
                             </div>
                         </div>
@@ -53,32 +55,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card h-100">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Nyahaktif Pengguna</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    +3,462
-                                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i style="font-size: 1rem;"
-                                    class="fas fa-lg fa-user-minus ps-2 pe-2 text-center text-dark "
-                                    aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
+        </div>ard kat dashboard 1st line-->
+
+        <div class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body p-3">
                     <div class="row">
@@ -86,8 +65,8 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pengguna Baharu</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    $103,430
-                                    <span class="text-success text-sm font-weight-bolder">+5%</span>
+                                    
+                                    <span class="text-success font-weight-bolder">{{$newUsers}}</span>
                                 </h5>
                             </div>
                         </div>
@@ -116,8 +95,8 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Kanak-kanak</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    $53,000
-                                    <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                    {{$totalChildren}}
+                                    <span class="text-success text-sm font-weight-bolder"></span>
                                 </h5>
                             </div>
                         </div>
@@ -140,8 +119,8 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Kadar Penilaian Perkembangan
                                     Selesai</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    2,300
-                                    <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                    
+                                    <span class="text-success font-weight-bolder">{{$completionRate}}</span>
                                 </h5>
                             </div>
                         </div>
@@ -166,8 +145,8 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pengagihan Berisiko Tinggi
                                     M-CHAT</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    +3,462
-                                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                                    
+                                    <span class="text-danger font-weight-bolder">{{$highRiskMCHAT}}</span>
                                 </h5>
                             </div>
                         </div>
@@ -209,7 +188,7 @@
                         @foreach ($checklists as $checklist)
                             <tr>
                                 <td class="align-middle text-xs">
-                                    <span>SP{{ $checklist->id }}</span>
+                                    <span>{{ $checklist->id }}</span>
                                 </td>
                                 <td class="align-middle text-xs">
                                     <span>{{ $checklist->title}}</span>
