@@ -1,6 +1,9 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@php
+    $childId = request('childId', Auth::user()->children->first()->id);
+@endphp
     <div class="card">
         <div class="container">
             <br>
@@ -29,7 +32,7 @@
                 </div>
             </div>
             <br>
-            <a href="/papar-maklumat" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('user-details.showParentDetail', ['childId' => request('childId', Auth::user()->children->first()->id)]) }}" class="btn btn-secondary">Kembali</a>
         </div>
     </div>
 @endsection
