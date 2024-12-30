@@ -170,7 +170,7 @@
                 <table class="table align-items-center mb-0">
                     <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">LID.</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIL.</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tajuk
                                 Senarai</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -187,8 +187,8 @@
                     @else
                         @foreach ($checklists as $checklist)
                             <tr>
-                                <td class="align-middle text-xs">
-                                    <span>{{ $checklist->id }}</span>
+                                <td class="align-middle text-center text-xs">
+                                    <span>{{ $loop->iteration }}</span>
                                 </td>
                                 <td class="align-middle text-xs">
                                     <span>{{ $checklist->title}}</span>
