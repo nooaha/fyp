@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('children', function (Blueprint $table) {
+        if (!Schema::hasTable('children')) {
+            Schema::create('children', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id');
             $table->foreign('parent_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('child_name')->nullable();
             $table->date('child_dob')->nullable();
-            $table->string('child_gender')->nullable(); 
+            $table->string('child_gender')->nullable();
             $table->decimal('height', 5, 2)->nullable(); // Allows up to 999.99 cm/in
             $table->decimal('weight', 5, 2)->nullable(); // Allows up to 999.99 kg/lbs
             $table->timestamps();
         });
+    }
     }
 
     /**

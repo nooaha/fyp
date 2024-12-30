@@ -10,7 +10,6 @@
         <h5>Edit Maklumat {{ $child->child_name }}</h5>
         <br>
         <div class="card-body">
-
             <form method="POST" action="{{ route('user-details.updateChildDetails', $child->id) }}">
                 @csrf
                 @method('PUT')

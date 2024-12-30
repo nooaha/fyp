@@ -1,9 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
-<div class="container">
-
+    <div class="container">
     <h2 class="mb-3">Selamat Datang,<span class="text-capitalize" style="color: #3F51B2;">
             {{auth()->user()->name}}!</span></h2>
     <p>Mula jejak tumbesaran dan pencapaian perkembangan <span class="text-capitalize" style="color: #3F51B2;">
@@ -62,6 +60,31 @@
     <!-- Milestone Section -->
     <h6 class="ms-2 mb-3 text-xs font-weight-bolder opacity-6">Paparan Data Pencapaian Perkembangan </h6>
     @include('user.checklist-milestone-partial', ['milestoneProgress' => $milestoneProgress, 'child' => $child])
+    <!--tips and intervention-->
 
+        <div class="row">
+            <div class="card p-1 mb-3" style="background-color:blue">
+                <div class="card-header text-center">
+                    <h5 class="card-title">Kebersihan Gigi dan Pergigian</h5>
+                </div>
+            </div>
+            <!--cards-->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="col-auto">
+                            <div class="avatar avatar-xl position-relative">
+                                <img src="../assets/img/marie.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
+                            </div>
+                        </div>
+                        <br>
+                        <h4 class="card-title">Kebersihan Gigi dan Pergigian</h4>
+                        <h6 class="card-title mb-3">12 bulan</h6>
+                        <a href="{{ route('m-chat') }}" class="btn btn-primary mt-3 btn-sm">Lihat</a>
+                    </div>
+                </div>
+            </div>
+       </div>
 </div>
 @endsection
+

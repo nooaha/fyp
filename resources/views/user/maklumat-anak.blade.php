@@ -4,6 +4,7 @@
 @php
     $childId = request('childId', Auth::user()->children->first()->id);
 @endphp
+
 <div class="card">
     <div class="container">
         <br>

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Tips; // Updated model name
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
 
 class TipsCategoryController extends Controller
 {
@@ -22,86 +20,110 @@ class TipsCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'tipscategoryname' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // Validate the incoming request
+        $validatedData = $request->validate([
+            'tips_name' => 'required|string|max:255',
+            'age_category' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ensure image is required
         ]);
 
-        $tipscategory = new Tips();
-        $tipscategory->tipscategoryname = $request->tipscategoryname;
+        $imagePath = null;
 
+        // Handle image upload
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images');
-            $tipscategory->image = $path;
+            // Get the uploaded image
+            $image = $request->file('image');
+
+            // Generate a unique image name
+            $imageName = time() . '_' . $image->getClientOriginalName();
+
+            // Move the image to the desired directory
+            $image->move(public_path('assets/img'), $imageName);
+
+            // Store the relative path in the database
+            $imagePath = 'assets/img/' . $imageName;
         }
 
-        $tipscategory->save();
+        // Save the tips data to the database
+        Tips::create([
+            'tips_name' => $validatedData['tips_name'],
+            'age_category' => $validatedData['age_category'],
+            'image' => $imagePath, // Store the image path in the database
+        ]);
 
+        // Redirect with success message
         return redirect()->route('tips-categories.index')->with('success', 'Category added successfully.');
     }
 
     public function show(Tips $tipscategory)
     {
-        $tipscategory->load('questions');
         return view('admin.admin-tips-view', compact('tipscategory'));
     }
 
     public function edit($id)
     {
-        // Fetch the tips category by ID
+        // Fetch the tips category
         $tipscategory = Tips::findOrFail($id);
 
         // Pass the data to the view
         return view('admin.admin-edit-category-tips', compact('tipscategory'));
     }
 
-
-
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'tipscategoryname' => 'required|string|max:255',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
-
-    // Find the existing category
-    $tipscategory = TipsCategory::findOrFail($id);
-    $tipscategory->tipscategoryname = $request->tipscategoryname;
-
-    // Handle image upload
-    if ($request->hasFile('image')) {
-        // Delete the old image if it exists
-        if ($tipscategory->image) {
-            \Storage::delete('public/' . $tipscategory->image);
-        }
-
-        // Store the new image
-        $path = $request->file('image')->store('images', 'public');
-        $tipscategory->image = $path;
-    }
-
-    $tipscategory->save();
-
-    return redirect()->route('tips-categories.index')->with('success', 'Category updated successfully.');
-}
-
-
-
-    public function destroy(Tips $tipscategory)
     {
-        try {
-            DB::beginTransaction();
+        // Validate inputs
+        $request->validate([
+            'tipscategoryname' => 'required|string|max:255',
+            'age_category' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-            $tipscategory->delete();
+        // Fetch the category
+        $tipscategory = Tips::findOrFail($id);
 
-            DB::commit();
+        // Update category fields
+        $tipscategory->tips_name = $request->tipscategoryname;
+        $tipscategory->age_category = $request->age_category;
 
-            return back()->with('success', 'Senarai tips berjaya dipadam!');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with('error', 'An error occurred while deleting the ' . $e->getMessage());
+        // Handle image replacement if a new image is uploaded
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($tipscategory->image && file_exists(public_path($tipscategory->image))) {
+                @unlink(public_path($tipscategory->image));  // Suppress error if file doesn't exist
+            }
+
+            // Get the uploaded image file
+            $image = $request->file('image');
+
+            // Generate a new image name (timestamp + original name)
+            $imageName = time() . '_' . $image->getClientOriginalName();
+
+            // Move the image to the desired folder (public/assets/img)
+            $image->move(public_path('assets/img'), $imageName);
+
+            // Update the image path in the database
+            $tipscategory->image = 'assets/img/' . $imageName;
         }
+
+        // Save the updated category
+        $tipscategory->save();
+
+        return redirect()->route('tips-categories.index')->with('success', 'Tips updated successfully!');
     }
 
+    public function destroyTips($id)
+    {
+        // Find the tips category by ID
+        $tipscategory = Tips::find($id);
 
+        // Check if it exists
+        if (!$tipscategory) {
+            return redirect()->back()->with('error', 'Maklumat kategori tidak dijumpai.');
+        }
+
+        // Delete the record
+        $tipscategory->delete();
+
+        return redirect()->route('tips-categories.index')->with('success', 'Maklumat berjaya dipadam.');
+    }
 }
