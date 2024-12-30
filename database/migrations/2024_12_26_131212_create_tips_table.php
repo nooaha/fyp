@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('tips_name');
             $table->string('age_category')->default('N/A');
-            $table->string('image'); // Image for the category
+            $table->string('image')->nullable; // Image for the category
             $table->timestamps();
         });
     }

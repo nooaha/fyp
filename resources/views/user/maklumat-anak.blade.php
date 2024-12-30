@@ -22,14 +22,6 @@
                     <label class="form-control-label">Jantina</label>
                     <input class="form-control" value="{{ $child->child_gender }}" readonly>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Tinggi (cm)</label>
-                    <input class="form-control" value="{{ $child->height }} " readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label">Berat (kg)</label>
-                    <input class="form-control" value="{{ $child->weight }} " readonly>
-                </div>
             </div>
             <br>
             <a href="{{ route('user-details.showParentDetail', ['childId' => request('childId', Auth::user()->children->first()->id)]) }}" class="btn btn-secondary">Kembali</a>

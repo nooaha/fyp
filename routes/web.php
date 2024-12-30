@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\MilestoneRecordController;
 
 //Route::post('/upload-image', [PasswordController::class, 'store'])->name('upload.image');
@@ -158,14 +157,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/senarai-semak-perkembangan', [MilestoneChecklistController::class, 'index'])->name('senarai-semak-perkembangan');
     Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
 
-    Route::resource('tips-categories', TipsCategoryController::class)->except(['show']);
+    // Show all tips categories
+    Route::get('/tips-categories', [TipsCategoryController::class, 'index'])->name('tips-categories.index');
 
-    Route::get('/tips-categories/{tipscategory}', [TipsCategoryController::class, 'show'])->name('tipscategories.show');
+    // Create tips category
+    Route::get('/tips-categories/create', [TipsCategoryController::class, 'create'])->name('tips-categories.create');
+    Route::post('/tips-categories', [TipsCategoryController::class, 'store'])->name('tips-categories.store');
 
-    Route::get('/admin-tips', [TipsCategoryController::class, 'index'])->name('tips-categories.index');
+    // Show a specific tips category (if needed)
+    Route::get('tips-categories/{tipscategory}', [TipsCategoryController::class, 'show'])->name('tips-categories.show');
 
-    //Route::delete('/tipscategories/{tipscategory}', [TipsCategoryController::class, 'destroy'])->name('tipscategories.destroy');
-    //Route::delete('/tipscategories/{id}', [TipsCategoryController::class, 'destroy'])->name('custom-category-destroy');
+    // Edit a specific tips category
+    Route::get('/tips-categories/{id}/edit', [TipsCategoryController::class, 'edit'])->name('tips-categories.edit');
+    Route::put('/tips-categories/{id}', [TipsCategoryController::class, 'update'])->name('tips-categories.update');
+
+    // Delete a specific tips category
+    Route::delete('/tips-categories/{id}', [TipsCategoryController::class, 'destroyTips'])->name('tips-categories.destroy');
 
     Route::get('user-profile', function () {
         return view('user.user-profile');
@@ -177,8 +184,6 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard');
     })->name('sign-up');
 });
-
-
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [RegisterController::class, 'create']);
