@@ -27,14 +27,6 @@
                             <option value="Perempuan" {{ $child->child_gender == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Tinggi (cm)</label>
-                        <input class="form-control" value="{{ $child->height }} " required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Berat (kg)</label>
-                        <input class="form-control" value="{{ $child->weight }} " required>
-                    </div>
                     <br>
                     <!-- Add other fields here -->
                     <div class="d-flex mt-3 justify-content-end">
