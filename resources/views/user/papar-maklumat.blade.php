@@ -1,6 +1,9 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@php
+    $childId = request('childId', Auth::user()->children->first()->id);
+@endphp
     <div class="container-fluid">
         <div class="page-header min-height-300 border-radius-xl mt-4"
             style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 45%;"></div>
@@ -26,10 +29,8 @@
                             </p>
                         </div>
                         <!-- Button -->
-                        <button type="button" class="btn btn-primary btn-sm custom-btn"
-                            onclick="window.location.href='/edit-kata-laluan'">
-                            Edit kata Laluan
-                        </button>
+                        <a href="{{ route('update-password.showChangePasswordForm',['childId' => $childId ?? Auth::user()->children->first()->id]) }}" class="btn btn-primary btn-sm">Tukar Kata Laluan</a>
+                        
                     </div>
                 </div>
             </div>
@@ -92,7 +93,7 @@
                         <!-- Children Details Table -->
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h2 class="mb-0">Maklumat Anak</h2>
-                            <a href="{{ route('user-details.createChildDetails') }}" class="btn btn-success btn-sm">+&nbsp; Tambah Senarai</a>
+                            <a href="{{ route('user-details.createChildDetails',['childId' => $childId ?? Auth::user()->children->first()->id]) }}" class="btn btn-success btn-sm">+&nbsp; Tambah Senarai</a>
                         </div>
                         <table class="table align-items-center mb-0" style="table-layout: fixed; width: 100%;">
                             <thead>

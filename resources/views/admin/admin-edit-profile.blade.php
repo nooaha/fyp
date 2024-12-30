@@ -4,7 +4,7 @@
     <div class="card">
         <div class="container">
             <br>
-            <h2>Edit Maklumat {{ $user->name }}</h2>
+            <h5>Edit Maklumat {{ $user->name }}</h5>
             <br>
             <div class="card-body">
 
@@ -27,9 +27,8 @@
                     <div class="row">
                 <div class="col-6">
                     <!-- Button Kembali (Left) -->
-                    <button type="button" class="btn btn-secondary btn-sm"
-                        onclick="window.location.href='/papar-maklumat'">Kembali</button>
-                    </button>
+                    <a href="{{ route('user-details.show', ['childId' => request('childId')]) }}" class="btn btn-secondary btn-sm me-2">Kembali</a>
+                        
                 </div>
                 <div class="col-6 text-end">
                     <!-- Button Kemaskini Kata Laluan (Right) -->

@@ -45,7 +45,7 @@ class SessionsController extends Controller
                 if ($children->count() > 0) {
                     // Store the first child's ID in the session by default
                     session(['child_id' => $children->first()->id]);
-                    return redirect('paparan-utama')->with(['success' => 'You have successfully logged in!']);
+                    return redirect()->route('user-dashboard', ['childId' => $parent->children->first()->id])->with(['success' => 'You have successfully logged in!']);
                 }else {
                     return redirect('paparan-utama')->with(['error' => 'No children found.']);
                 }

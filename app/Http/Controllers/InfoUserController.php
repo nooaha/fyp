@@ -44,18 +44,24 @@ class InfoUserController extends Controller
         ]);
 
         // Save each child in Children table
-        foreach ($validated['children'] as $child) {
-            Child::create([
-                'parent_id' => $user->id, // Link child to the newly created parent details
+        $firstChild = null;
+        foreach ($validated['children'] as $index => $child) {
+            $savedChild = Child::create([
+                'parent_id' => $user->id,
                 'child_name' => $child['name'],
                 'child_dob' => $child['dob'],
                 'child_gender' => $child['gender'],
             ]);
+
+            if ($index === 0) {
+                $firstChild = $savedChild;
+            }
         }
 
         // Redirect or return a response
 
-        return redirect()->route('user-dashboard')->with('success', 'Info stored successfully.');
+        return redirect()->route('user-dashboard', ['childId' => $firstChild->id])
+                     ->with('success', 'Registration successful!');
     }
 
     public function showParentDetail()
@@ -64,9 +70,9 @@ class InfoUserController extends Controller
         $user = Auth::user();
 
         $parentDetails = ParentDetail::where('user_id', auth()->id())->first();
+        //dd($parentDetails);
         $childDetails = Child::where('parent_id', auth()->id())->get();
-        //dd($childDetails);
-
+                
         // Add age information for each child
         foreach ($childDetails as $child) {
             if (!empty($child->child_dob)) {
@@ -77,7 +83,7 @@ class InfoUserController extends Controller
             }
         }
         // Pass both parent and child details to the view
-        return view('user.papar-maklumat', compact('user', 'parentDetails', 'childDetails'));
+        return view('user.papar-maklumat', compact('user','child', 'parentDetails', 'childDetails'));
     }
 
     //those for admin view part

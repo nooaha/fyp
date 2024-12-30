@@ -37,7 +37,8 @@ class ChildDetailsController extends Controller
         $child->save();
 
         // Redirect with a success message
-        return redirect()->route('user-details.showParentDetail')->with('success', 'Maklumat anak berjaya disimpan!');
+        return redirect()->route('user-details.showParentDetail', ['childId' => $child->id])
+            ->with('success', 'Maklumat anak berjaya disimpan!');
     }
 
     public function showChildDetails($child)

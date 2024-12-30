@@ -18,10 +18,30 @@ class Child extends Model
         'weight' => 'decimal:2',
     ];
 
-    
+
     // Define inverse relationship
     public function parent()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function growthRecords()
+    {
+        return $this->hasMany(GrowthRecord::class);
+    }
+
+    public function mchatAnswers()
+    {
+        return $this->hasMany(MChatAnswer::class);
+    }
+
+    public function mchatResult()
+    {
+        return $this->hasMany(MChatResult::class);
+    }
+
+    public function milestoneRecords()
+    {
+        return $this->hasMany(MilestoneRecord::class, 'child_id');
     }
 }
