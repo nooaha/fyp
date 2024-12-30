@@ -1,6 +1,11 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
 <div class="container my-4">
     <div class="card">
         <div class="card-header pb-0 mb-0">
@@ -27,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <form method="POST" action="{{ route('record-milestone.store') }}">
+                        <form id="milestoneForm" method="POST" action="{{ route('record-milestone.store') }}">
                             @csrf
                             <!-- Hidden fields for childId and milestoneId -->
                             <input type="hidden" name="childId" value="{{ request('childId') }}">
@@ -46,7 +51,8 @@
                                             {{ isset($responses[$question->id]) && $responses[$question->id]->completed ? 'checked' : '' }}>
                                         <label class="btn btn-outline-success" for="yes_{{ $question->id }}">Ya</label>
 
-                                        <input type="radio" class="btn-check" name="questions[{{ $question->id }}]" id="no_{{ $question->id }}" value="no" autocomplete="off"
+                                        <input type="radio" class="btn-check milestone-alert" name="questions[{{ $question->id }}]" id="no_{{ $question->id }}" value="no" autocomplete="off"
+                                            data-alert="{{ in_array($question->id, [6,13]) ? 'true' : 'false' }}"
                                             {{ isset($responses[$question->id]) && !$responses[$question->id]->completed ? 'checked' : '' }}>
                                         <label class="btn btn-outline-secondary" for="no_{{ $question->id }}">Tidak</label>
                                     </td>
@@ -59,7 +65,7 @@
                 <div class="d-flex justify-content-end">
                     <a href="{{ route('child-milestone.showMilestoneList', ['childId' => request('childId')]) }}"
                         class="btn btn-secondary me-2">Kembali</a>
-                    <button type="submit" class="btn btn-primary" style="float: right">Simpan Rekod</button>
+                    <button type="button" id="rekodButton" class="btn btn-primary" style="float: right">Simpan Rekod</button>
                 </div>
                 </form>
             </div>
@@ -67,4 +73,39 @@
         </div>
     </div>
 </div>
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('#rekodButton').addEventListener('click', function (e) {
+            // Prevent default action of the button
+            e.preventDefault();
+
+            // Check for "Tidak" answers in specific questions
+            let showAlert = false;
+            document.querySelectorAll('input[data-alert="true"]:checked').forEach(function (input) {
+                if (input.value === 'no') {
+                    showAlert = true;
+                }
+            });
+
+            // Show alert if condition is met
+            if (showAlert) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Perhatian',
+                    text: 'Sila jumpa doktor untuk pemeriksaan lanjut.',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Submit the form after alert is acknowledged
+                    document.querySelector('#milestoneForm').submit();
+                });
+            } else {
+                // Submit the form normally if no issues
+                document.querySelector('#milestoneForm').submit();
+            }
+        });
+    });
+</script>
 @endsection

@@ -1,6 +1,11 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
 <div class="container">
     <h5 class="card-title mb-3">Keputusan Ujian Saringan Modified Checklist Autism Test(M-CHAT)</h5>
 
@@ -53,7 +58,7 @@
                     @else
                         <p class="mb-1">
                             <strong style="color: #4CAF50;">Risiko Rendah:</strong> Risiko Rendah menunjukkan jumlah skor
-                            berada di bawah ambang kritikal.<br>
+                            berada di bawah ambang risiko rendah ke noraml.<br>
                         <ul>
                             <li>Tiada tindakan susulan diperlukan pada masa ini.</li>
                             <li>Teruskan memantau perkembangan anak secara berkala.</li>

@@ -14,11 +14,11 @@
 
         <!-- M-CHAT Score Section -->
         <div class="col-md-3">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body text-center">
                     <h5 class="card-title">M-CHAT</h5>
                     <h6 class="card-title mb-3">Skor M-CHAT</h6>
-                    <h2 class="display-4"><strong>{{ $latestMCHAT->score ?? '0' }}</strong></h2>
+                    <h2 class="display-4" style="color: #3F51B2;"><strong>{{ $latestMCHAT->score ?? '0' }}</strong></h2>
 
                     <span class="badge
                     @if ($latestMCHAT?->risk_level === 'RISIKO TINGGI')
@@ -35,7 +35,27 @@
                         Ujian</a>
                 </div>
             </div>
+            <div class="card " >
+                <div class="card-body text-center">
+                    <h5 class="card-title">Indeks Jisim Badan(BMI)</h5>
+                    <h5 class="display-5" style="color: #3F51B2;"><strong>{{ $bmi ?? '0' }}</strong></h5>
+                    
+                    <span class="badge
+                    @if ($bmiStatus === 'Obesiti')
+                        bg-gradient-danger
+                    @elseif ($bmiStatus === 'Berat Badan Berlebihan' || $bmiStatus === "Kurang Berat Badan")
+                        bg-gradient-warning
+                    @else
+                        bg-gradient-success
+                    @endif">
+                    {{ $bmiStatus ?? 'Tiada Rekod'}}
+                    </span>
+                    <br>
+                </div>
+            </div>
         </div>
+        
+
     </div><br>
     <!-- Milestone Section -->
     <h6 class="ms-2 mb-3 text-xs font-weight-bolder opacity-6">Paparan Data Pencapaian Perkembangan </h6>

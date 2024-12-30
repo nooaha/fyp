@@ -1,7 +1,11 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
 <div class="container">
     <div class="card">
         @php
@@ -30,26 +34,7 @@
                         <div class="col-lg-6 col-7">
                             <h6>Graf Berat</h6>
                         </div>
-                        <!-- menu dotted 3-->
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <!-- Dynamic age range selection -->
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateWeightChart('all')">Semua Umur</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateWeightChart('24-36')">2-3 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateWeightChart('36-48')">3-4 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateWeightChart('48-60')">4-5 Tahun</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -72,28 +57,6 @@
                         <div class="col-lg-6 col-7">
                             <h6>Graf Tinggi</h6>
                         </div>
-                        <!-- menu dotted 3-->
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <!-- Dynamic age range selection -->
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateChart('all')">Semua Umur</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateChart('24-36')">2-3 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateChart('36-48')">3-4 Tahun</a></li>
-                                    <li><a class="dropdown-item border-radius-md" style="cursor: pointer;"
-                                            onclick="updateChart('48-60')">4-5 Tahun</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
 
@@ -106,8 +69,6 @@
             </div>
         </div>
     </div>
-    <!-- error in location need (controller)
-    <button type="button" class="btn btn-primary" style="float: right" onclick="location.href='{{ route('growth-tracking.add',['childId' => request('childId')]) }}'>Tambah Data</button>-->
     <a href="{{ route('growth-tracking.add', ['childId' => request('childId')]) }}" style="float: right"
         class="btn btn-primary">+&nbsp;Tambah Data</a>
 </div>
@@ -119,6 +80,7 @@
 
     <script>
         window.onload = function () {
+            // Data from the Controller
             const growthData = @json($growthRecords);
             const refData = @json($refRecords);
 
@@ -127,26 +89,58 @@
             const heightData = growthData.map(record => record.height);
             const weightData = growthData.map(record => record.weight);
 
-            // Reference Data
-            //const refAge = refData.map(ref => ref.age_months);
-            const height3SD = refData.map(ref => ref.height3SD);
-            const height0SD = refData.map(ref => ref.height0SD);
-            const heightMin = refData.map(ref => ref.heightMin);
-            const weight3SD = refData.map(ref => ref.weight3SD);
-            const weight0SD = refData.map(ref => ref.weight0SD);
-            const weightMin = refData.map(ref => ref.weightMin);
+            // WHO Reference Data
+            const refAge = refData.map(ref => ref.age_months);
+            const height3SD = refData.map(ref => ref.height_3SD);
+            const height2SD = refData.map(ref => ref.height_2SD);
+            const height0SD = refData.map(ref => ref.height_0SD);
+            const heightNeg2SD = refData.map(ref => ref.height_neg_2SD);
+            const heightNeg3SD = refData.map(ref => ref.height_neg_3SD);
+            const weight3SD = refData.map(ref => ref.weight_3SD);
+            const weight2SD = refData.map(ref => ref.weight_2SD);
+            const weight0SD = refData.map(ref => ref.weight_0SD);
+            const weightNeg2SD = refData.map(ref => ref.weight_neg_2SD);
+            const weightNeg3SD = refData.map(ref => ref.weight_neg_3SD);
+
+            // Generate Unified Age List (X-axis)
+            const unifiedAgeInMonths = Array.from(new Set([...ageInMonths, ...refAge])).sort((a, b) => a - b);
+
+            // Helper Function to Align Datasets
+            const alignData = (unifiedAge, originalAges, originalData) =>
+                unifiedAge.map(month =>
+                    originalAges.includes(month) ? originalData[originalAges.indexOf(month)] : null
+                );
+
+            // Align All Datasets
+            const alignedHeight3SD = alignData(unifiedAgeInMonths, refAge, height3SD);
+            const alignedHeight2SD = alignData(unifiedAgeInMonths, refAge, height2SD);
+            const alignedHeight0SD = alignData(unifiedAgeInMonths, refAge, height0SD);
+            const alignedHeightNeg2SD = alignData(unifiedAgeInMonths, refAge, heightNeg2SD);
+            const alignedHeightNeg3SD = alignData(unifiedAgeInMonths, refAge, heightNeg3SD);
+            const alignedWeight3SD = alignData(unifiedAgeInMonths, refAge, weight3SD);
+            const alignedWeight2SD = alignData(unifiedAgeInMonths, refAge, weight2SD);
+            const alignedWeight0SD = alignData(unifiedAgeInMonths, refAge, weight0SD);
+            const alignedWeightNeg2SD = alignData(unifiedAgeInMonths, refAge, weightNeg2SD);
+            const alignedWeightNeg3SD = alignData(unifiedAgeInMonths, refAge, weightNeg3SD);
+
+            // Align Growth Data
+            const alignedHeightData = alignData(unifiedAgeInMonths, ageInMonths, heightData);
+            const alignedWeightData = alignData(unifiedAgeInMonths, ageInMonths, weightData);
 
             // Chart for Height
             new Chart(document.getElementById('heightChart').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ageInMonths, // X-axis: Age in months
+                    labels: unifiedAgeInMonths, // X-axis: Unified Age in Months
                     datasets: [
-                        { label: 'Normal (+3SD)', data: height3SD, borderColor: 'green', fill: false },
-                        { label: 'Normal (0SD)', data: height0SD, borderColor: 'green', backgroundColor: 'rgba(0, 255, 0, 0.2)', fill: "false" },
-                        { label: 'Bantut (-3SD)', data: heightMin, borderColor: 'yellow', backgroundColor: 'rgba(255, 255, 0, 0.2)', fill: true },
-                        { label: 'Tinggi Anak', data: heightData, borderColor: 'blue', fill: false }
-                    ]
+                        { label: '+3SD', data: alignedHeight3SD, borderColor: 'red', borderWidth: 1, pointRadius: 1 },
+                        { label: '+2SD', data: alignedHeight2SD, borderColor: 'orange', borderWidth: 1, pointRadius: 1 },
+                        { label: 'Median (0SD)', data: alignedHeight0SD, borderColor: 'green', borderWidth: 1, pointRadius: 1 },
+                        { label: '-2SD', data: alignedHeightNeg2SD, borderColor: 'orange', borderWidth: 1, pointRadius: 1 },
+                        { label: '-3SD', data: alignedHeightNeg3SD, borderColor: 'red', borderWidth: 1, pointRadius: 1 },
+                        { label: 'Tinggi Anak', data: alignedHeightData, borderColor: 'black', spanGaps: true, borderWidth: 1 }
+                    ],
+
                 },
                 options: {
                     responsive: true,
@@ -161,13 +155,14 @@
             new Chart(document.getElementById('weightChart').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ageInMonths, // X-axis: Age in months
+                    labels: unifiedAgeInMonths, // X-axis: Unified Age in Months
                     datasets: [
-                        { label: 'Top of Chart', data: new Array(37).fill(30), borderColor: 'transparent', backgroundColor: 'rgba(255, 0, 0, 0.2)', fill: false },
-                        { label: 'Obesiti (+3SD)', data: weight3SD, borderColor: 'red', backgroundColor: 'rgba(255, 0, 0, 0.2)', fill: '-1' },
-                        { label: 'Normal (0SD)', data: weight0SD, borderColor: 'green', fill: false },
-                        { label: 'Kurang Berat Badan (-3SD)', data: weightMin, borderColor: 'yellow', backgroundColor: 'rgba(255, 255, 0, 0.2)', fill: true },
-                        { label: 'Berat Anak', data: weightData, borderColor: 'purple', fill: false }
+                        { label: '+3SD', data: alignedWeight3SD, borderColor: 'red', borderWidth: 1, pointRadius: 1 },
+                        { label: '+2SD', data: alignedWeight2SD, borderColor: 'orange', borderWidth: 1, pointRadius: 1 },
+                        { label: 'Median (0SD)', data: alignedWeight0SD, borderColor: 'green', borderWidth: 1, pointRadius: 1 },
+                        { label: '-2SD', data: alignedWeightNeg2SD, borderColor: 'orange', borderWidth: 1, pointRadius: 1 },
+                        { label: '-3SD', data: alignedWeightNeg3SD, borderColor: 'red', borderWidth: 1, pointRadius: 1 },
+                        { label: 'Berat Anak', data: alignedWeightData, borderColor: 'black', spanGaps: true, borderWidth: 1 }
                     ]
                 },
                 options: {
@@ -175,20 +170,10 @@
                     scales: {
                         x: { title: { display: true, text: 'Umur (Bulan)' } },
                         y: { title: { display: true, text: 'Berat Badan (kg)' } }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                // Filter out specific legends wanted to hide
-                                filter: function (legendItem, data) {
-                                    // Hide the legend for 'Top pf chart'
-                                    return legendItem.text !== 'Top of Chart';
-                                }
-                            }
-                        }
                     }
                 }
             });
+
         };
     </script>
 
