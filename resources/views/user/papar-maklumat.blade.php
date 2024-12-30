@@ -4,6 +4,11 @@
 @php
     $childId = request('childId', Auth::user()->children->first()->id);
 @endphp
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
     <div class="container-fluid">
         <div class="page-header min-height-300 border-radius-xl mt-4"
             style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 45%;"></div>
@@ -38,8 +43,8 @@
 
             <div class="container-fluid py-4">
                 <div class="card">
-                    <div class="card-header">
-                        <h2>Maklumat Ibu Bapa</h2>
+                    <div class="card-header pb-0">
+                        <h5>Maklumat Ibu Bapa</h5>
                     </div>
                     <div class="card-body">
                         <!-- Parent Details Form -->
@@ -91,9 +96,9 @@
                         </form>
 
                         <!-- Children Details Table -->
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h2 class="mb-0">Maklumat Anak</h2>
-                            <a href="{{ route('user-details.createChildDetails',['childId' => $childId ?? Auth::user()->children->first()->id]) }}" class="btn btn-success btn-sm">+&nbsp; Tambah Senarai</a>
+                        <div class="card-header d-flex justify-content-between align-items-center pb-0">
+                            <h5 class="mb-0">Maklumat Anak</h5>
+                            <a href="{{ route('user-details.createChildDetails',['childId' => $childId ?? Auth::user()->children->first()->id]) }}" class="btn btn-success btn-sm">+&nbsp; Tambah Anak</a>
                         </div>
                         <table class="table align-items-center mb-0" style="table-layout: fixed; width: 100%;">
                             <thead>
@@ -101,11 +106,11 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                         style="width: 10%;">No.</th>
                                     <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                                        style="width: 30%;">Nama Anak</th>
+                                        style="width: 24%;">Nama Anak</th>
                                     <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                                         style="width: 15%;">Umur</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                                        style="width: 35%;">Tindakan</th>
+                                        style="width: 45%;">Tindakan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -120,7 +125,7 @@
                                         <td class="align-middle text-xs" style="width: 10%; white-space: normal;">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td class="align-middle text-xs" style="width: 30%; white-space: normal;">
+                                        <td class="align-middle text-xs" style="width: 25%; white-space: normal;">
                                             {{ $detail->child_name ?? 'N/A' }}
                                         </td>
                                         <td class="align-middle text-center text-xs" style="width: 15%;">
@@ -129,7 +134,7 @@
                                             </span>
                                         </td>
                                         <td class="align-middle text-center text-xs"
-                                            style="width: 35%; white-space: normal;">
+                                            style="width: 45%; white-space: normal;">
                                             <!-- Show more button that links to the child details page -->
                                             <a class="btn btn-link text-info px-3 mb-0"
                                                 href="{{ route('user-details.showChildDetails', $detail->id) }}">
