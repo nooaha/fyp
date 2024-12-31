@@ -1,23 +1,25 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
-<div class="container">
-    <!-- start letak foreach loop-->
-    <h5 class="card-title mb-3">Modified Checklist Autism Test(M-CHAT)</h5>
-
-    <div class="card mb-3">
-        <div class="card-body">
-            <h6 class="card-title mb-3">Apa itu M-CHAT?</h6>
-            <div class="row align-items-center">
-                    <!-- Peratusan Pencapaian -->
-                    <div class="col-md-12">
-                        <p class="mb-0 mb-1">
-                        Modified Checklist for Autism in Toddlers (M-CHAT) adalah alat pemeriksaan perkembangan yang disahkan untuk kanak-kanak berumur antara 16 dan 30 bulan. Ia dirancang untuk mengenal pasti kanak-kanak yang mungkin mendapat manfaat daripada penilaian perkembangan dan autisme yang lebih teliti.
-                        </p>
+    @php
+        $childId = request()->query('childId');
+    @endphp
+    <div class="container">
+            <h5 class="card-title mb-3">Tip dan Panduan</h5>
+        <div class="card mb-3 ">
+            <div class="card-body">
+                <div class="container">
+                    <h4 class="mb-0">Kategori Umur:
+                        <strong class="text-capitalize" style="color: #3F51B2;">{{ $tips->age_category }}</strong>
+                    </h4>
+                    <br>
+                    <p>{{ $tips->tips_name }}</p>
+                    <div>
+                        <img src="{{ asset($tips->image) }}" alt="Image"
+                            style="width: 100%; height: 100%; border: 1px solid black;">
                     </div>
                 </div>
+            </div>
         </div>
     </div>
-
 @endsection

@@ -1,11 +1,16 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <!-- Tips Table -->
     <div class="card">
         <div class="container">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h2>Senarai Kategori Tips</h2>
+                <h4>Senarai Tips</h4>
                 <button type="button" class="btn btn-success btn-sm btn-add"
                     onclick="window.location.href='{{ route('tips-categories.create') }}'">+&nbsp; Tambah</button>
             </div>
@@ -16,24 +21,25 @@
                         <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                             style="width: 5%;">Id</th>
                         <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                            style="width: 10%;">Umur</th>
-                            <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                            style="width: 35%;">Penerangan </th>
+                            style="width: 20%;">Umur</th>
                         <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-                            style="width: 20%;">Gambar </th>
+                            style="width: 20%;">Gambar</th>
                         <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                             style="width: 15%;">Tarikh Akhir Kemaskini</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                            style="width: 40%;">Tindakan</th>
+                            style="width: 30%;">Tindakan</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @foreach ($tipscategories as $tipscategory)
                         <tr>
                             <td class="align-middle text-xs">{{ $tipscategory->id }}</td>
-                            <td class="align-middle text-xs">{{ $tipscategory->age_category ?? 'N/A' }}</td>
-                            <td class="align-middle text-xs">{{ $tipscategory->tips_name ?? 'N/A' }}</td>
-                            <td class="align-middle text-xs">
+                            <td class="align-middle text-xs"
+                                style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word; max-width: 200px;">
+                                {{ $tipscategory->age_category ?? 'N/A' }}</td>
+                            </td>
+                            <td class="align-middle text-xs text-center">
                                 @if ($tipscategory->image)
                                     <img src="{{ asset($tipscategory->image) }}" alt="Image"
                                         style="width: 100px; height: auto;">

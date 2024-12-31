@@ -19,7 +19,7 @@
   <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <!-- Child Dropdown Menu -->
-      
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle {{ Request::is('user-dashboard/*') ? 'active' : '' }}" href="#"
           id="childDropdown" data-bs-toggle="collapse" data-bs-target="#childAccordion"
@@ -106,7 +106,7 @@
       <!-- Tips dan Intervensi -->
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('tips-dan-intervensi') ? 'active' : '' }}"
-          href="{{ url('tips-dan-intervensi') }}">
+          href="{{route('tips.showTipsIntervensi', ['childId' => request('childId')]) }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <i style="font-size: 1rem;" class="fas fa-lg fa-heart-pulse ps-2 pe-2 text-center text-dark"
@@ -115,7 +115,7 @@
           <span class="nav-link-text ms-1">Tips dan Intervensi</span>
         </a>
       </li>
-      
+
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('user-details.showParentDetail') ? 'active' : '' }}"
           href="{{ route('user-details.showParentDetail', ['childId' => request('childId')]) }}">

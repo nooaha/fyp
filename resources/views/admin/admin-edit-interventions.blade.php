@@ -2,74 +2,79 @@
 
 @section('content')
 
-<div style="background-color: #90C9E9; padding: 10px; margin-top: 10px; text-align: center; border-radius: 20px;">
-    <h5>Intervensi</h5>
-</div>
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 mt-0">
-            <div class="card">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-0">
+
                 <div class="card-header pb-0">
                     <div class="row mb-0">
                         <div class="col-md-9">
-                            <h6 class="mb-0">Tambah Senarai Intervensi</h6>
+                            <h5 class="mb-0">Edit Tajuk:
+                                <strong class="text-capitalize"
+                                    style="color: #3F51B2;">{{ $interventions->interventions_title }}</strong>
+                            </h5>
+                            <br>
                         </div>
+
+                        <form action="{{ route('interventions.update', $interventions->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="form-group">
+                                <label class="form-control-label">Tajuk</label>
+                                <input class="form-control" name="interventions_title"
+                                    value="{{ $interventions->interventions_title }}" type="text" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Penerangan</label>
+                                <input class="form-control" name="interventions_explain"
+                                    value="{{ $interventions->interventions_explain }}" type="text" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Rujukan</label>
+                                <input class="form-control" name="interventions_reference"
+                                    value="{{ $interventions->interventions_reference }}" type="text" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="current_image">Gambar:</label>
+                                <div style="border: 1px dashed #ccc; padding: 10px; width: fit-content;">
+                                    @if ($interventions->interventions_image)
+                                        <img src="{{ asset($interventions->interventions_image) }}" alt="Existing Image"
+                                            style="max-width: 300px; height: auto;">
+                                    @else
+                                        <p>No image available</p>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="interventions_image">Tukar Gambar:</label>
+                                <input type="file" name="interventions_image" id="interventions_image"
+                                    class="form-control">
+                            </div>
+                            <div class="d-flex mt-3 justify-content-end">
+                                <!-- Back Button -->
+                                <a href="{{ route('interventions.index') }}" class="btn btn-secondary me-2 btn-sm"
+                                    id="cancelButton">Kembali</a>
+
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary btn-sm" style="float: right">Kemas kini
+                                    Tips</button>
+                            </div>
+                        </form>
+
                     </div>
-                </div>
-                <div class="card-body p-3">
-                    <!-- Form to handle both the category and image upload -->
-                    <form action="{{ route('upload.image') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <!-- Tips title -->
-                        <div class="form-group">
-                            <label for="interventionsTitle" class="form-control-label">Tajuk</label>
-                            <input class="form-control" type="text" placeholder="Tajuk" id="interventionsTitle" name="interventions_title" required>
-                        </div>
-
-                        <!-- Image Upload Section -->
-                        <div class="form-group">
-                            <label for="image">Gambar:</label>
-                            <input type="file" name="image" class="form-control" id="image" required>
-                        </div>
-
-                        <!-- Explaination -->
-                        <div class="form-group">
-                            <label for="interventionsExplain" class="form-control-label">Penerangan</label>
-                            <input class="form-control" type="text" placeholder="Penerangan" id="interventionsExplain" name="interventions_explain" required>
-                        </div>
-
-                        <!-- Success Message placed below the image upload but above the buttons -->
-                        @if ($message = Session::get('success'))
-                            <div class="alert alert-success alert-block mt-3">
-                                <strong>{{ $message }}</strong>
-                            </div>
-                        @endif
-
-                        <!-- Error Handling -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger mt-3">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <!-- Buttons for form submission -->
-                        <div class="d-flex justify-content-end mt-3">
-                            <!-- Cancel/Back Button -->
-                            <button type="button" class="btn btn-secondary me-2" onclick="window.history.back()">Kembali</button>
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-@endsection
+    @endsection

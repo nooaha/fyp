@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\InterventionsController;
 use App\Http\Controllers\MilestoneChecklistController;
 use App\Http\Controllers\TipsCategoryController;
 use App\Http\Controllers\ChildDetailsController;
@@ -74,17 +75,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::delete('delete-child-details/{id}', [ChildDetailsController::class, 'destroyChildDetails'])->name('user-details.destroyChildDetails');
 
-    Route::get('tips-dan-intervensi', function () {
-        return view('user.tips-interventions');
-    })->name('tips-dan-intervensi');
-
     Route::get('tips1', function () {
         return view('user.tips1');
     })->name('tips1');
-
-    Route::get('interventions1', function () {
-        return view('user.interventions1');
-    })->name('interventions1');
 
     //Route::get('mchat/{child_id}', [MCHATController::class, 'results'])->name('mchat');
     Route::get('MCHAT/{childId}', [MCHATController::class, 'index'])->name('mchat.index');
@@ -95,61 +88,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('senarai-perkembangan', [MilestoneRecordController::class, 'index'])->name('record-milestone.index');
     Route::post('senarai-perkembangan', [MilestoneRecordController::class, 'store'])->name('record-milestone.store');
 
-    Route::get('tips-dan-intervensi', function () {
-        return view('user.tips-interventions');
-    })->name('tips-dan-intervensi');
-
-    Route::get('tips1', function () {
-        return view('user.tips1');
-    })->name('tips1');
-
-    Route::get('interventions1', function () {
-        return view('user.interventions1');
-    })->name('interventions1');
 
     Route::get('admin-dashboard', function () {
         return view('admin.admin-dashboard');
     })->name('admin-dashboard');
-
-    Route::get('admin-interventions', function () {
-        return view('admin.admin-interventions');
-    })->name('admin-interventions');
-
-    Route::get('admin-tips-interventions', function () {
-        return view('admin.admin-tips-interventions');
-    })->name('admin-tips-interventions');
-
-    Route::get('tambah-kategori-tips', function () {
-        return view('admin.admin-add-category-tips');
-    })->name('add-category-tips');
-
-    Route::get('tambah-tips', function () {
-        return view('admin.admin-add-tips');
-    })->name('add-tips');
-
-    Route::get('edit-kategori-tips', function () {
-        return view('admin.admin-edit-category-tips');
-    })->name('edit-kategori-tips');
-
-    Route::get('edit-tips', function () {
-        return view('admin.admin-edit-tips');
-    })->name('edit-tips');
-
-    Route::get('tambah-kategori-intervensi', function () {
-        return view('admin.admin-add-category-interventions');
-    })->name('add-category-interventions');
-
-    Route::get('tambah-intervensi', function () {
-        return view('admin.admin-add-interventions');
-    })->name('add-interventions');
-
-    Route::get('edit-kategori-intervensi', function () {
-        return view('admin.admin-edit-category-interventions');
-    })->name('edit-category-interventions');
-
-    Route::get('edit-intervensi', function () {
-        return view('admin.admin-edit-interventions');
-    })->name('edit-interventions');
 
     Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('milestone-checklists', MilestoneChecklistController::class);
@@ -157,8 +99,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/senarai-semak-perkembangan', [MilestoneChecklistController::class, 'index'])->name('senarai-semak-perkembangan');
     Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
 
-    // Show all tips categories
-    Route::get('/tips-categories', [TipsCategoryController::class, 'index'])->name('tips-categories.index');
+    //pilih tips/intervensi
+    Route::get('admin-tips-interventions', function () {
+        return view('admin.admin-tips-interventions');
+    })->name('admin-tips-interventions');
+
+    // Admin show all tips categories
+    Route::get('/tips-kategori', [TipsCategoryController::class, 'index'])->name('tips-categories.index');
+   // Route::get('/admin-tips/{id}', [TipsCategoryController::class, 'show'])->name('tips.show');
 
     // Create tips category
     Route::get('/tips-categories/create', [TipsCategoryController::class, 'create'])->name('tips-categories.create');
@@ -167,12 +115,29 @@ Route::group(['middleware' => 'auth'], function () {
     // Show a specific tips category (if needed)
     Route::get('tips-categories/{tipscategory}', [TipsCategoryController::class, 'show'])->name('tips-categories.show');
 
+    // In routes/web.php
+    Route::get('/tips/{id}', [TipsCategoryController::class, 'showTips'])->name('tips.showTips');
+    Route::get('/tips-intervensi', [TipsCategoryController::class, 'showTipsIntervensi'])->name('tips.showTipsIntervensi');
+    Route::get('/senarai-tips', [TipsCategoryController::class, 'showSenaraiTips'])->name('tips.showSenaraiTips');
+
     // Edit a specific tips category
     Route::get('/tips-categories/{id}/edit', [TipsCategoryController::class, 'edit'])->name('tips-categories.edit');
     Route::put('/tips-categories/{id}', [TipsCategoryController::class, 'update'])->name('tips-categories.update');
 
     // Delete a specific tips category
     Route::delete('/tips-categories/{id}', [TipsCategoryController::class, 'destroyTips'])->name('tips-categories.destroy');
+
+    //all for interventions
+    Route::get('/intervensi', [InterventionsController::class, 'index'])->name('interventions.index');
+    Route::get('maklumat-intervensi/{interventions}', [InterventionsController::class, 'show'])->name('interventions.show');
+    Route::get('/tambah-intervensi/create', [InterventionsController::class, 'create'])->name('interventions.create');
+    Route::post('/simpan-intervensi', [InterventionsController::class, 'store'])->name('interventions.store');
+    Route::get('/intervensi/{id}/edit', [InterventionsController::class, 'edit'])->name('interventions.edit');
+    Route::put('/intervensi/{id}', [InterventionsController::class, 'update'])->name('interventions.update');
+    Route::delete('/intervensi/{id}', [InterventionsController::class, 'destroy'])->name('interventions.destroy');
+    Route::get('/intervensi/{id}', [InterventionsController::class, 'showInterventions'])->name('interventions.showInterventions');
+    Route::get('/senarai-intervensi', [InterventionsController::class, 'showSenaraiIntervensi'])->name('interventions.showSenaraiIntervensi');
+
 
     Route::get('user-profile', function () {
         return view('user.user-profile');

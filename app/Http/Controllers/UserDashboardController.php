@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Child;
 use App\Models\ReferenceData;
+use App\Models\Tips;
+use App\Models\Interventions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GrowthRecordController;
 use App\Http\Controllers\MilestoneChecklistController;
 use App\Models\GrowthRef;
 
+
 class UserDashboardController extends Controller
 {
-
     public function index($childId)
     {
         $user = Auth::user(); // Get the logged-in user
@@ -39,6 +41,12 @@ class UserDashboardController extends Controller
 
         $milestoneProgress = $milestoneController->showList($childId);
 
+        // Fetch all tips to display on the dashboard
+        $tips = Tips::all(); // Retrieve all tips
+
+         // Fetch all tips to display on the dashboard
+         $interventions = Interventions::all(); // Retrieve all tips
+        
         // Retrieve data for the child
         $latestMCHAT = $child->mchatResult()->latest()->first(); // Latest M-CHAT result
 
@@ -62,7 +70,6 @@ class UserDashboardController extends Controller
             }
         }
         
-        return view('user.user-dashboard', compact('childId', 'child', 'refRecords', 'growthRecords', 'milestoneProgress', 'latestMCHAT', 'bmi', 'bmiStatus'));
+        return view('user.user-dashboard', compact('childId', 'child', 'refRecords', 'growthRecords', 'milestoneProgress', 'latestMCHAT', 'tips', 'interventions'));
     }
-
 }
