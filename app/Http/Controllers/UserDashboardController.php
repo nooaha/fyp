@@ -70,6 +70,6 @@ class UserDashboardController extends Controller
             }
         }
         
-        return view('user.user-dashboard', compact('childId', 'child', 'refRecords', 'growthRecords', 'milestoneProgress', 'latestMCHAT', 'tips', 'interventions'));
+        return view('user.user-dashboard', compact('childId', 'child', 'bmi', 'bmiStatus','refRecords', 'growthRecords', 'milestoneProgress', 'latestMCHAT', 'tips', 'interventions'));
     }
 }
