@@ -1,11 +1,11 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-@if(session()->has('success'))
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
-    </div>
-@endif
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
     <!-- Tips Table -->
     <div class="card">
         <div class="container">
