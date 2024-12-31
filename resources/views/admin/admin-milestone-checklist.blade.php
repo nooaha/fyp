@@ -58,8 +58,7 @@
                                                     {{ $checklist->title }}
                                                 </td>
                                                 <td class="align-middle text-center text-xs">
-                                                    <span class="badge bg-gradient-secondary">{{ $checklist->age_category }}
-                                                        bulan</span>
+                                                    <span class="badge bg-gradient-secondary">{{ $checklist->age_category }}</span>
                                                 </td>
                                                 <td class="align-middle text-center text-xs"
                                                     style="width: 20%; white-space: normal;">

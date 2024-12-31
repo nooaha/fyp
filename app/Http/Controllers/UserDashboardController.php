@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GrowthRecordController;
 use App\Http\Controllers\MilestoneChecklistController;
+use App\Models\GrowthRef;
+
 
 class UserDashboardController extends Controller
 {
@@ -30,23 +32,44 @@ class UserDashboardController extends Controller
 
         $growthController = new GrowthRecordController();
         $milestoneController = new MilestoneChecklistController();
-        $refRecords = ReferenceData::all();
+        //$refRecords = GrowthRef::all();
 
         $chartData = $growthController->showChart($childId);
         $growthRecords = $chartData['growthRecords'];
+        $refRecords = $chartData['refRecords'];
+        //$refRecords = $growthController->showChart($childId);
 
         $milestoneProgress = $milestoneController->showList($childId);
-
-        // Retrieve the latest M-CHAT result for the child
-        $latestMCHAT = $child->mchatResult()->latest()->first();
 
         // Fetch all tips to display on the dashboard
         $tips = Tips::all(); // Retrieve all tips
 
          // Fetch all tips to display on the dashboard
          $interventions = Interventions::all(); // Retrieve all tips
+        
+        // Retrieve data for the child
+        $latestMCHAT = $child->mchatResult()->latest()->first(); // Latest M-CHAT result
 
-        // Pass the data to the dashboard view
+        $latestGrowthRecord = $child->growthRecords()->latest()->first();
+        $bmi = null;
+        $bmiStatus = null;
+
+        if ($latestGrowthRecord && $latestGrowthRecord->weight && $latestGrowthRecord->height) {
+            $heightInMeters = $latestGrowthRecord->height / 100; // Convert height to meters
+            $bmi = round($latestGrowthRecord->weight / ($heightInMeters ** 2), 2);
+
+            // Determine BMI status
+            if ($bmi < 18.5) {
+                $bmiStatus = 'Kurang Berat Badan';
+            } elseif ($bmi >= 18.5 && $bmi <= 24.9) {
+                $bmiStatus = 'Sihat';
+            } elseif ($bmi >= 25 && $bmi <= 29.9) {
+                $bmiStatus = 'Berat Badan Berlebihan';
+            } else {
+                $bmiStatus = 'Obesiti';
+            }
+        }
+        
         return view('user.user-dashboard', compact('childId', 'child', 'refRecords', 'growthRecords', 'milestoneProgress', 'latestMCHAT', 'tips', 'interventions'));
     }
 }

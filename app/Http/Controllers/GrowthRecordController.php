@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\ReferenceData;
 use App\Models\GrowthRecord;
 use App\Models\Child;
+use App\Models\GrowthRef;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class GrowthRecordController extends Controller
 
         if (!$child) {
             return redirect()->route('growth-tracking.showGrowthChart', ['childId' => $user->children->first()->id])
-                ->with('error', 'Invalid child selected, redirecting to default.');
+                ->with('error', 'Pilihan tidak sah, mengubah ke ketetapan.');
         }
         // Retrieve growth data (e.g., height and weight records)
         $growthData = [
@@ -62,7 +63,7 @@ class GrowthRecordController extends Controller
         ]);
 
         return redirect()->route('growth-tracking.showGrowthChart', ['childId' => $childId])
-            ->with('success', 'Growth record added successfully.');
+            ->with('success', 'Rekod berjaya ditambah.');
     }
 
 
@@ -75,26 +76,59 @@ class GrowthRecordController extends Controller
 
         if (!$child) {
             return redirect()->route('growth-tracking.showGrowthChart', ['childId' => $user->children->first()->id])
-                ->with('error', 'Invalid child selected, redirecting to default.');
+                ->with('error', 'Pilihan tidak sah, mengubah ke ketetapan.');
         }
 
         $childDob = $child->child_dob;
         $currentDate = now();
         $ageInMonths = $currentDate->diffInMonths($childDob);
+        $ageInYears = $currentDate->diffInYears($childDob);
 
-        $refRecords = ReferenceData::select(
-            'age_months',
-            'height_normal_3SD as height3SD',
-            'height_normal_0SD as height0SD',
-            'height_min as heightMin',
-            'weight_obese_3SD as weight3SD',
-            'weight_normal_0SD as weight0SD',
-            'weight_min as weightMin'
-        )
-            ->orderBy('age_months')
-            ->get();
+        // Determine which reference data to use
+        
+        if ($ageInMonths <= 24) {
 
+            $refRecords = GrowthRef::select(
+                'age_months',
+                'gender',
+                'height_3SD as height_3SD',
+                'height_2SD as height_2SD',
+                'height_normal_0SD as height_0SD',
+                'height_neg_2SD as height_neg_2SD',
+                'height_neg_3SD as height_neg_3SD',
+                'weight_3SD as weight_3SD',
+                'weight_2SD as weight_2SD',
+                'weight_normal_0SD as weight_0SD',
+                'weight_neg_2SD as weight_neg_2SD',
+                'weight_neg_3SD as weight_neg_3SD'
+            )
+                ->where('age_months', '<=', 24)
+                ->where('gender', $child->child_gender)  // First condition for gender
+                ->orderBy('age_months')
+                ->get();
+        } else {
+            $refRecords = GrowthRef::select(
+                'age_months',
+                'gender',
+                'height_3SD as height_3SD',
+                'height_2SD as height_2SD',
+                'height_normal_0SD as height_0SD',
+                'height_neg_2SD as height_neg_2SD',
+                'height_neg_3SD as height_neg_3SD',
+                'weight_3SD as weight_3SD',
+                'weight_2SD as weight_2SD',
+                'weight_normal_0SD as weight_0SD',
+                'weight_neg_2SD as weight_neg_2SD',
+                'weight_neg_3SD as weight_neg_3SD'
+            )
+                ->where('age_months', '>', 24)
+                ->where('gender', $child->child_gender)  // First condition for gender
+                ->orderBy('age_months')
+                ->get();
 
+        }
+
+        //dd($refRecords);
         $growthRecords = GrowthRecord::with('child')
             ->where('child_id', $childId)
             ->orderBy('created_at')
@@ -107,6 +141,7 @@ class GrowthRecordController extends Controller
         return view('user.growth-charts', compact('child', 'growthRecords', 'ageInMonths', 'refRecords'));
     }
 
+    //for dashboard view
     public function showChart($childId)
     {
         $user = Auth::user();
@@ -115,25 +150,48 @@ class GrowthRecordController extends Controller
 
         if (!$child) {
             return redirect()->route('growth-tracking.showGrowthChart', ['childId' => $user->children->first()->id])
-                ->with('error', 'Invalid child selected, redirecting to default.');
+                ->with('error', 'Pilihan tidak sah, mengubah ke ketetapan.');
         }
 
         $childDob = $child->child_dob;
         $currentDate = now();
         $ageInMonths = $currentDate->diffInMonths($childDob);
+        
+        // Determine which reference data to use
+        
+        if ($ageInMonths <= 24) {
 
-        $refRecords = ReferenceData::select(
-            'age_months',
-            'height_normal_3SD as height3SD',
-            'height_normal_0SD as height0SD',
-            'height_min as heightMin',
-            'weight_obese_3SD as weight3SD',
-            'weight_normal_0SD as weight0SD',
-            'weight_min as weightMin'
-        )
-            ->orderBy('age_months')
-            ->get();
+            $refRecords = GrowthRef::select(
+                'age_months',
+                'gender',
+                'weight_3SD as weight_3SD',
+                'weight_2SD as weight_2SD',
+                'weight_normal_0SD as weight_0SD',
+                'weight_neg_2SD as weight_neg_2SD',
+                'weight_neg_3SD as weight_neg_3SD'
+            )
+                ->where('age_months', '<=', 24)
+                ->where('gender', $child->child_gender)  // First condition for gender
+                ->orderBy('age_months')
+                ->get();
+        } else {
+            $refRecords = GrowthRef::select(
+                'age_months',
+                'gender',
+                'weight_3SD as weight_3SD',
+                'weight_2SD as weight_2SD',
+                'weight_normal_0SD as weight_0SD',
+                'weight_neg_2SD as weight_neg_2SD',
+                'weight_neg_3SD as weight_neg_3SD'
+            )
+                ->where('age_months', '>', 24)
+                ->where('gender', $child->child_gender)  // First condition for gender
+                ->orderBy('age_months')
+                ->get();
 
+        }
+
+              
         $growthRecords = GrowthRecord::with('child')
             ->where('child_id', $childId)
             ->orderBy('created_at')
@@ -142,7 +200,7 @@ class GrowthRecordController extends Controller
                 $record->age_in_months = $record->child->child_dob->diffInMonths($record->created_at);
                 return $record;
             });
-
+  
         // Return the data instead of the view
         return [
             'child' => $child,
@@ -150,6 +208,7 @@ class GrowthRecordController extends Controller
             'ageInMonths' => $ageInMonths,
             'refRecords' => $refRecords,
         ];
+        
     }
 
 }

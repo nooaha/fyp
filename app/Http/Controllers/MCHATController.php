@@ -64,7 +64,6 @@ class MCHATController extends Controller
         $atRiskScore = 0;
         $criticalCount = 0;
 
-
         foreach ($responses as $questionId => $answer) {
 
             $question = MChatQuestion::find($questionId);
@@ -95,20 +94,24 @@ class MCHATController extends Controller
             }
         }
 
+        $score=0;
         // **Determine Risk Level**
-        if ($criticalCount >= 2 || $atRiskScore++ >= 3) {
+        if ($criticalCount > 2 || $atRiskScore++ >= 3) {
+            $score = $criticalCount + $atRiskScore;
             $riskLevel = 'RISIKO TINGGI';
         } elseif ($atRiskScore >= 2) {
+            $score= $criticalCount + $atRiskScore;
             $riskLevel = 'RISIKO SEDERHANA';
         } else {
-            $riskLevel = 'RISIKO RENDAH';
+            $score= $criticalCount + $atRiskScore;
+            $riskLevel = 'NORMAL - RISIKO RENDAH';
         }
 
 
         // Store the result in the database, associating the result with the child's ID
         $results = MChatResult::create([
             'child_id' => $childId, // Store result under the child's ID
-            'score' => $atRiskScore, // Store the total at-risk score
+            'score' => $score, // Store the total at-risk score
             'risk_level' => $riskLevel,
 
         ]);
@@ -116,7 +119,7 @@ class MCHATController extends Controller
         // Redirect to the result page with the result ID
         //return redirect()->route('mchat.result', ['resultId' => $result->id]);
         return view('user.test-result', compact('child', 'results'))
-            ->with('success', 'Keputusan ujian anak anda sudah siap!');
+            ->with('success', 'Keputusan ujian M-CHAT anak anda sedia!');
 
     }
 

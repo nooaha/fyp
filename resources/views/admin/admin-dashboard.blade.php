@@ -137,55 +137,53 @@
             </div>
         </div>
 
-        <div class="card mb-5">
-            <div class="card-body">
-                <h6 class="card-title mb-3">Kemas kini Senarai Pencapaian Perkembangan </h6>
-                <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
-                        <thead>
+    <div class="card mb-5">
+        <div class="card-body">
+            <h6 class="card-title mb-3">Kemas kini Senarai Pencapaian Perkembangan </h6>
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BIL.</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tajuk
+                                Senarai</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Kategori Umur</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Tarikh akhir kemaskini</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if ($checklists->isEmpty())
+                        <tr>
+                            <td colspan="4" class="text-center mb-0 text-xs">Tiada rekod Senarai Pencapaian Perkembangan</td>
+                        </tr>
+                    @else
+                        @foreach ($checklists as $checklist)
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">LID.</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tajuk
-                                    Senarai</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Kategori Umur</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Tarikh akhir kemaskini</th>
+                                <td class="align-middle text-center text-xs">
+                                    <span>{{ $loop->iteration }}</span>
+                                </td>
+                                <td class="align-middle text-xs">
+                                    <span>{{ $checklist->title}}</span>
+                                </td>
+                                <td class="align-middle text-center text-xs">
+                                    <span class="badge bg-gradient-secondary ">{{ $checklist->age_category }} bulan</span>
+                                </td>
+                                <td class="align-middle text-center text-xs">
+                                    <span>{{ $checklist->updated_at}}</span>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @if ($checklists->isEmpty())
-                                <tr>
-                                    <td colspan="4" class="text-center mb-0 text-xs">Tiada rekod Senarai Pencapaian
-                                        Perkembangan</td>
-                                </tr>
-                            @else
-                                @foreach ($checklists as $checklist)
-                                    <tr>
-                                        <td class="align-middle text-xs">
-                                            <span>{{ $checklist->id }}</span>
-                                        </td>
-                                        <td class="align-middle text-xs">
-                                            <span>{{ $checklist->title }}</span>
-                                        </td>
-                                        <td class="align-middle text-center text-xs">
-                                            <span class="badge bg-gradient-secondary ">{{ $checklist->age_category }}
-                                                bulan</span>
-                                        </td>
-                                        <td class="align-middle text-center text-xs">
-                                            <span>{{ $checklist->updated_at }}</span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-end mt-2">
-                    <a href="{{ route('milestone-checklists.index') }}" class="btn btn-primary mb-0">Kemas kini</a>
-                </div>
+                        @endforeach
+                    @endif
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-end mt-2">
+                <a href="{{ route('milestone-checklists.index') }}" class="btn btn-primary mb-0">Kemas kini</a>
             </div>
         </div>
+    </div>
 
         <h6 class="ms-2 mb-4 text-uppercase text-xs font-weight-bolder opacity-6">Paparan Data Tip dan intervensi</h6>
         <div class="card mb-3 mb-4">

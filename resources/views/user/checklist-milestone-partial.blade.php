@@ -4,7 +4,7 @@
     <div class="card mb-3">
         <div class="card-body">
             <h6 class="card-title mb-3">
-                {{ $item['milestone']->title }} - {{ $item['milestone']->age_category }} bulan
+                {{ $item['milestone']->title }} - {{ $item['milestone']->age_category }}
             </h6>
             <div class="row align-items-center">
                 <!-- Progress Label -->
