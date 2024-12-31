@@ -5,6 +5,8 @@ use App\Models\MilestoneChecklist;
 use App\Models\MilestoneRecord;
 use App\Models\User;
 use App\Models\Child;
+use App\Models\Tips;
+use App\Models\Interventions;
 use App\Models\MCHATResult;
 
 use Illuminate\Http\Request;
@@ -30,19 +32,24 @@ class AdminDashboardController extends Controller
 
         // Latest milestone checklists (existing functionality)
         $checklists = MilestoneChecklist::orderBy('updated_at', 'desc')->take(5)->get();
+        $tips = Tips::latest('updated_at')->first();
+        $interventions = Interventions::latest('updated_at')->first();
 
         return view('admin.admin-dashboard', compact(
             'checklists',
             'registeredUsers',
-            
+
             'newUsers',
             'totalChildren',
             'completionRate',
-            'highRiskMCHAT'
+            'highRiskMCHAT',
+            'tips',
+            'interventions'
+
         ));
     }
 
-   /**
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

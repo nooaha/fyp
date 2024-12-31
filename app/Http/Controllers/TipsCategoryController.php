@@ -52,12 +52,33 @@ class TipsCategoryController extends Controller
         ]);
 
         // Redirect with success message
-        return redirect()->route('tips-categories.index')->with('success', 'Category added successfully.');
+        return redirect()->route('tips-categories.index')->with('success', 'Tip Berjaya Ditambah.');
     }
 
     public function show(Tips $tipscategory)
     {
         return view('admin.admin-tips-view', compact('tipscategory'));
+    }
+
+    //users view
+    public function showTips($tips)
+    {
+        $tips = Tips::findOrFail($tips);
+
+    // Retrieve the child_id from the query parameters (if available)
+        $childId = request()->query('childId');
+        return view('user.tips', compact('childId','tips'));
+    }
+
+    public function showTipsIntervensi()
+    {
+        return view('user.pilihan-tips-intervensi');
+    }
+
+    public function showSenaraiTips(Tips $tips)
+    {
+        $tips = Tips::all();
+        return view('user.senarai-tips', compact('tips'));
     }
 
     public function edit($id)
@@ -108,7 +129,7 @@ class TipsCategoryController extends Controller
         // Save the updated category
         $tipscategory->save();
 
-        return redirect()->route('tips-categories.index')->with('success', 'Tips updated successfully!');
+        return redirect()->route('tips-categories.index')->with('success', 'Tip Berjaya Dikemaskini!');
     }
 
     public function destroyTips($id)
@@ -124,6 +145,6 @@ class TipsCategoryController extends Controller
         // Delete the record
         $tipscategory->delete();
 
-        return redirect()->route('tips-categories.index')->with('success', 'Maklumat berjaya dipadam.');
+        return redirect()->route('tips-categories.index')->with('success', 'Tip Berjaya Dipadam.');
     }
 }
