@@ -94,7 +94,7 @@
                                         Selesai</p>
                                     <h5 class="font-weight-bolder mb-0">
 
-                                        <span class="text-success font-weight-bolder">{{ $completionRate }}</span>
+                                        <span class="text-success font-weight-bolder">{{ $completionRate }}%</span>
                                     </h5>
                                 </div>
                             </div>

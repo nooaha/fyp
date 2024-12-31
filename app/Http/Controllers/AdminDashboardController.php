@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\MilestoneChecklist;
 use App\Models\MilestoneRecord;
+use App\Models\Question;
 use App\Models\User;
 use App\Models\Child;
 use App\Models\Tips;
@@ -25,9 +26,16 @@ class AdminDashboardController extends Controller
 
         // Section: Paparan Data Pencapaian Perkembangan dan M-CHAT
         $totalChildren = Child::count(); // Total number of children
-        $completedMilestones = MilestoneRecord::where('completed', 1)->count(); // Completed milestones
-        $totalMilestones = MilestoneChecklist::count(); // Total milestones
-        $completionRate = $totalMilestones > 0 ? ($completedMilestones / $totalMilestones) * 100 : 0; // Completion rate
+
+        // Total number of questions across all milestones
+        $totalQuestionsPerChild = Question::count(); // Assuming each question is linked to a milestone
+        $totalQuestions = $totalChildren * $totalQuestionsPerChild; // Total questions for all children
+        $completedQuestions = MilestoneRecord::where('completed', 1)->count(); // Assuming `QuestionRecord` tracks question completion
+
+        // Calculate the completion rate
+        $completionRate = $totalQuestions > 0 ? ($completedQuestions / $totalQuestions) * 100 : 0;
+        $completionRate = number_format($completionRate, 1);
+
         $highRiskMCHAT = MCHATResult::where('risk_level', 'RISIKO TINGGI')->count(); // High-risk M-CHAT results
 
         // Latest milestone checklists (existing functionality)
