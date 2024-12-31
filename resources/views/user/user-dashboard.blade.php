@@ -77,7 +77,7 @@
             <!-- Tip Cards -->
             <div class="row">
                 @foreach ($tips->take(3) as $tip)
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card" style="width: 100%; height: 350px; margin: auto;"> <!-- Fixed card size -->
                             <div class="card-body text-center" style="padding: 15px 20px;">
                                 <!-- Add a gap above the image -->
@@ -108,7 +108,7 @@
             <!-- Interventions Cards -->
             <div class="row">
                 @foreach ($interventions->take(3) as $intervention)
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="card" style="width: 100%; height: 350px; margin: auto;"> <!-- Fixed card size -->
                             <div class="card-body text-center" style="padding: 15px 20px;">
                                 <!-- Add a gap above the image -->
