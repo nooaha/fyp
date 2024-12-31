@@ -2,6 +2,12 @@
 
 @section('content')
 
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     <div class="container">
         <div class="row">
             <div class="col-md-12 mt-0">
@@ -9,7 +15,7 @@
                     <div class="card-header pb-0">
                         <div class="row mb-0">
                             <div class="col-md-9">
-                                <h2 class="mb-0">Tambah Senarai Tips</h2>
+                                <h4 class="mb-0">Tambah Senarai Tips</h4>
                             </div>
                             <br>
                         </div>
@@ -24,8 +30,8 @@
 
                             <div class="form-group">
                                 <label for="age_category" class="form-control-label">Kategori Umur</label>
-                                <input class="form-control" type="text" placeholder="Kategori umur"
-                                    id="age_category" name="age_category" required>
+                                <input class="form-control" type="text" placeholder="Kategori umur" id="age_category"
+                                    name="age_category" required>
                             </div>
 
                             <div class="form-group">

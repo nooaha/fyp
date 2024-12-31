@@ -12,12 +12,12 @@
         <br>
 
         <div class="d-flex justify-content-center text-center">
-            <button type="button" class="btn btn-primary btn-sm custom-btn" onclick="window.location.href='{{ route('tips-categories.store') }}'">Tips</button>
+            <button type="button" class="btn btn-primary btn-sm custom-btn" onclick="window.location.href='{{ route('tips-categories.index') }}'">Tips</button>
         </div>
 
 
         <div class="d-flex justify-content-center text-center">
-            <button type="button" class="btn btn-primary btn-sm custom-btn" onclick="window.location.href='/admin-interventions'">Intervensi</button>
+            <button type="button" class="btn btn-primary btn-sm custom-btn" onclick="window.location.href='{{ route('interventions.index') }}'">Intervensi</button>
         </div>
 
 

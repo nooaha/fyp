@@ -1,122 +1,84 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
-    <style>
-        /* Fix the width of the action column */
-        .action-column {
-            width: 150px;
-            text-align: center;
-        }
-
-        /* Align the title and button on the same row, with button to the right */
-        .header-row {
-            display: flex;
-            justify-content: space-between; /* Push content to far ends */
-            align-items: center;
-        }
-
-        /* Styling for the Tips header */
-        .tips-header {
-            background-color: #90C9E9;
-            padding: 10px;
-            margin-top: 10px;
-            text-align: center;
-            border-radius: 20px;
-        }
-
-        /* Custom table border styling */
-        table, th, td {
-            border: 1px solid grey !important; /* Ensures all borders are visible */
-        }
-
-        /* Ensure the button stays on the right side of the card */
-        .btn-add {
-            float: right;
-        }
-
-    </style>
-
-    <div class="container mt-5">
-        <div class="tips-header">
-            <h5>Intervensi</h5>
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
         </div>
-        <br>
+    @endif
 
-        <div class="card-header pb-0">
+    <!-- Tips Table -->
+    <div class="card">
+        <div class="container">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4>Senarai Intervensi</h4>
+                <button type="button" class="btn btn-success btn-sm btn-add"
+                    onclick="window.location.href='{{ route('interventions.create') }}'">+&nbsp; Tambah</button>
+            </div>
+
+            <table class="table align-items-center mb-0" style="table-layout: fixed; width: 100%;">
+                <thead>
+                    <tr>
+                        <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            style="width: 5%;">Id</th>
+                        <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            style="width: 40%;">Tajuk</th>
+                        <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            style="width: 20%;">Gambar </th>
+                        <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            style="width: 15%;">Tarikh Akhir Kemaskini</th>
+                        <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            style="width: 30%;">Tindakan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($interventions as $intervention)
+                        <tr>
+                            <td class="align-middle text-xs">{{ $intervention->id }}</td>
+                            <td class="align-middle text-xs"
+                                style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word; max-width: 200px;">
+                                {{ $intervention->interventions_title ?? 'N/A' }}</td>
+                            <td class="align-middle text-center text-xs">
+                                @if ($intervention->interventions_image)
+                                    <img src="{{ asset($intervention->interventions_image) }}" alt="Image"
+                                        style="width: 100px; height: auto;">
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td class="align-middle text-center text-xs">{{ $intervention->updated_at }}</td>
+                            <!--tindakan-->
+                            <td class="align-middle text-center text-xs"
+                                style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word; max-width: 200px;">
+                                <!-- show Button -->
+                                <a class="btn btn-link text-info px-3 mb-0"
+                                    href="{{ route('interventions.show', $intervention->id) }}">
+                                    <i class="fas fa-eye text-info me-2" aria-hidden="true"></i>Papar
+                                </a>
+                                <!-- delete Button -->
+                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href=""
+                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $intervention->id }}').submit();">
+                                    <i class="far fa-trash-alt me-2"></i>Padam
+                                </a>
+                                <form id="delete-form-{{ $intervention->id }}"
+                                    action="{{ route('interventions.destroy', $intervention->id) }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+
+                                <!-- Edit Button -->
+                                <a class="btn btn-link text-dark px-3 mb-0"
+                                    href="{{ route('interventions.edit', $intervention->id) }}">
+                                    <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Sunting
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+
+            </table>
             <br>
-            <!-- Header row containing title and add button -->
-            <div class="header-row mb-3">
-                <h5 class="font-weight-bold">Senarai Kategori</h5>
-                <!-- "Tambah" button aligned to the right -->
-                <button type="button" class="btn btn-success btn-sm btn-add" onclick="window.location.href='/tambah-kategori-intervensi'">Tambah</button>
-            </div>
-
-            <!-- Table starts here -->
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th class="action-column">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="categoryTableBody">
-                            <tr>
-                                <td>1</td>
-                                <td>Tip 1</td>
-                                <td>This is a short description of tip 1.</td>
-                                <td class="action-column">
-                                    <button class="btn btn-warning btn-sm" onclick="window.location.href='/edit-kategori-intervensi'">Edit</button>
-                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Tip 2</td>
-                                <td>This is a short description of tip 2.</td>
-                                <td class="action-column">
-                                    <button class="btn btn-warning btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Tip 3</td>
-                                <td>This is a short description of tip 3.</td>
-                                <td class="action-column">
-                                    <button class="btn btn-warning btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete(this)">Padam</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Start button kembali -->
-            <div class="d-flex justify-content-center text-center">
-                <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='/admin-tips-interventions'">Kembali</button>
-            </div>
-            <!-- End button kembali -->
-
         </div>
-
-        <!-- Include Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <!-- JavaScript for delete confirmation -->
-        <script>
-            function confirmDelete(button) {
-                if (confirm("Adakah anda pasti untuk padam?")) {
-                    // Delete the row if confirmed
-                    var row = button.closest('tr');
-                    row.remove();
-                }
-            }
-        </script>
     </div>
 @endsection
