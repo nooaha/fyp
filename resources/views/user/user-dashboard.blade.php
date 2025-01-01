@@ -2,20 +2,20 @@
 
 @section('content')
 
-    <div class="container">
-        <h2 class="mb-3">Selamat Datang,<span class="text-capitalize" style="color: #3F51B2;">
-                {{ auth()->user()->name }}!</span></h2>
-        <p>Mula jejak tumbesaran dan pencapaian perkembangan <span class="text-capitalize" style="color: #3F51B2;">
-                <strong>{{ $child->child_name }}</strong></span>.</p>
+<div class="container">
+    <h2 class="mb-3">Selamat Datang,<span class="text-capitalize" style="color: #3F51B2;">
+            {{ auth()->user()->name }}!</span></h2>
+    <p>Mula jejak tumbesaran dan pencapaian perkembangan <span class="text-capitalize" style="color: #3F51B2;">
+            <strong>{{ $child->child_name }}</strong></span>.</p>
 
-        <div class="row">
-            <!-- Growth Chart Section -->
-            <!-- Include the growth chart partial -->
-            @include('user.growth-chart-partial', [
-                'child' => $child,
-                'growthRecords' => $growthRecords,
-                'refRecords' => $refRecords,
-            ])
+    <div class="row">
+        <!-- Growth Chart Section -->
+        <!-- Include the growth chart partial -->
+        @include('user.growth-chart-partial', [
+    'child' => $child,
+    'growthRecords' => $growthRecords,
+    'refRecords' => $refRecords,
+])
 
         <!-- M-CHAT Score Section -->
         <div class="col-md-3">
@@ -40,11 +40,11 @@
                         Ujian</a>
                 </div>
             </div>
-            <div class="card " >
+            <div class="card ">
                 <div class="card-body text-center">
                     <h5 class="card-title">Indeks Jisim Badan(BMI)</h5>
                     <h5 class="display-5" style="color: #3F51B2;"><strong>{{ $bmi ?? '0' }}</strong></h5>
-                    
+
                     <span class="badge
                     @if ($bmiStatus === 'Obesiti')
                         bg-gradient-danger
@@ -53,13 +53,13 @@
                     @else
                         bg-gradient-success
                     @endif">
-                    {{ $bmiStatus ?? 'Tiada Rekod'}}
+                        {{ $bmiStatus ?? 'Tiada Rekod'}}
                     </span>
                     <br>
                 </div>
             </div>
         </div>
-        
+
         <!-- Milestone Section -->
         <h6 class="ms-2 mb-3 text-xs font-weight-bolder opacity-6">Paparan Data Pencapaian Perkembangan </h6>
         @include('user.checklist-milestone-partial', ['milestoneProgress' => $milestoneProgress, 'child' => $child])
@@ -85,13 +85,19 @@
                                     <img src="{{ asset($tip->image) }}" alt="{{ $tip->tips_name }}"
                                         style="width: 100%; height: 180px; object-fit: cover; border-radius: 0; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                                 </div>
-                                <h6 class="card-title mt-3">{{ $tip->age_category }}</h6> <!-- Small margin top for title -->
+                                <h6 class="card-title mt-3">{{ $tip->age_category }}</h6>
+                                <!-- Small margin top for title -->
                                 <!-- Shift the button up using margin-top and adjust card height if needed -->
-                                <a href="{{ route('tips.showTips', $tip->id) }}?childId={{ $child->id }}" class="btn btn-primary mt-4 btn-sm">Lihat</a>
+                                <a href="{{ route('tips.showTips', $tip->id) }}?childId={{ $child->id }}"
+                                    class="btn btn-primary mt-4 btn-sm">Lihat</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('tips.showSenaraiTips', ['childId' => $childId ?? Auth::user()->children->first()->id]) }}"
+                    class="btn btn-primary mt-3 btn-sm">Lihat Lagi</a>
             </div>
         </div>
 
@@ -116,14 +122,21 @@
                                     <img src="{{ asset($intervention->interventions_image) }}"
                                         style="width: 100%; height: 180px; object-fit: cover; border-radius: 0; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                                 </div>
-                                <h6 class="card-title mt-3">{{ $intervention->interventions_title }}</h6> <!-- Small margin top for title -->
+                                <h6 class="card-title mt-3">{{ $intervention->interventions_title }}</h6>
+                                <!-- Small margin top for title -->
                                 <!-- Shift the button up using margin-top and adjust card height if needed -->
-                                <a href="{{ route('interventions.showInterventions', $intervention->id) }}?childId={{ $child->id }}" class="btn btn-primary mt-4 btn-sm">Lihat</a>
+                                <a href="{{ route('interventions.showInterventions', $intervention->id) }}?childId={{ $child->id }}"
+                                    class="btn btn-primary mt-4 btn-sm">Lihat</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
+
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('interventions.showSenaraiIntervensi', ['childId' => $childId ?? Auth::user()->children->first()->id]) }}"
+                        class="btn btn-primary mt-3 btn-sm">Lihat Lagi</a>
+                </div>
             </div>
         </div>
     </div>
-@endsection
+    @endsection
