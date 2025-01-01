@@ -7,9 +7,9 @@
         <h5 class="card-title mb-3">Senarai Intervensi</h5>
         <div class="row">
             @foreach ($interventions as $intervention)
-                <div class="col-md-4">
-                    <div class="card mb-3" style="width: 100%; height: 350px; margin: auto;"> <!-- Fixed card size -->
-                        <div class="card-body text-center" style="padding: 15px 20px;">
+                <div class="col-md-4 mb-3">
+                    <div class="card " style="width: 100%; height: 100%; margin: auto;"> <!-- Fixed card size -->
+                        <div class="card-body text-center" style="padding:auto;">
                             <!-- Add a gap above the image -->
                             <div class="col-auto" style="margin-top: 10px;">
                                 <img src="{{ asset($intervention->interventions_image) }}"
