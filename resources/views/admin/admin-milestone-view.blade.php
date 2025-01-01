@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-md-3 text-end">
                             <a href="{{ route('milestone-checklists.edit', $milestoneChecklist->id) }}"
-                                class="btn btn-primary mb-3">Sunting</a>
+                                class="btn btn-primary mb-3 btn-sm">Sunting</a>
                         </div>
                     </div>
                     <div class="card-body p-3">
@@ -67,7 +67,7 @@
                         </table>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('milestone-checklists.index') }}" class="btn btn-secondary me-2">Kembali</a>
+                        <a href="{{ route('milestone-checklists.index') }}" class="btn btn-secondary me-2 btn-sm">Kembali</a>
                     </div>
                 </div>
             </div>
