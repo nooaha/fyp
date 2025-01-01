@@ -16,7 +16,7 @@
                             <h6 class="mb-0">Kemaskini Senarai Perkembangan</h6>
                         </div>
                         <div class="col-md-3 text-end">
-                            <a href="{{ route('milestone-checklists.create') }}" class="btn btn-success mb-3">+&nbsp;
+                            <a href="{{ route('milestone-checklists.create') }}" class="btn btn-success mb-3 btn-sm">+&nbsp;
                                 Tambah Senarai</a>
                         </div>
                     </div>

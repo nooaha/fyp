@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-3 text-end">
                                 <!-- Single Button to Add New Questions -->
-                                <button type="button" class="btn btn-success mb-3" id="addQuestionBtn">+&nbsp;Tambah
+                                <button type="button" class="btn btn-success mb-3 btn-sm" id="addQuestionBtn">+&nbsp;Tambah
                                     Soalan</button>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 <div class="form-group d-flex align-items-center">
                                     <input class="form-control me-2" type="text" name="questions[{{ $question->id }}]"
                                         value="{{ $question->question }}" required>
-                                    <button type="button" class="btn btn-danger ml-2 delete-btn"
+                                    <button type="button" class="btn btn-danger ml-2 delete-btn btn-sm"
                                         data-question-id="{{ $question->id }}">Padam</button>
                                 </div>
                             @endforeach
@@ -65,8 +65,8 @@
 
                         <div class="d-flex mt-3 justify-content-end">
                             <!-- Submit Button -->
-                            <button type="button" class="btn btn-secondary me-2" id="cancelButton">Batal</button>
-                            <button type="submit" class="btn btn-primary" style="float: right">Kemas kini
+                            <button type="button" class="btn btn-secondary me-2 btn-sm" id="cancelButton">Batal</button>
+                            <button type="submit" class="btn btn-primary btn-sm" style="float: right">Kemas kini
                                 Senarai</button>
                         </div>
                     </form>
@@ -86,7 +86,7 @@
             $('#questionsContainer').append(`
                 <div class="form-group d-flex align-items-center">
                     <input class="form-control me-2" type="text" name="new_questions[]" placeholder="Tambah Soalan">
-                    <button type="button" class="btn btn-danger ml-2 delete-btn">Padam</button>
+                    <button type="button" class="btn btn-danger ml-2 delete-btn btn-sm">Padam</button>
                 </div>
             `);
         });
@@ -106,10 +106,10 @@
             }
         });
     });
-    
+
     document.addEventListener('DOMContentLoaded', function() {
         var cancelButton = document.getElementById('cancelButton');
-        
+
         if (cancelButton) {
             cancelButton.addEventListener('click', function() {
                 window.location.href = "{{ route('milestone-checklists.show', $milestone->id) }}";

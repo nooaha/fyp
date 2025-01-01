@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-md-3 text-end">
                                 <!-- Single Button to Add New Questions -->
-                                <button type="button" class="btn btn-success mb-3" id="addQuestionBtn">+&nbsp; Tambah
+                                <button type="button" class="btn btn-success mb-3 btn-sm" id="addQuestionBtn">+&nbsp; Tambah
                                     Soalan</button>
                             </div>
 
@@ -50,15 +50,15 @@
                                 <div class="form-group question-group d-flex align-items-center">
                                     <input class="form-control ml-2" type="text" placeholder="Tambah Soalan"
                                         name="questions[]">
-                                    <button type="button" class="btn btn-danger ml-2 delete-btn">Padam</button>
+                                    <button type="button" class="btn btn-danger ml-2 delete-btn btn-sm">Padam</button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-end">
                             <!-- Submit Button -->
-                            <a href="{{ route('milestone-checklists.index') }}" class="btn btn-secondary me-2">Batal</a>
-                            <button type="submit" class="btn btn-primary" style="float: right">+&nbsp; Tambah
+                            <a href="{{ route('milestone-checklists.index') }}" class="btn btn-secondary me-2 btn-sm">Batal</a>
+                            <button type="submit" class="btn btn-primary btn-sm" style="float: right">+&nbsp; Tambah
                                 Senarai</button>
                         </div>
                     </form>
@@ -87,7 +87,7 @@
             $('#questionsContainer').append(`
                 <div class="form-group question-group d-flex align-items-center">
                     <input class="form-control ml-2" type="text" placeholder="Tambah Soalan" name="questions[]">
-                    <button type="button" class="btn btn-danger ml-2 delete-btn">Padam</button>
+                    <button type="button" class="btn btn-danger ml-2 delete-btn btn-sm">Padam</button>
                 </div>
             `);
         });
