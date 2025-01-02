@@ -61,7 +61,7 @@ class InfoUserController extends Controller
         // Redirect or return a response
 
         return redirect()->route('user-dashboard', ['childId' => $firstChild->id])
-                     ->with('success', 'Registration successful!');
+            ->with('success', 'Registration successful!');
     }
 
     public function showParentDetail()
@@ -72,7 +72,7 @@ class InfoUserController extends Controller
         $parentDetails = ParentDetail::where('user_id', auth()->id())->first();
         //dd($parentDetails);
         $childDetails = Child::where('parent_id', auth()->id())->get();
-                
+
         // Add age information for each child
         foreach ($childDetails as $child) {
             if (!empty($child->child_dob)) {
@@ -83,7 +83,7 @@ class InfoUserController extends Controller
             }
         }
         // Pass both parent and child details to the view
-        return view('user.papar-maklumat', compact('user','child', 'parentDetails', 'childDetails'));
+        return view('user.papar-maklumat', compact('user', 'child', 'parentDetails', 'childDetails'));
     }
 
     //those for admin view part
@@ -102,7 +102,7 @@ class InfoUserController extends Controller
     }
 
     // Update the user details in the database
-    public function update(Request $request, User $user)
+    /*public function update(Request $request, User $user)
     {
         // Validate the incoming data
         $validatedData = $request->validate([
@@ -118,7 +118,7 @@ class InfoUserController extends Controller
 
         // Redirect back with success message
         return redirect()->route('user-details.show')->with('success', 'Maklumat pengguna berjaya dikemaskini.');
-    }
+    }*/
 
     public function destroyUserDetails($id)
     {
@@ -135,33 +135,29 @@ class InfoUserController extends Controller
     }
 
 
-    /*public function updateParentDetail(Request $request)
+    public function editUserDetails(Request $request, $user)
     {
         // Validate the input
         $request->validate([
-            'full_name' => 'required|string|max:255',
-            'dob' => 'required|date',
-            'gender' => 'required|in:male,female',
-            'address' => 'required|string|max:255',
-            'parent_id' => 'required|exists:parent_details,id', // Validate using `id`
+            'email' => 'required|email', // Email is required and should be valid
+            'username' => 'nullable|string', // Username is optional and should be a string if provided
         ]);
 
-        // Find the parent detail record by ID
-        $parentDetail = ParentDetail::findOrFail($request->parent_id);
+        // Find the user by ID
+        $userDetail = User::findOrFail($user);
 
-        // Update the record with new data
-        $parentDetail->update([
-            'full_name' => $request->full_name,
-            'dob' => $request->dob,
-            'gender' => $request->gender,
-            'address' => $request->address,
+        // Update the user record
+        $userDetail->update([
+            'email' => $request->email,
+            'username' => $request->username, // Will be null if not provided
         ]);
 
-        // Refresh and return to the same view with updated data
-        $parentDetail->save();
+        // Redirect with success message
+        return redirect()->route('user-details.editUserDetails', $user)->with('success', 'Maklumat berjaya dikemaskini.');
+    }
 
-        return redirect()->route('user-details.showParentDetail')->with('success', 'Maklumat berjaya dikemaskini.');
-    }*/
+
+
 
 
 }

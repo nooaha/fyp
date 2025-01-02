@@ -24,7 +24,7 @@ class SessionsController extends Controller
 
             if (Auth::attempt(['username' => $attributes['username'], 'password' => $attributes['password']])) {
                 session()->regenerate();
-                return redirect('admin-dashboard')->with(['success' => 'You are logged in as admin.']);
+                return redirect('paparan-utama-admin')->with(['success' => 'You are logged in as admin.']);
             } else {
                 return back()->withErrors(['username' => 'Username or password invalid.']);
             }

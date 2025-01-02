@@ -92,9 +92,6 @@
 
               </div>
               <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                <small class="text-muted">Lupa kata laluan? Set semula kata laluan
-                  <a href="/login/forgot-password" class="font-weight-bold" style="color: #3F51B2;">di sini</a>
-                </small>
                 <p class="mb-4 text-sm mx-auto">
                   Tidak mempunyai akaun?
                   <a href="register" class="font-weight-bold" style="color: #3F51B2;">Daftar Masuk</a>
