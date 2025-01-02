@@ -75,7 +75,8 @@
     <div class="d-flex justify-content-end">
         <a href="{{ route('mchat.index', ['childId' => request('childId')]) }}"
             class="btn btn-secondary me-2">Kembali</a>
-        <button type="submit" class="btn btn-primary" style="float: right">Lihat Intervensi</button>
+            <a href="{{ route('interventions.showSenaraiIntervensi', ['childId' => $childId ?? Auth::user()->children->first()->id]) }}"
+            class="btn btn-primary">Lihat Intervensi</a>
     </div>
 </div>
 @endsection
