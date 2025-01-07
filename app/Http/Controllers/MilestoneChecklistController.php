@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\MilestoneChecklist;
 use App\Models\MilestoneRecord;
 use App\Models\Child;
+use App\Mail\MilestoneReminderMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Question;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -122,10 +125,7 @@ class MilestoneChecklistController extends Controller
 
         return redirect()->route('milestone-checklists.index')->with('success', 'Senarai semak perkembangan dan soalan berjaya disimpan!');
 
-    }
-
-
-    
+    }  
 
     public function edit($id)
     {
@@ -189,5 +189,43 @@ class MilestoneChecklistController extends Controller
             DB::rollBack();
             return back()->with('error', 'Ralat berlaku semasa memadam senarai semak pencapaian.: ' . $e->getMessage());
         }
+    }
+
+    public function sendReminders()
+    {
+        $today = Carbon::now();
+        $children = Child::with('parent')->get();
+
+        foreach ($children as $child) {
+            $ageInMonths = $today->diffInMonths(Carbon::parse($child->child_dob));
+            $nextMilestone = $this->getNextMilestone($ageInMonths);
+
+            if ($nextMilestone) {
+                // Send the reminder email
+                Mail::to($child->parent->email)->send(new MilestoneReminderMail($child, $nextMilestone));
+                // Optionally log or display success message
+                // You could log the action or notify about the reminder being sent
+            }
+        }
+
+        // Redirect back with a success message after reminders are sent
+        return redirect()->back()->with('success', 'Peringatan telah dihantar kepada semua ibu bapa.');
+    }
+
+    // This function calculates the next milestone based on the child's age in months
+    private function getNextMilestone($ageInMonths)
+    {
+        // Define the milestone ages in months
+        $milestones = [12,15,18,21,24,30,36,42,48,60, 72]; // Example milestone ages in months
+
+        // Loop through the milestones and return the next milestone for the child
+        foreach ($milestones as $milestone) {
+            if ($ageInMonths < $milestone) {
+                return "{$milestone}";  // Return the next milestone to send as a reminder
+            }
+        }
+        
+        // If there are no upcoming milestones, return null
+        return null;
     }
 }

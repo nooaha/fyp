@@ -95,6 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/senarai-semak-perkembangan/{milestoneChecklist}', [MilestoneChecklistController::class, 'showList'])->name('milestone-checklists.showList');
     Route::get('/senarai-semak-perkembangan', [MilestoneChecklistController::class, 'index'])->name('senarai-semak-perkembangan');
     Route::get('/kemaskini-senarai/{id}/edit', [MilestoneChecklistController::class, 'edit'])->name('milestone-checklists.edit');
+    Route::post('/hantar-peringatan', [MilestoneChecklistController::class, 'sendReminders'])
+    ->name('admin.sendReminders');
 
     //pilih tips/intervensi
     Route::get('admin-tips-interventions', function () {
@@ -166,4 +168,6 @@ Route::get('', function () {
 Route::get('/login', function () {
     return view('session/login-session-copy');
 })->name('login');
+
+
 

@@ -79,7 +79,7 @@
                 <div class="container">
                     <h2 class="text-center">Hubungi Kami</h2>
                     <div class="text-center">
-                        <p><i class="fas fa-envelope"></i> pedi@pedipulse.com</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:pedipulseask@gmail.com">pedipulseask@gmail.com</a></p>
                         <p><i class="fas fa-phone"></i> 012-3456789</p>
                     </div>
                 </div>

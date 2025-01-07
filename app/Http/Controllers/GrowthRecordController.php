@@ -131,7 +131,7 @@ class GrowthRecordController extends Controller
         //dd($refRecords);
         $growthRecords = GrowthRecord::with('child')
             ->where('child_id', $childId)
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($record) {
                 $record->age_in_months = $record->child->child_dob->diffInMonths($record->created_at);

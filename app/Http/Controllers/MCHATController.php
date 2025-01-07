@@ -96,7 +96,7 @@ class MCHATController extends Controller
 
         $score=0;
         // **Determine Risk Level**
-        if ($criticalCount > 2 || $atRiskScore++ >= 3) {
+        if ($criticalCount > 2 || $atRiskScore >= 3) {
             $score = $criticalCount + $atRiskScore;
             $riskLevel = 'RISIKO TINGGI';
         } elseif ($atRiskScore >= 2) {
